@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Barkod Tarayıcı</string>
+    <string name="scan_barcode">Barkod Tara</string>
+    <string name="no_barcodes">Henüz barkod taranmadı</string>
+    <string name="scan_instruction">Barkod taramak için butona basın</string>
+    <string name="camera_permission_required">Kamera izni gerekli</string>
+    <string name="barcode_added">Barkod başarıyla eklendi</string>
+    <string name="back">Geri</string>
+    <string name="scanning_instruction">Barkodu kamera görüş alanının ortasına getirin</string>
+    <string name="auto_scan_info">Barkod otomatik olarak taranacak</string>
+</resources>
