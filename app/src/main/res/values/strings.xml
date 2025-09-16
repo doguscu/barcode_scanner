@@ -9,4 +9,19 @@
     <string name="back">Geri</string>
     <string name="scanning_instruction">Barkodu kamera görüş alanının ortasına getirin</string>
     <string name="auto_scan_info">Barkod otomatik olarak taranacak</string>
+    
+    <!-- Navigation Menu -->
+    <string name="nav_home">Ana Sayfa</string>
+    <string name="nav_stocks">Stoklar</string>
+    <string name="nav_calendar">Takvim</string>
+    <string name="nav_settings">Ayarlar</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="nav_header_subtitle">Barkod okuma ve stok yönetimi</string>
+    <string name="navigation_drawer_open">Navigation drawer açık</string>
+    <string name="navigation_drawer_close">Navigation drawer kapalı</string>
+
+    <string name="Barkod_Tara">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
+    <string name="barcode_scanner_initial_prompt">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
+    <string name="barkod_tarayıcı">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
+    <string name="Taranan_barkodlar_aşağıda_listelenecek">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
 </resources>

@@ -21,9 +21,24 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".StocksActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.BarcodeScanner.NoActionBar" />
+        <activity
+            android:name=".CalendarActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.BarcodeScanner.NoActionBar" />
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.BarcodeScanner.NoActionBar" />
+        <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.BarcodeScanner">
+            android:theme="@style/Theme.BarcodeScanner.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

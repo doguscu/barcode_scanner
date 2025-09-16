@@ -5,17 +5,21 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.barcodescanner.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var barcodeAdapter: BarcodeAdapter
     private val barcodeList = mutableListOf<BarcodeItem>()
+    private lateinit var drawerToggle: ActionBarDrawerToggle
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -43,8 +47,31 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        setupToolbar()
+        setupDrawer()
         setupRecyclerView()
         setupScanButton()
+    }
+
+    private fun setupToolbar() {
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = "Ana Sayfa"
+    }
+
+    private fun setupDrawer() {
+        drawerToggle = ActionBarDrawerToggle(
+            this,
+            binding.drawerLayout,
+            binding.toolbar,
+            R.string.navigation_drawer_open,
+            R.string.navigation_drawer_close
+        )
+        binding.drawerLayout.addDrawerListener(drawerToggle)
+        drawerToggle.syncState()
+
+        binding.navigationView.setNavigationItemSelectedListener(this)
+        // Set home as checked by default
+        binding.navigationView.setCheckedItem(R.id.nav_home)
     }
 
     private fun setupRecyclerView() {
@@ -132,8 +159,39 @@ class MainActivity : AppCompatActivity() {
         ).show()
     }
 
+    override fun onNavigationItemSelected(item: android.view.MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.nav_home -> {
+                // Already on home, just close drawer
+                binding.drawerLayout.closeDrawer(GravityCompat.START)
+                return true
+            }
+            R.id.nav_stocks -> {
+                startActivity(Intent(this, StocksActivity::class.java))
+            }
+            R.id.nav_calendar -> {
+                startActivity(Intent(this, CalendarActivity::class.java))
+            }
+            R.id.nav_settings -> {
+                startActivity(Intent(this, SettingsActivity::class.java))
+            }
+        }
+        binding.drawerLayout.closeDrawer(GravityCompat.START)
+        return true
+    }
+
+    override fun onBackPressed() {
+        if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            binding.drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            super.onBackPressed()
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         updateEmptyState()
+        // Set home as selected when returning to main activity
+        binding.navigationView.setCheckedItem(R.id.nav_home)
     }
 }

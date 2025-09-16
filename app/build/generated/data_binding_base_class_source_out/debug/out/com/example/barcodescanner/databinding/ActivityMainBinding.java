@@ -8,22 +8,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
-import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.barcodescanner.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.navigation.NavigationView;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
 
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
-  private final CoordinatorLayout rootView;
+  private final DrawerLayout rootView;
+
+  @NonNull
+  public final DrawerLayout drawerLayout;
 
   @NonNull
   public final FloatingActionButton fabScanBarcode;
+
+  @NonNull
+  public final NavigationView navigationView;
 
   @NonNull
   public final RecyclerView recyclerViewBarcodes;
@@ -34,11 +41,14 @@ public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   public final Toolbar toolbar;
 
-  private ActivityMainBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull FloatingActionButton fabScanBarcode, @NonNull RecyclerView recyclerViewBarcodes,
-      @NonNull TextView textViewEmptyState, @NonNull Toolbar toolbar) {
+  private ActivityMainBinding(@NonNull DrawerLayout rootView, @NonNull DrawerLayout drawerLayout,
+      @NonNull FloatingActionButton fabScanBarcode, @NonNull NavigationView navigationView,
+      @NonNull RecyclerView recyclerViewBarcodes, @NonNull TextView textViewEmptyState,
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
+    this.drawerLayout = drawerLayout;
     this.fabScanBarcode = fabScanBarcode;
+    this.navigationView = navigationView;
     this.recyclerViewBarcodes = recyclerViewBarcodes;
     this.textViewEmptyState = textViewEmptyState;
     this.toolbar = toolbar;
@@ -46,7 +56,7 @@ public final class ActivityMainBinding implements ViewBinding {
 
   @Override
   @NonNull
-  public CoordinatorLayout getRoot() {
+  public DrawerLayout getRoot() {
     return rootView;
   }
 
@@ -71,9 +81,17 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      DrawerLayout drawerLayout = (DrawerLayout) rootView;
+
       id = R.id.fabScanBarcode;
       FloatingActionButton fabScanBarcode = ViewBindings.findChildViewById(rootView, id);
       if (fabScanBarcode == null) {
+        break missingId;
+      }
+
+      id = R.id.navigationView;
+      NavigationView navigationView = ViewBindings.findChildViewById(rootView, id);
+      if (navigationView == null) {
         break missingId;
       }
 
@@ -95,8 +113,8 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((CoordinatorLayout) rootView, fabScanBarcode,
-          recyclerViewBarcodes, textViewEmptyState, toolbar);
+      return new ActivityMainBinding((DrawerLayout) rootView, drawerLayout, fabScanBarcode,
+          navigationView, recyclerViewBarcodes, textViewEmptyState, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
