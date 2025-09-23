@@ -13,6 +13,7 @@
     <!-- Navigation Menu -->
     <string name="nav_home">Ana Sayfa</string>
     <string name="nav_stocks">Stoklar</string>
+    <string name="nav_sales">Satışlarım</string>
     <string name="nav_calendar">Takvim</string>
     <string name="nav_settings">Ayarlar</string>
     <string name="nav_header_desc">Navigation header</string>
@@ -24,4 +25,11 @@
     <string name="barcode_scanner_initial_prompt">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
     <string name="barkod_tarayıcı">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
     <string name="Taranan_barkodlar_aşağıda_listelenecek">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
+    
+    <!-- Filter Dialog -->
+    <string name="filter_transactions">İşlemleri Filtrele</string>
+    <string name="start_date">Başlangıç Tarihi</string>
+    <string name="end_date">Bitiş Tarihi</string>
+    <string name="cancel">İptal</string>
+    <string name="apply_filter">Filtreyi Uygula</string>
 </resources>

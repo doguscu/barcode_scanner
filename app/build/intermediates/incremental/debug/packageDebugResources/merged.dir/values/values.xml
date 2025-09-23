@@ -15,16 +15,21 @@
     <string name="Barkod_Tara">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
     <string name="Taranan_barkodlar_aşağıda_listelenecek">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
     <string name="app_name">Barkod Tarayıcı</string>
+    <string name="apply_filter">Filtreyi Uygula</string>
     <string name="auto_scan_info">Barkod otomatik olarak taranacak</string>
     <string name="back">Geri</string>
     <string name="barcode_added">Barkod başarıyla eklendi</string>
     <string name="barcode_scanner_initial_prompt">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
     <string name="barkod_tarayıcı">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
     <string name="camera_permission_required">Kamera izni gerekli</string>
+    <string name="cancel">İptal</string>
+    <string name="end_date">Bitiş Tarihi</string>
+    <string name="filter_transactions">İşlemleri Filtrele</string>
     <string name="nav_calendar">Takvim</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="nav_header_subtitle">Barkod okuma ve stok yönetimi</string>
     <string name="nav_home">Ana Sayfa</string>
+    <string name="nav_sales">Satışlarım</string>
     <string name="nav_settings">Ayarlar</string>
     <string name="nav_stocks">Stoklar</string>
     <string name="navigation_drawer_close">Navigation drawer kapalı</string>
@@ -33,7 +38,8 @@
     <string name="scan_barcode">Barkod Tara</string>
     <string name="scan_instruction">Barkod taramak için butona basın</string>
     <string name="scanning_instruction">Barkodu kamera görüş alanının ortasına getirin</string>
-    <style name="Theme.BarcodeScanner" parent="Theme.Material3.DayNight">
+    <string name="start_date">Başlangıç Tarihi</string>
+    <style name="Theme.BarcodeScanner" parent="Theme.Material3.DayNight.NoActionBar">
         
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -45,6 +51,9 @@
         
         <item name="android:statusBarColor" ns1:targetApi="l">?attr/colorPrimaryVariant</item>
         
+        
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
     <style name="Theme.BarcodeScanner.AppBarOverlay" parent="ThemeOverlay.Material3.Dark.ActionBar"/>
     <style name="Theme.BarcodeScanner.NoActionBar">

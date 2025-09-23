@@ -16,6 +16,11 @@
             android:title="@string/nav_stocks" />
 
         <item
+            android:id="@+id/nav_sales"
+            android:icon="@drawable/ic_sell_24"
+            android:title="@string/nav_sales" />
+
+        <item
             android:id="@+id/nav_calendar"
             android:icon="@drawable/ic_calendar_24"
             android:title="@string/nav_calendar" />

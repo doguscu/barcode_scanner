@@ -4,18 +4,29 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.ArrayAdapter
+import com.example.barcodescanner.adapter.StockItemAdapter
 import com.example.barcodescanner.databinding.ActivityStocksBinding
+import com.example.barcodescanner.databinding.DialogAddStockItemBinding
+import com.example.barcodescanner.model.StockItem
+import com.example.barcodescanner.model.Transaction
+import com.example.barcodescanner.repository.StockItemRepository
+import com.example.barcodescanner.repository.TransactionRepository
 import com.google.android.material.snackbar.Snackbar
 
 class StocksActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityStocksBinding
-    private lateinit var stockBarcodeAdapter: StockBarcodeAdapter
-    private val stockBarcodeList = mutableListOf<BarcodeItem>()
+    private lateinit var stockItemAdapter: StockItemAdapter
+    private val stockItemList = mutableListOf<StockItem>()
+    private lateinit var stockItemRepository: StockItemRepository
+    private lateinit var transactionRepository: TransactionRepository
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -33,7 +44,7 @@ class StocksActivity : AppCompatActivity() {
         if (result.resultCode == RESULT_OK) {
             val scannedBarcode = result.data?.getStringExtra("scanned_barcode")
             scannedBarcode?.let { barcode ->
-                addBarcodeToStockList(barcode)
+                showAddStockItemDialog(barcode)
             }
         }
     }
@@ -43,10 +54,14 @@ class StocksActivity : AppCompatActivity() {
         binding = ActivityStocksBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        stockItemRepository = StockItemRepository(this)
+        transactionRepository = TransactionRepository(this)
+        
         setupToolbar()
         setupRecyclerView()
         setupScanButton()
-        updateEmptyState()
+        loadStockItems()
+        loadProductTypeCounts()
     }
 
     private fun setupToolbar() {
@@ -59,18 +74,25 @@ class StocksActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        stockBarcodeAdapter = StockBarcodeAdapter(stockBarcodeList) { barcodeItem ->
-            showBarcodeDetails(barcodeItem)
-        }
+        stockItemAdapter = StockItemAdapter(
+            context = this,
+            stockItems = stockItemList,
+            onItemClick = { stockItem ->
+                showStockItemDetails(stockItem)
+            },
+            onItemLongClick = { stockItem ->
+                showStockItemContextMenu(stockItem)
+            }
+        )
         
         binding.recyclerViewStockBarcodes.apply {
-            layoutManager = LinearLayoutManager(this@StocksActivity, LinearLayoutManager.HORIZONTAL, false)
-            adapter = stockBarcodeAdapter
+            layoutManager = LinearLayoutManager(this@StocksActivity)
+            adapter = stockItemAdapter
         }
     }
 
     private fun setupScanButton() {
-        binding.btnScanBarcode.setOnClickListener {
+        binding.fabAddStock.setOnClickListener {
             checkCameraPermissionAndScan()
         }
     }
@@ -94,31 +116,103 @@ class StocksActivity : AppCompatActivity() {
         scannerLauncher.launch(intent)
     }
 
-    private fun addBarcodeToStockList(barcode: String) {
-        val timestamp = System.currentTimeMillis()
-        val barcodeItem = BarcodeItem(barcode, timestamp)
-        
-        stockBarcodeList.add(0, barcodeItem) // Add to beginning of list
-        stockBarcodeAdapter.notifyItemInserted(0)
-        binding.recyclerViewStockBarcodes.smoothScrollToPosition(0)
-
-        // Show success message
-        Snackbar.make(
-            binding.root,
-            "Stok barkodu eklendi: $barcode",
-            Snackbar.LENGTH_SHORT
-        ).show()
-
-        // Update empty state
+    private fun loadStockItems() {
+        stockItemList.clear()
+        stockItemList.addAll(stockItemRepository.getAllStockItems())
+        stockItemAdapter.notifyDataSetChanged()
         updateEmptyState()
     }
 
+    private fun loadProductTypeCounts() {
+        val glassCount = transactionRepository.getStockCountByProductType(Transaction.PRODUCT_TYPE_GLASS)
+        val frameCount = transactionRepository.getStockCountByProductType(Transaction.PRODUCT_TYPE_FRAME)
+        val totalCount = transactionRepository.getTotalStockCount()
+
+        binding.textViewGlassCount.text = glassCount.toString()
+        binding.textViewFrameCount.text = frameCount.toString()
+        binding.textViewTotalCount.text = totalCount.toString()
+    }
+
+    private fun showAddStockItemDialog(barcode: String) {
+        val dialogBinding = DialogAddStockItemBinding.inflate(LayoutInflater.from(this))
+        dialogBinding.textViewScannedBarcode.text = "Barkod: $barcode"
+
+        // Ürün tipi dropdown'ını hazırla
+        val productTypes = arrayOf(
+            Transaction.PRODUCT_TYPE_GLASS,
+            Transaction.PRODUCT_TYPE_FRAME,
+            Transaction.PRODUCT_TYPE_LENS
+        )
+        val productTypeAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, productTypes)
+        dialogBinding.spinnerProductType.setAdapter(productTypeAdapter)
+
+        AlertDialog.Builder(this)
+            .setTitle("Stok Bilgileri")
+            .setView(dialogBinding.root)
+            .setPositiveButton("Kaydet") { _, _ ->
+                val brand = dialogBinding.editTextBrand.text.toString().trim()
+                val purchasePriceText = dialogBinding.editTextPurchasePrice.text.toString().trim()
+                val quantityText = dialogBinding.editTextQuantity.text.toString().trim()
+                val productType = dialogBinding.spinnerProductType.text.toString().trim()
+
+                if (brand.isEmpty() || purchasePriceText.isEmpty() || quantityText.isEmpty() || productType.isEmpty()) {
+                    Snackbar.make(binding.root, "Tüm alanları doldurun", Snackbar.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                try {
+                    val purchasePrice = purchasePriceText.toDouble()
+                    val quantity = quantityText.toInt()
+                    
+                    if (quantity <= 0) {
+                        Snackbar.make(binding.root, "Adet 0'dan büyük olmalı", Snackbar.LENGTH_SHORT).show()
+                        return@setPositiveButton
+                    }
+                    
+                    // StockItem kaydet
+                    val stockItem = StockItem(
+                        barcode = barcode,
+                        brand = brand,
+                        purchasePrice = purchasePrice,
+                        stockDate = System.currentTimeMillis(),
+                        quantity = quantity
+                    )
+                    stockItemRepository.insertStockItem(stockItem)
+
+                    // Transaction kaydet
+                    val transaction = Transaction(
+                        brand = brand,
+                        productType = productType,
+                        transactionType = Transaction.TYPE_STOCK_ENTRY,
+                        amount = purchasePrice,
+                        barcode = barcode,
+                        transactionDate = System.currentTimeMillis()
+                    )
+                    val id = transactionRepository.insertTransaction(transaction)
+                    
+                    if (id > 0) {
+                        loadStockItems()
+                        loadProductTypeCounts()
+                        Snackbar.make(binding.root, "Stok başarıyla kaydedildi", Snackbar.LENGTH_SHORT).show()
+                    } else {
+                        Snackbar.make(binding.root, "Kaydetme hatası", Snackbar.LENGTH_SHORT).show()
+                    }
+                } catch (e: NumberFormatException) {
+                    Snackbar.make(binding.root, "Geçerli bir fiyat girin", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("İptal", null)
+            .show()
+    }
+
     private fun updateEmptyState() {
-        if (stockBarcodeList.isEmpty()) {
+        if (stockItemList.isEmpty()) {
             binding.textViewEmptyState.visibility = android.view.View.VISIBLE
+            binding.layoutTableHeaders.visibility = android.view.View.GONE
             binding.recyclerViewStockBarcodes.visibility = android.view.View.GONE
         } else {
             binding.textViewEmptyState.visibility = android.view.View.GONE
+            binding.layoutTableHeaders.visibility = android.view.View.VISIBLE
             binding.recyclerViewStockBarcodes.visibility = android.view.View.VISIBLE
         }
     }
@@ -131,15 +225,148 @@ class StocksActivity : AppCompatActivity() {
         ).show()
     }
 
-    private fun showBarcodeDetails(barcodeItem: BarcodeItem) {
-        val message = "Stok Barkodu: ${barcodeItem.value}\n" +
-                "Eklenme Zamanı: ${java.text.DateFormat.getDateTimeInstance().format(java.util.Date(barcodeItem.timestamp))}"
+    private fun showStockItemDetails(stockItem: StockItem) {
+        val message = "Marka: ${stockItem.brand}\n" +
+                "Alış Fiyatı: ₺${String.format("%.2f", stockItem.purchasePrice)}\n" +
+                "Barkod: ${stockItem.barcode}\n" +
+                "Tarih: ${java.text.DateFormat.getDateTimeInstance().format(java.util.Date(stockItem.stockDate))}"
         
         Snackbar.make(
             binding.root,
             message,
             Snackbar.LENGTH_LONG
         ).show()
+    }
+
+    private fun showStockItemContextMenu(stockItem: StockItem) {
+        val options = arrayOf("Ayrıntıları Gör", "Sil")
+        
+        AlertDialog.Builder(this)
+            .setTitle(stockItem.brand)
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> showStockItemDetailDialog(stockItem)
+                    1 -> showDeleteStockItemDialog(stockItem)
+                }
+            }
+            .show()
+    }
+
+    private fun showStockItemDetailDialog(stockItem: StockItem) {
+        val productType = transactionRepository.getProductTypeByBarcode(stockItem.barcode) ?: "Genel"
+        val message = "Marka: ${stockItem.brand}\n" +
+                "Ürün Tipi: $productType\n" +
+                "Adet: ${stockItem.quantity}\n" +
+                "Alış Fiyatı: ₺${String.format("%.2f", stockItem.purchasePrice)}\n" +
+                "Barkod: ${stockItem.barcode}\n" +
+                "Tarih: ${java.text.DateFormat.getDateTimeInstance().format(java.util.Date(stockItem.stockDate))}"
+        
+        AlertDialog.Builder(this)
+            .setTitle("Stok Ayrıntıları")
+            .setMessage(message)
+            .setPositiveButton("Tamam", null)
+            .show()
+    }
+
+    private fun showDeleteStockItemDialog(stockItem: StockItem) {
+        AlertDialog.Builder(this)
+            .setTitle("Stok Ürününü Sil")
+            .setMessage("${stockItem.brand} ürününü stoktan silmek istediğinize emin misiniz?")
+            .setPositiveButton("Sil") { _, _ ->
+                deleteStockItem(stockItem)
+            }
+            .setNegativeButton("İptal", null)
+            .show()
+    }
+
+    private fun deleteStockItem(stockItem: StockItem) {
+        val success = stockItemRepository.deleteStockItem(stockItem.id)
+        if (success) {
+            loadStockItems()
+            loadProductTypeCounts()
+            Snackbar.make(binding.root, "Ürün stoktan silindi", Snackbar.LENGTH_SHORT).show()
+        } else {
+            Snackbar.make(binding.root, "Silme işlemi başarısız", Snackbar.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun showEditStockItemDialog(stockItem: StockItem) {
+        val dialogBinding = DialogAddStockItemBinding.inflate(LayoutInflater.from(this))
+        dialogBinding.textViewScannedBarcode.text = "Barkod: ${stockItem.barcode}"
+
+        // Mevcut verileri dialog'a yükle
+        dialogBinding.editTextBrand.setText(stockItem.brand)
+        dialogBinding.editTextQuantity.setText(stockItem.quantity.toString())
+        dialogBinding.editTextPurchasePrice.setText(stockItem.purchasePrice.toString())
+
+        // Ürün tipi dropdown'ını hazırla
+        val productTypes = arrayOf(
+            Transaction.PRODUCT_TYPE_GLASS,
+            Transaction.PRODUCT_TYPE_FRAME,
+            Transaction.PRODUCT_TYPE_LENS
+        )
+        val productTypeAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, productTypes)
+        dialogBinding.spinnerProductType.setAdapter(productTypeAdapter)
+
+        // Mevcut ürün tipini seç
+        val currentProductType = transactionRepository.getProductTypeByBarcode(stockItem.barcode) ?: Transaction.PRODUCT_TYPE_FRAME
+        dialogBinding.spinnerProductType.setText(currentProductType, false)
+
+        AlertDialog.Builder(this)
+            .setTitle("Stok Bilgilerini Düzenle")
+            .setView(dialogBinding.root)
+            .setPositiveButton("Kaydet") { _, _ ->
+                val brand = dialogBinding.editTextBrand.text.toString().trim()
+                val purchasePriceText = dialogBinding.editTextPurchasePrice.text.toString().trim()
+                val quantityText = dialogBinding.editTextQuantity.text.toString().trim()
+                val productType = dialogBinding.spinnerProductType.text.toString().trim()
+
+                if (brand.isEmpty() || purchasePriceText.isEmpty() || quantityText.isEmpty() || productType.isEmpty()) {
+                    Snackbar.make(binding.root, "Tüm alanları doldurun", Snackbar.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                try {
+                    val purchasePrice = purchasePriceText.toDouble()
+                    val quantity = quantityText.toInt()
+                    
+                    if (quantity <= 0) {
+                        Snackbar.make(binding.root, "Adet 0'dan büyük olmalı", Snackbar.LENGTH_SHORT).show()
+                        return@setPositiveButton
+                    }
+                    
+                    // StockItem güncelle
+                    val updatedStockItem = stockItem.copy(
+                        brand = brand,
+                        purchasePrice = purchasePrice,
+                        quantity = quantity
+                    )
+                    val success = stockItemRepository.updateStockItem(updatedStockItem)
+                    
+                    if (success) {
+                        // Transaction'ı da güncelle
+                        val existingTransaction = transactionRepository.getTransactionByBarcode(stockItem.barcode)
+                        if (existingTransaction != null) {
+                            val updatedTransaction = existingTransaction.copy(
+                                brand = brand,
+                                productType = productType,
+                                amount = purchasePrice
+                            )
+                            transactionRepository.updateTransaction(updatedTransaction)
+                        }
+                        
+                        loadStockItems()
+                        loadProductTypeCounts()
+                        Snackbar.make(binding.root, "Stok başarıyla güncellendi", Snackbar.LENGTH_SHORT).show()
+                    } else {
+                        Snackbar.make(binding.root, "Güncelleme hatası", Snackbar.LENGTH_SHORT).show()
+                    }
+                } catch (e: NumberFormatException) {
+                    Snackbar.make(binding.root, "Geçerli bir değer girin", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("İptal", null)
+            .show()
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -149,6 +376,7 @@ class StocksActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        updateEmptyState()
+        loadStockItems()
+        loadProductTypeCounts()
     }
 }

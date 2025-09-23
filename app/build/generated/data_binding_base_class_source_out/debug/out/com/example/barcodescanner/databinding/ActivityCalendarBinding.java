@@ -4,10 +4,13 @@ package com.example.barcodescanner.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.barcodescanner.R;
@@ -20,10 +23,38 @@ public final class ActivityCalendarBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
+  public final RecyclerView recyclerViewCalendar;
+
+  @NonNull
+  public final Spinner spinnerMonth;
+
+  @NonNull
+  public final Spinner spinnerYear;
+
+  @NonNull
+  public final TextView textViewDailyProfit;
+
+  @NonNull
+  public final TextView textViewMonthlyProfit;
+
+  @NonNull
+  public final TextView textViewWeeklyProfit;
+
+  @NonNull
   public final Toolbar toolbar;
 
-  private ActivityCalendarBinding(@NonNull CoordinatorLayout rootView, @NonNull Toolbar toolbar) {
+  private ActivityCalendarBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull RecyclerView recyclerViewCalendar, @NonNull Spinner spinnerMonth,
+      @NonNull Spinner spinnerYear, @NonNull TextView textViewDailyProfit,
+      @NonNull TextView textViewMonthlyProfit, @NonNull TextView textViewWeeklyProfit,
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
+    this.recyclerViewCalendar = recyclerViewCalendar;
+    this.spinnerMonth = spinnerMonth;
+    this.spinnerYear = spinnerYear;
+    this.textViewDailyProfit = textViewDailyProfit;
+    this.textViewMonthlyProfit = textViewMonthlyProfit;
+    this.textViewWeeklyProfit = textViewWeeklyProfit;
     this.toolbar = toolbar;
   }
 
@@ -54,13 +85,51 @@ public final class ActivityCalendarBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.recyclerViewCalendar;
+      RecyclerView recyclerViewCalendar = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerViewCalendar == null) {
+        break missingId;
+      }
+
+      id = R.id.spinnerMonth;
+      Spinner spinnerMonth = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerMonth == null) {
+        break missingId;
+      }
+
+      id = R.id.spinnerYear;
+      Spinner spinnerYear = ViewBindings.findChildViewById(rootView, id);
+      if (spinnerYear == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewDailyProfit;
+      TextView textViewDailyProfit = ViewBindings.findChildViewById(rootView, id);
+      if (textViewDailyProfit == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewMonthlyProfit;
+      TextView textViewMonthlyProfit = ViewBindings.findChildViewById(rootView, id);
+      if (textViewMonthlyProfit == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewWeeklyProfit;
+      TextView textViewWeeklyProfit = ViewBindings.findChildViewById(rootView, id);
+      if (textViewWeeklyProfit == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
       Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
         break missingId;
       }
 
-      return new ActivityCalendarBinding((CoordinatorLayout) rootView, toolbar);
+      return new ActivityCalendarBinding((CoordinatorLayout) rootView, recyclerViewCalendar,
+          spinnerMonth, spinnerYear, textViewDailyProfit, textViewMonthlyProfit,
+          textViewWeeklyProfit, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

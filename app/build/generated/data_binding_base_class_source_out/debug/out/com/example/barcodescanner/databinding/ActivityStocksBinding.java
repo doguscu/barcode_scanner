@@ -4,6 +4,7 @@ package com.example.barcodescanner.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.barcodescanner.R;
-import com.google.android.material.button.MaterialButton;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -23,7 +24,10 @@ public final class ActivityStocksBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
-  public final MaterialButton btnScanBarcode;
+  public final FloatingActionButton fabAddStock;
+
+  @NonNull
+  public final LinearLayout layoutTableHeaders;
 
   @NonNull
   public final RecyclerView recyclerViewStockBarcodes;
@@ -32,15 +36,30 @@ public final class ActivityStocksBinding implements ViewBinding {
   public final TextView textViewEmptyState;
 
   @NonNull
+  public final TextView textViewFrameCount;
+
+  @NonNull
+  public final TextView textViewGlassCount;
+
+  @NonNull
+  public final TextView textViewTotalCount;
+
+  @NonNull
   public final Toolbar toolbar;
 
   private ActivityStocksBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull MaterialButton btnScanBarcode, @NonNull RecyclerView recyclerViewStockBarcodes,
-      @NonNull TextView textViewEmptyState, @NonNull Toolbar toolbar) {
+      @NonNull FloatingActionButton fabAddStock, @NonNull LinearLayout layoutTableHeaders,
+      @NonNull RecyclerView recyclerViewStockBarcodes, @NonNull TextView textViewEmptyState,
+      @NonNull TextView textViewFrameCount, @NonNull TextView textViewGlassCount,
+      @NonNull TextView textViewTotalCount, @NonNull Toolbar toolbar) {
     this.rootView = rootView;
-    this.btnScanBarcode = btnScanBarcode;
+    this.fabAddStock = fabAddStock;
+    this.layoutTableHeaders = layoutTableHeaders;
     this.recyclerViewStockBarcodes = recyclerViewStockBarcodes;
     this.textViewEmptyState = textViewEmptyState;
+    this.textViewFrameCount = textViewFrameCount;
+    this.textViewGlassCount = textViewGlassCount;
+    this.textViewTotalCount = textViewTotalCount;
     this.toolbar = toolbar;
   }
 
@@ -71,9 +90,15 @@ public final class ActivityStocksBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.btnScanBarcode;
-      MaterialButton btnScanBarcode = ViewBindings.findChildViewById(rootView, id);
-      if (btnScanBarcode == null) {
+      id = R.id.fabAddStock;
+      FloatingActionButton fabAddStock = ViewBindings.findChildViewById(rootView, id);
+      if (fabAddStock == null) {
+        break missingId;
+      }
+
+      id = R.id.layoutTableHeaders;
+      LinearLayout layoutTableHeaders = ViewBindings.findChildViewById(rootView, id);
+      if (layoutTableHeaders == null) {
         break missingId;
       }
 
@@ -89,14 +114,33 @@ public final class ActivityStocksBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.textViewFrameCount;
+      TextView textViewFrameCount = ViewBindings.findChildViewById(rootView, id);
+      if (textViewFrameCount == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewGlassCount;
+      TextView textViewGlassCount = ViewBindings.findChildViewById(rootView, id);
+      if (textViewGlassCount == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewTotalCount;
+      TextView textViewTotalCount = ViewBindings.findChildViewById(rootView, id);
+      if (textViewTotalCount == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
       Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
         break missingId;
       }
 
-      return new ActivityStocksBinding((CoordinatorLayout) rootView, btnScanBarcode,
-          recyclerViewStockBarcodes, textViewEmptyState, toolbar);
+      return new ActivityStocksBinding((CoordinatorLayout) rootView, fabAddStock,
+          layoutTableHeaders, recyclerViewStockBarcodes, textViewEmptyState, textViewFrameCount,
+          textViewGlassCount, textViewTotalCount, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

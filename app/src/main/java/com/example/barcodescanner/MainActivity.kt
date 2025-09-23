@@ -4,22 +4,36 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.LayoutInflater
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.ArrayAdapter
+import com.example.barcodescanner.adapter.TransactionAdapter
 import com.example.barcodescanner.databinding.ActivityMainBinding
+import com.example.barcodescanner.databinding.DialogAddScanResultBinding
+import com.example.barcodescanner.model.ScanResult
+import com.example.barcodescanner.model.StockItem
+import com.example.barcodescanner.model.Transaction
+import com.example.barcodescanner.repository.ScanResultRepository
+import com.example.barcodescanner.repository.StockItemRepository
+import com.example.barcodescanner.repository.TransactionRepository
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var barcodeAdapter: BarcodeAdapter
-    private val barcodeList = mutableListOf<BarcodeItem>()
+    private lateinit var transactionAdapter: TransactionAdapter
+    private val transactionList = mutableListOf<Transaction>()
     private lateinit var drawerToggle: ActionBarDrawerToggle
+    private lateinit var scanResultRepository: ScanResultRepository
+    private lateinit var stockItemRepository: StockItemRepository
+    private lateinit var transactionRepository: TransactionRepository
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -37,7 +51,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (result.resultCode == RESULT_OK) {
             val scannedBarcode = result.data?.getStringExtra("scanned_barcode")
             scannedBarcode?.let { barcode ->
-                addBarcodeToList(barcode)
+                showAddScanResultDialog(barcode)
             }
         }
     }
@@ -47,10 +61,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        scanResultRepository = ScanResultRepository(this)
+        stockItemRepository = StockItemRepository(this)
+        transactionRepository = TransactionRepository(this)
+        
         setupToolbar()
         setupDrawer()
         setupRecyclerView()
         setupScanButton()
+        addDummyDataIfNeeded()
+        loadDashboardData()
     }
 
     private fun setupToolbar() {
@@ -75,14 +95,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun setupRecyclerView() {
-        barcodeAdapter = BarcodeAdapter(barcodeList) { barcodeItem ->
-            // Handle barcode item click if needed
-            showBarcodeDetails(barcodeItem)
-        }
+        transactionAdapter = TransactionAdapter(transactionList)
         
-        binding.recyclerViewBarcodes.apply {
+        binding.recyclerViewRecentTransactions.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = barcodeAdapter
+            adapter = transactionAdapter
         }
     }
 
@@ -111,32 +128,119 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         scannerLauncher.launch(intent)
     }
 
-    private fun addBarcodeToList(barcode: String) {
-        val timestamp = System.currentTimeMillis()
-        val barcodeItem = BarcodeItem(barcode, timestamp)
+    private fun loadDashboardData() {
+        // Dashboard kartlarını güncelle - Sadece bugünkü veriler
+        val totalSalesRevenue = transactionRepository.getTodaySales() // Bugünkü satış geliri
+        val netIncome = transactionRepository.getTodayNetIncome() // Bugünkü net gelir (satış - alım)
+        val salesCount = transactionRepository.getTodaySalesCount() // Bugünkü satış sayısı
+
+        binding.textViewNetIncome.text = "₺${String.format("%.2f", netIncome)}"
+        if (netIncome > 0) {
+            binding.textViewNetIncome.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark))
+        } else {
+            binding.textViewNetIncome.setTextColor(ContextCompat.getColor(this, android.R.color.primary_text_light))
+        }
         
-        barcodeList.add(0, barcodeItem) // Add to beginning of list
-        barcodeAdapter.notifyItemInserted(0)
-        binding.recyclerViewBarcodes.smoothScrollToPosition(0)
+        binding.textViewIncome.text = "₺${String.format("%.2f", totalSalesRevenue)}"
+        if (totalSalesRevenue > 0) {
+            binding.textViewIncome.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark))
+        } else {
+            binding.textViewIncome.setTextColor(ContextCompat.getColor(this, android.R.color.primary_text_light))
+        }
+        
+        binding.textViewSalesCount.text = salesCount.toString()
 
-        // Show success message
-        Snackbar.make(
-            binding.root,
-            "Barkod başarıyla eklendi: $barcode",
-            Snackbar.LENGTH_SHORT
-        ).show()
-
-        // Update empty state
+        // Son işlemleri yükle
+        transactionList.clear()
+        val recentTransactions = transactionRepository.getRecentTransactions()
+        transactionList.addAll(recentTransactions)
+        transactionAdapter.notifyDataSetChanged()
         updateEmptyState()
+        
+        // Debug için
+        android.util.Log.d("MainActivity", "Transaction count: ${transactionList.size}")
+        for (transaction in transactionList) {
+            android.util.Log.d("MainActivity", "Transaction: ${transaction.brand} - ${transaction.productType} - ${transaction.transactionType} - ${transaction.amount}")
+        }
+    }
+
+    private fun showAddScanResultDialog(barcode: String) {
+        // Önce stokta bu barkodun olup olmadığını kontrol et
+        val stockItem = stockItemRepository.getStockItemByBarcode(barcode)
+        
+        if (stockItem == null) {
+            // Ürün stokta yok, uyarı ver
+            AlertDialog.Builder(this)
+                .setTitle("Ürün Bulunamadı")
+                .setMessage("Bu barkod numarasına ($barcode) sahip ürün stokta bulunmuyor. Önce ürünü stok sayfasından ekleyiniz.")
+                .setPositiveButton("Tamam", null)
+                .show()
+            return
+        }
+
+        val dialogBinding = DialogAddScanResultBinding.inflate(LayoutInflater.from(this))
+        dialogBinding.textViewScannedBarcode.text = "Barkod: $barcode"
+
+        // Stok bilgilerini göster
+        val productType = transactionRepository.getProductTypeByBarcode(barcode) ?: "Genel"
+        dialogBinding.textViewStockInfo.text = "Marka: ${stockItem.brand} | Tip: $productType"
+
+        AlertDialog.Builder(this)
+            .setTitle("Satış Bilgileri")
+            .setView(dialogBinding.root)
+            .setPositiveButton("Kaydet") { _, _ ->
+                val salePriceText = dialogBinding.editTextSalePrice.text.toString().trim()
+
+                if (salePriceText.isEmpty()) {
+                    Snackbar.make(binding.root, "Satış fiyatını girin", Snackbar.LENGTH_SHORT).show()
+                    return@setPositiveButton
+                }
+
+                try {
+                    val salePrice = salePriceText.toDouble()
+                    val productType = transactionRepository.getProductTypeByBarcode(barcode) ?: "Genel"
+                    
+                    // ScanResult kaydet
+                    val scanResult = ScanResult(
+                        barcode = barcode,
+                        brand = stockItem.brand,
+                        salePrice = salePrice,
+                        scanDate = System.currentTimeMillis()
+                    )
+                    scanResultRepository.insertScanResult(scanResult)
+
+                    // Transaction kaydet
+                    val transaction = Transaction(
+                        brand = stockItem.brand,
+                        productType = productType,
+                        transactionType = Transaction.TYPE_SALE,
+                        amount = salePrice,
+                        barcode = barcode,
+                        transactionDate = System.currentTimeMillis()
+                    )
+                    val id = transactionRepository.insertTransaction(transaction)
+                    
+                    if (id > 0) {
+                        loadDashboardData()
+                        Snackbar.make(binding.root, "Satış başarıyla kaydedildi", Snackbar.LENGTH_SHORT).show()
+                    } else {
+                        Snackbar.make(binding.root, "Kaydetme hatası", Snackbar.LENGTH_SHORT).show()
+                    }
+                } catch (e: NumberFormatException) {
+                    Snackbar.make(binding.root, "Geçerli bir fiyat girin", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("İptal", null)
+            .show()
     }
 
     private fun updateEmptyState() {
-        if (barcodeList.isEmpty()) {
-            binding.textViewEmptyState.visibility = android.view.View.VISIBLE
-            binding.recyclerViewBarcodes.visibility = android.view.View.GONE
+        if (transactionList.isEmpty()) {
+            binding.textViewEmptyTransactions.visibility = android.view.View.VISIBLE
+            binding.recyclerViewRecentTransactions.visibility = android.view.View.GONE
         } else {
-            binding.textViewEmptyState.visibility = android.view.View.GONE
-            binding.recyclerViewBarcodes.visibility = android.view.View.VISIBLE
+            binding.textViewEmptyTransactions.visibility = android.view.View.GONE
+            binding.recyclerViewRecentTransactions.visibility = android.view.View.VISIBLE
         }
     }
 
@@ -148,16 +252,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         ).show()
     }
 
-    private fun showBarcodeDetails(barcodeItem: BarcodeItem) {
-        val message = "Barkod: ${barcodeItem.value}\n" +
-                "Tarih: ${java.text.DateFormat.getDateTimeInstance().format(java.util.Date(barcodeItem.timestamp))}"
-        
-        Snackbar.make(
-            binding.root,
-            message,
-            Snackbar.LENGTH_LONG
-        ).show()
-    }
+
 
     override fun onNavigationItemSelected(item: android.view.MenuItem): Boolean {
         when (item.itemId) {
@@ -168,6 +263,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_stocks -> {
                 startActivity(Intent(this, StocksActivity::class.java))
+            }
+            R.id.nav_sales -> {
+                startActivity(Intent(this, SalesActivity::class.java))
             }
             R.id.nav_calendar -> {
                 startActivity(Intent(this, CalendarActivity::class.java))
@@ -188,9 +286,122 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    private fun addDummyDataIfNeeded() {
+        // Eğer veri yoksa dummy veriler ekle
+        val existingTransactions = transactionRepository.getRecentTransactions(1)
+        if (existingTransactions.isEmpty()) {
+            addDummyTransactions()
+            addDummyStockItems()
+        }
+    }
+
+    private fun addDummyTransactions() {
+        val dummyTransactions = listOf(
+            Transaction(
+                brand = "Samsung",
+                productType = "Çerçeve",
+                transactionType = Transaction.TYPE_SALE,
+                amount = 850.0,
+                barcode = "1234567890123",
+                transactionDate = System.currentTimeMillis() - 3600000 // 1 saat önce
+            ),
+            Transaction(
+                brand = "Apple",
+                productType = "Cam",
+                transactionType = Transaction.TYPE_SALE,
+                amount = 1200.0,
+                barcode = "1234567890124",
+                transactionDate = System.currentTimeMillis() - 7200000 // 2 saat önce
+            ),
+            Transaction(
+                brand = "Huawei",
+                productType = "Çerçeve",
+                transactionType = Transaction.TYPE_STOCK_ENTRY,
+                amount = 450.0,
+                barcode = "1234567890125",
+                transactionDate = System.currentTimeMillis() - 10800000 // 3 saat önce
+            ),
+            Transaction(
+                brand = "Xiaomi",
+                productType = "Cam",
+                transactionType = Transaction.TYPE_SALE,
+                amount = 675.0,
+                barcode = "1234567890126",
+                transactionDate = System.currentTimeMillis() - 14400000 // 4 saat önce
+            ),
+            Transaction(
+                brand = "LG",
+                productType = "Lens",
+                transactionType = Transaction.TYPE_STOCK_ENTRY,
+                amount = 320.0,
+                barcode = "1234567890127",
+                transactionDate = System.currentTimeMillis() - 18000000 // 5 saat önce
+            )
+        )
+
+        for (transaction in dummyTransactions) {
+            transactionRepository.insertTransaction(transaction)
+        }
+    }
+
+    private fun addDummyStockItems() {
+        val dummyStockItems = listOf(
+            StockItem(
+                barcode = "1234567890125",
+                brand = "Huawei",
+                purchasePrice = 450.0,
+                stockDate = System.currentTimeMillis() - 10800000,
+                quantity = 3
+            ),
+            StockItem(
+                barcode = "1234567890127",
+                brand = "LG",
+                purchasePrice = 320.0,
+                stockDate = System.currentTimeMillis() - 18000000,
+                quantity = 5
+            ),
+            StockItem(
+                barcode = "1234567890128",
+                brand = "Sony",
+                purchasePrice = 780.0,
+                stockDate = System.currentTimeMillis() - 25200000,
+                quantity = 2
+            ),
+            StockItem(
+                barcode = "1234567890129",
+                brand = "Nokia",
+                purchasePrice = 290.0,
+                stockDate = System.currentTimeMillis() - 32400000,
+                quantity = 4
+            ),
+            StockItem(
+                barcode = "1234567890130",
+                brand = "Oppo",
+                purchasePrice = 520.0,
+                stockDate = System.currentTimeMillis() - 39600000,
+                quantity = 1
+            )
+        )
+
+        for (stockItem in dummyStockItems) {
+            stockItemRepository.insertStockItem(stockItem)
+            
+            // Stok items için transaction da ekle
+            val transaction = Transaction(
+                brand = stockItem.brand,
+                productType = "Çerçeve", // Default olarak çerçeve
+                transactionType = Transaction.TYPE_STOCK_ENTRY,
+                amount = stockItem.purchasePrice,
+                barcode = stockItem.barcode,
+                transactionDate = stockItem.stockDate
+            )
+            transactionRepository.insertTransaction(transaction)
+        }
+    }
+
     override fun onResume() {
         super.onResume()
-        updateEmptyState()
+        loadDashboardData()
         // Set home as selected when returning to main activity
         binding.navigationView.setCheckedItem(R.id.nav_home)
     }

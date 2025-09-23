@@ -33,24 +33,38 @@ public final class ActivityMainBinding implements ViewBinding {
   public final NavigationView navigationView;
 
   @NonNull
-  public final RecyclerView recyclerViewBarcodes;
+  public final RecyclerView recyclerViewRecentTransactions;
 
   @NonNull
-  public final TextView textViewEmptyState;
+  public final TextView textViewEmptyTransactions;
+
+  @NonNull
+  public final TextView textViewIncome;
+
+  @NonNull
+  public final TextView textViewNetIncome;
+
+  @NonNull
+  public final TextView textViewSalesCount;
 
   @NonNull
   public final Toolbar toolbar;
 
   private ActivityMainBinding(@NonNull DrawerLayout rootView, @NonNull DrawerLayout drawerLayout,
       @NonNull FloatingActionButton fabScanBarcode, @NonNull NavigationView navigationView,
-      @NonNull RecyclerView recyclerViewBarcodes, @NonNull TextView textViewEmptyState,
+      @NonNull RecyclerView recyclerViewRecentTransactions,
+      @NonNull TextView textViewEmptyTransactions, @NonNull TextView textViewIncome,
+      @NonNull TextView textViewNetIncome, @NonNull TextView textViewSalesCount,
       @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.drawerLayout = drawerLayout;
     this.fabScanBarcode = fabScanBarcode;
     this.navigationView = navigationView;
-    this.recyclerViewBarcodes = recyclerViewBarcodes;
-    this.textViewEmptyState = textViewEmptyState;
+    this.recyclerViewRecentTransactions = recyclerViewRecentTransactions;
+    this.textViewEmptyTransactions = textViewEmptyTransactions;
+    this.textViewIncome = textViewIncome;
+    this.textViewNetIncome = textViewNetIncome;
+    this.textViewSalesCount = textViewSalesCount;
     this.toolbar = toolbar;
   }
 
@@ -95,15 +109,33 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.recyclerViewBarcodes;
-      RecyclerView recyclerViewBarcodes = ViewBindings.findChildViewById(rootView, id);
-      if (recyclerViewBarcodes == null) {
+      id = R.id.recyclerViewRecentTransactions;
+      RecyclerView recyclerViewRecentTransactions = ViewBindings.findChildViewById(rootView, id);
+      if (recyclerViewRecentTransactions == null) {
         break missingId;
       }
 
-      id = R.id.textViewEmptyState;
-      TextView textViewEmptyState = ViewBindings.findChildViewById(rootView, id);
-      if (textViewEmptyState == null) {
+      id = R.id.textViewEmptyTransactions;
+      TextView textViewEmptyTransactions = ViewBindings.findChildViewById(rootView, id);
+      if (textViewEmptyTransactions == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewIncome;
+      TextView textViewIncome = ViewBindings.findChildViewById(rootView, id);
+      if (textViewIncome == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewNetIncome;
+      TextView textViewNetIncome = ViewBindings.findChildViewById(rootView, id);
+      if (textViewNetIncome == null) {
+        break missingId;
+      }
+
+      id = R.id.textViewSalesCount;
+      TextView textViewSalesCount = ViewBindings.findChildViewById(rootView, id);
+      if (textViewSalesCount == null) {
         break missingId;
       }
 
@@ -114,7 +146,8 @@ public final class ActivityMainBinding implements ViewBinding {
       }
 
       return new ActivityMainBinding((DrawerLayout) rootView, drawerLayout, fabScanBarcode,
-          navigationView, recyclerViewBarcodes, textViewEmptyState, toolbar);
+          navigationView, recyclerViewRecentTransactions, textViewEmptyTransactions, textViewIncome,
+          textViewNetIncome, textViewSalesCount, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
