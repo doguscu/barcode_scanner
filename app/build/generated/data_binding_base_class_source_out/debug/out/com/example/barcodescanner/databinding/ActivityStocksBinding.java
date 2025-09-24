@@ -4,6 +4,7 @@ package com.example.barcodescanner.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.barcodescanner.R;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
@@ -24,7 +26,40 @@ public final class ActivityStocksBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
+  public final MaterialButton buttonFilterStocks;
+
+  @NonNull
   public final FloatingActionButton fabAddStock;
+
+  @NonNull
+  public final LinearLayout headerStockAmount;
+
+  @NonNull
+  public final LinearLayout headerStockBrand;
+
+  @NonNull
+  public final LinearLayout headerStockDate;
+
+  @NonNull
+  public final LinearLayout headerStockProductType;
+
+  @NonNull
+  public final LinearLayout headerStockQuantity;
+
+  @NonNull
+  public final ImageView iconSortStockAmount;
+
+  @NonNull
+  public final ImageView iconSortStockBrand;
+
+  @NonNull
+  public final ImageView iconSortStockDate;
+
+  @NonNull
+  public final ImageView iconSortStockProductType;
+
+  @NonNull
+  public final ImageView iconSortStockQuantity;
 
   @NonNull
   public final LinearLayout layoutTableHeaders;
@@ -48,12 +83,29 @@ public final class ActivityStocksBinding implements ViewBinding {
   public final Toolbar toolbar;
 
   private ActivityStocksBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull FloatingActionButton fabAddStock, @NonNull LinearLayout layoutTableHeaders,
-      @NonNull RecyclerView recyclerViewStockBarcodes, @NonNull TextView textViewEmptyState,
-      @NonNull TextView textViewFrameCount, @NonNull TextView textViewGlassCount,
-      @NonNull TextView textViewTotalCount, @NonNull Toolbar toolbar) {
+      @NonNull MaterialButton buttonFilterStocks, @NonNull FloatingActionButton fabAddStock,
+      @NonNull LinearLayout headerStockAmount, @NonNull LinearLayout headerStockBrand,
+      @NonNull LinearLayout headerStockDate, @NonNull LinearLayout headerStockProductType,
+      @NonNull LinearLayout headerStockQuantity, @NonNull ImageView iconSortStockAmount,
+      @NonNull ImageView iconSortStockBrand, @NonNull ImageView iconSortStockDate,
+      @NonNull ImageView iconSortStockProductType, @NonNull ImageView iconSortStockQuantity,
+      @NonNull LinearLayout layoutTableHeaders, @NonNull RecyclerView recyclerViewStockBarcodes,
+      @NonNull TextView textViewEmptyState, @NonNull TextView textViewFrameCount,
+      @NonNull TextView textViewGlassCount, @NonNull TextView textViewTotalCount,
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
+    this.buttonFilterStocks = buttonFilterStocks;
     this.fabAddStock = fabAddStock;
+    this.headerStockAmount = headerStockAmount;
+    this.headerStockBrand = headerStockBrand;
+    this.headerStockDate = headerStockDate;
+    this.headerStockProductType = headerStockProductType;
+    this.headerStockQuantity = headerStockQuantity;
+    this.iconSortStockAmount = iconSortStockAmount;
+    this.iconSortStockBrand = iconSortStockBrand;
+    this.iconSortStockDate = iconSortStockDate;
+    this.iconSortStockProductType = iconSortStockProductType;
+    this.iconSortStockQuantity = iconSortStockQuantity;
     this.layoutTableHeaders = layoutTableHeaders;
     this.recyclerViewStockBarcodes = recyclerViewStockBarcodes;
     this.textViewEmptyState = textViewEmptyState;
@@ -90,9 +142,75 @@ public final class ActivityStocksBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonFilterStocks;
+      MaterialButton buttonFilterStocks = ViewBindings.findChildViewById(rootView, id);
+      if (buttonFilterStocks == null) {
+        break missingId;
+      }
+
       id = R.id.fabAddStock;
       FloatingActionButton fabAddStock = ViewBindings.findChildViewById(rootView, id);
       if (fabAddStock == null) {
+        break missingId;
+      }
+
+      id = R.id.headerStockAmount;
+      LinearLayout headerStockAmount = ViewBindings.findChildViewById(rootView, id);
+      if (headerStockAmount == null) {
+        break missingId;
+      }
+
+      id = R.id.headerStockBrand;
+      LinearLayout headerStockBrand = ViewBindings.findChildViewById(rootView, id);
+      if (headerStockBrand == null) {
+        break missingId;
+      }
+
+      id = R.id.headerStockDate;
+      LinearLayout headerStockDate = ViewBindings.findChildViewById(rootView, id);
+      if (headerStockDate == null) {
+        break missingId;
+      }
+
+      id = R.id.headerStockProductType;
+      LinearLayout headerStockProductType = ViewBindings.findChildViewById(rootView, id);
+      if (headerStockProductType == null) {
+        break missingId;
+      }
+
+      id = R.id.headerStockQuantity;
+      LinearLayout headerStockQuantity = ViewBindings.findChildViewById(rootView, id);
+      if (headerStockQuantity == null) {
+        break missingId;
+      }
+
+      id = R.id.iconSortStockAmount;
+      ImageView iconSortStockAmount = ViewBindings.findChildViewById(rootView, id);
+      if (iconSortStockAmount == null) {
+        break missingId;
+      }
+
+      id = R.id.iconSortStockBrand;
+      ImageView iconSortStockBrand = ViewBindings.findChildViewById(rootView, id);
+      if (iconSortStockBrand == null) {
+        break missingId;
+      }
+
+      id = R.id.iconSortStockDate;
+      ImageView iconSortStockDate = ViewBindings.findChildViewById(rootView, id);
+      if (iconSortStockDate == null) {
+        break missingId;
+      }
+
+      id = R.id.iconSortStockProductType;
+      ImageView iconSortStockProductType = ViewBindings.findChildViewById(rootView, id);
+      if (iconSortStockProductType == null) {
+        break missingId;
+      }
+
+      id = R.id.iconSortStockQuantity;
+      ImageView iconSortStockQuantity = ViewBindings.findChildViewById(rootView, id);
+      if (iconSortStockQuantity == null) {
         break missingId;
       }
 
@@ -138,9 +256,12 @@ public final class ActivityStocksBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityStocksBinding((CoordinatorLayout) rootView, fabAddStock,
-          layoutTableHeaders, recyclerViewStockBarcodes, textViewEmptyState, textViewFrameCount,
-          textViewGlassCount, textViewTotalCount, toolbar);
+      return new ActivityStocksBinding((CoordinatorLayout) rootView, buttonFilterStocks,
+          fabAddStock, headerStockAmount, headerStockBrand, headerStockDate, headerStockProductType,
+          headerStockQuantity, iconSortStockAmount, iconSortStockBrand, iconSortStockDate,
+          iconSortStockProductType, iconSortStockQuantity, layoutTableHeaders,
+          recyclerViewStockBarcodes, textViewEmptyState, textViewFrameCount, textViewGlassCount,
+          textViewTotalCount, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

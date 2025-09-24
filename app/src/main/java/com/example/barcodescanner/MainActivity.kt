@@ -1,6 +1,7 @@
 package com.example.barcodescanner
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -9,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,6 +36,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var scanResultRepository: ScanResultRepository
     private lateinit var stockItemRepository: StockItemRepository
     private lateinit var transactionRepository: TransactionRepository
+    
+    // Sorting states for recent transactions
+    private var currentSortField: String? = null
+    private var isAscending = true
+    
+    companion object {
+        const val SORT_BRAND = "brand"
+        const val SORT_DATE = "date"
+        const val SORT_AMOUNT = "amount"
+    }
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -57,6 +69,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Apply saved theme before calling super.onCreate
+        applySelectedTheme()
+        
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -296,6 +311,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun addDummyTransactions() {
+        // 13-24 Eylül 2024 tarihleri için Calendar kullan
+        val calendar = java.util.Calendar.getInstance()
+        
         val dummyTransactions = listOf(
             Transaction(
                 brand = "Samsung",
@@ -303,7 +321,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 transactionType = Transaction.TYPE_SALE,
                 amount = 850.0,
                 barcode = "1234567890123",
-                transactionDate = System.currentTimeMillis() - 3600000 // 1 saat önce
+                transactionDate = calendar.apply { set(2024, 8, 24, 14, 30) }.timeInMillis // 24 Eylül 2024
             ),
             Transaction(
                 brand = "Apple",
@@ -311,7 +329,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 transactionType = Transaction.TYPE_SALE,
                 amount = 1200.0,
                 barcode = "1234567890124",
-                transactionDate = System.currentTimeMillis() - 7200000 // 2 saat önce
+                transactionDate = calendar.apply { set(2024, 8, 23, 10, 15) }.timeInMillis // 23 Eylül 2024
             ),
             Transaction(
                 brand = "Huawei",
@@ -319,7 +337,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 transactionType = Transaction.TYPE_STOCK_ENTRY,
                 amount = 450.0,
                 barcode = "1234567890125",
-                transactionDate = System.currentTimeMillis() - 10800000 // 3 saat önce
+                transactionDate = calendar.apply { set(2024, 8, 20, 16, 45) }.timeInMillis // 20 Eylül 2024
             ),
             Transaction(
                 brand = "Xiaomi",
@@ -327,7 +345,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 transactionType = Transaction.TYPE_SALE,
                 amount = 675.0,
                 barcode = "1234567890126",
-                transactionDate = System.currentTimeMillis() - 14400000 // 4 saat önce
+                transactionDate = calendar.apply { set(2024, 8, 18, 11, 20) }.timeInMillis // 18 Eylül 2024
             ),
             Transaction(
                 brand = "LG",
@@ -335,7 +353,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 transactionType = Transaction.TYPE_STOCK_ENTRY,
                 amount = 320.0,
                 barcode = "1234567890127",
-                transactionDate = System.currentTimeMillis() - 18000000 // 5 saat önce
+                transactionDate = calendar.apply { set(2024, 8, 15, 9, 10) }.timeInMillis // 15 Eylül 2024
             )
         )
 
@@ -345,40 +363,43 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun addDummyStockItems() {
+        // 13-24 Eylül 2024 tarihleri için Calendar kullan
+        val calendar = java.util.Calendar.getInstance()
+        
         val dummyStockItems = listOf(
             StockItem(
                 barcode = "1234567890125",
                 brand = "Huawei",
                 purchasePrice = 450.0,
-                stockDate = System.currentTimeMillis() - 10800000,
+                stockDate = calendar.apply { set(2024, 8, 20, 16, 45) }.timeInMillis, // 20 Eylül 2024
                 quantity = 3
             ),
             StockItem(
                 barcode = "1234567890127",
                 brand = "LG",
                 purchasePrice = 320.0,
-                stockDate = System.currentTimeMillis() - 18000000,
+                stockDate = calendar.apply { set(2024, 8, 15, 9, 10) }.timeInMillis, // 15 Eylül 2024
                 quantity = 5
             ),
             StockItem(
                 barcode = "1234567890128",
                 brand = "Sony",
                 purchasePrice = 780.0,
-                stockDate = System.currentTimeMillis() - 25200000,
+                stockDate = calendar.apply { set(2024, 8, 22, 13, 25) }.timeInMillis, // 22 Eylül 2024
                 quantity = 2
             ),
             StockItem(
                 barcode = "1234567890129",
                 brand = "Nokia",
                 purchasePrice = 290.0,
-                stockDate = System.currentTimeMillis() - 32400000,
+                stockDate = calendar.apply { set(2024, 8, 17, 8, 45) }.timeInMillis, // 17 Eylül 2024
                 quantity = 4
             ),
             StockItem(
                 barcode = "1234567890130",
                 brand = "Oppo",
                 purchasePrice = 520.0,
-                stockDate = System.currentTimeMillis() - 39600000,
+                stockDate = calendar.apply { set(2024, 8, 14, 15, 30) }.timeInMillis, // 14 Eylül 2024
                 quantity = 1
             )
         )
@@ -396,6 +417,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 transactionDate = stockItem.stockDate
             )
             transactionRepository.insertTransaction(transaction)
+        }
+    }
+
+    private fun applySelectedTheme() {
+        val sharedPreferences = getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
+        val savedTheme = sharedPreferences.getString(SettingsActivity.PREF_THEME, SettingsActivity.THEME_LIGHT)
+        
+        when (savedTheme) {
+            SettingsActivity.THEME_LIGHT -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            SettingsActivity.THEME_DARK -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            SettingsActivity.THEME_SYSTEM -> AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM)
         }
     }
 

@@ -20,20 +20,119 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="To be updated"
-            android:textSize="18sp"
-            android:textColor="?attr/colorOnSurface" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    </LinearLayout>
+            <!-- Tema Başlığı -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tema Seçimi"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="?attr/colorOnSurface"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Tema Seçenekleri -->
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- Aydınlık Tema -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutline"
+                    app:strokeWidth="1dp">
+
+                    <RadioButton
+                        android:id="@+id/lightThemeOption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Aydınlık Tema"
+                        android:textSize="16sp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableStart="@drawable/ic_light_mode"
+                        android:drawablePadding="12dp" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Karanlık Tema -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutline"
+                    app:strokeWidth="1dp">
+
+                    <RadioButton
+                        android:id="@+id/darkThemeOption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Karanlık Tema"
+                        android:textSize="16sp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableStart="@drawable/ic_dark_mode"
+                        android:drawablePadding="12dp" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Sistem Tema -->
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="2dp"
+                    app:strokeColor="?attr/colorOutline"
+                    app:strokeWidth="1dp">
+
+                    <RadioButton
+                        android:id="@+id/systemThemeOption"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Sistem Ayarı"
+                        android:textSize="16sp"
+                        android:textColor="?attr/colorOnSurface"
+                        android:padding="16dp"
+                        android:background="?attr/selectableItemBackground"
+                        android:drawableStart="@drawable/ic_auto_mode"
+                        android:drawablePadding="12dp" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </RadioGroup>
+
+            <!-- Açıklama -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tema değişikliği hemen uygulanır ve tercihler kaydedilir."
+                android:textSize="14sp"
+                android:textColor="?attr/colorOnSurfaceVariant"
+                android:layout_marginTop="16dp"
+                android:textStyle="italic" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

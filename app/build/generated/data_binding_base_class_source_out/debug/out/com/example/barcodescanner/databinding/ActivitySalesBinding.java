@@ -4,6 +4,7 @@ package com.example.barcodescanner.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.barcodescanner.R;
+import com.google.android.material.button.MaterialButton;
 import java.lang.NullPointerException;
 import java.lang.Override;
 import java.lang.String;
@@ -21,6 +23,33 @@ import java.lang.String;
 public final class ActivitySalesBinding implements ViewBinding {
   @NonNull
   private final CoordinatorLayout rootView;
+
+  @NonNull
+  public final MaterialButton buttonFilterSales;
+
+  @NonNull
+  public final LinearLayout headerAmount;
+
+  @NonNull
+  public final LinearLayout headerBrand;
+
+  @NonNull
+  public final LinearLayout headerDate;
+
+  @NonNull
+  public final LinearLayout headerProductType;
+
+  @NonNull
+  public final ImageView iconSortAmount;
+
+  @NonNull
+  public final ImageView iconSortBrand;
+
+  @NonNull
+  public final ImageView iconSortDate;
+
+  @NonNull
+  public final ImageView iconSortProductType;
 
   @NonNull
   public final LinearLayout layoutSalesHeaders;
@@ -35,9 +64,23 @@ public final class ActivitySalesBinding implements ViewBinding {
   public final Toolbar toolbar;
 
   private ActivitySalesBinding(@NonNull CoordinatorLayout rootView,
-      @NonNull LinearLayout layoutSalesHeaders, @NonNull RecyclerView recyclerViewSales,
-      @NonNull TextView textViewEmptySales, @NonNull Toolbar toolbar) {
+      @NonNull MaterialButton buttonFilterSales, @NonNull LinearLayout headerAmount,
+      @NonNull LinearLayout headerBrand, @NonNull LinearLayout headerDate,
+      @NonNull LinearLayout headerProductType, @NonNull ImageView iconSortAmount,
+      @NonNull ImageView iconSortBrand, @NonNull ImageView iconSortDate,
+      @NonNull ImageView iconSortProductType, @NonNull LinearLayout layoutSalesHeaders,
+      @NonNull RecyclerView recyclerViewSales, @NonNull TextView textViewEmptySales,
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
+    this.buttonFilterSales = buttonFilterSales;
+    this.headerAmount = headerAmount;
+    this.headerBrand = headerBrand;
+    this.headerDate = headerDate;
+    this.headerProductType = headerProductType;
+    this.iconSortAmount = iconSortAmount;
+    this.iconSortBrand = iconSortBrand;
+    this.iconSortDate = iconSortDate;
+    this.iconSortProductType = iconSortProductType;
     this.layoutSalesHeaders = layoutSalesHeaders;
     this.recyclerViewSales = recyclerViewSales;
     this.textViewEmptySales = textViewEmptySales;
@@ -71,6 +114,60 @@ public final class ActivitySalesBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonFilterSales;
+      MaterialButton buttonFilterSales = ViewBindings.findChildViewById(rootView, id);
+      if (buttonFilterSales == null) {
+        break missingId;
+      }
+
+      id = R.id.headerAmount;
+      LinearLayout headerAmount = ViewBindings.findChildViewById(rootView, id);
+      if (headerAmount == null) {
+        break missingId;
+      }
+
+      id = R.id.headerBrand;
+      LinearLayout headerBrand = ViewBindings.findChildViewById(rootView, id);
+      if (headerBrand == null) {
+        break missingId;
+      }
+
+      id = R.id.headerDate;
+      LinearLayout headerDate = ViewBindings.findChildViewById(rootView, id);
+      if (headerDate == null) {
+        break missingId;
+      }
+
+      id = R.id.headerProductType;
+      LinearLayout headerProductType = ViewBindings.findChildViewById(rootView, id);
+      if (headerProductType == null) {
+        break missingId;
+      }
+
+      id = R.id.iconSortAmount;
+      ImageView iconSortAmount = ViewBindings.findChildViewById(rootView, id);
+      if (iconSortAmount == null) {
+        break missingId;
+      }
+
+      id = R.id.iconSortBrand;
+      ImageView iconSortBrand = ViewBindings.findChildViewById(rootView, id);
+      if (iconSortBrand == null) {
+        break missingId;
+      }
+
+      id = R.id.iconSortDate;
+      ImageView iconSortDate = ViewBindings.findChildViewById(rootView, id);
+      if (iconSortDate == null) {
+        break missingId;
+      }
+
+      id = R.id.iconSortProductType;
+      ImageView iconSortProductType = ViewBindings.findChildViewById(rootView, id);
+      if (iconSortProductType == null) {
+        break missingId;
+      }
+
       id = R.id.layoutSalesHeaders;
       LinearLayout layoutSalesHeaders = ViewBindings.findChildViewById(rootView, id);
       if (layoutSalesHeaders == null) {
@@ -95,8 +192,9 @@ public final class ActivitySalesBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivitySalesBinding((CoordinatorLayout) rootView, layoutSalesHeaders,
-          recyclerViewSales, textViewEmptySales, toolbar);
+      return new ActivitySalesBinding((CoordinatorLayout) rootView, buttonFilterSales, headerAmount,
+          headerBrand, headerDate, headerProductType, iconSortAmount, iconSortBrand, iconSortDate,
+          iconSortProductType, layoutSalesHeaders, recyclerViewSales, textViewEmptySales, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

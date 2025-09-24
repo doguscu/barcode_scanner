@@ -4,6 +4,7 @@ package com.example.barcodescanner.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
@@ -20,10 +21,24 @@ public final class ActivitySettingsBinding implements ViewBinding {
   private final CoordinatorLayout rootView;
 
   @NonNull
+  public final RadioButton darkThemeOption;
+
+  @NonNull
+  public final RadioButton lightThemeOption;
+
+  @NonNull
+  public final RadioButton systemThemeOption;
+
+  @NonNull
   public final Toolbar toolbar;
 
-  private ActivitySettingsBinding(@NonNull CoordinatorLayout rootView, @NonNull Toolbar toolbar) {
+  private ActivitySettingsBinding(@NonNull CoordinatorLayout rootView,
+      @NonNull RadioButton darkThemeOption, @NonNull RadioButton lightThemeOption,
+      @NonNull RadioButton systemThemeOption, @NonNull Toolbar toolbar) {
     this.rootView = rootView;
+    this.darkThemeOption = darkThemeOption;
+    this.lightThemeOption = lightThemeOption;
+    this.systemThemeOption = systemThemeOption;
     this.toolbar = toolbar;
   }
 
@@ -54,13 +69,32 @@ public final class ActivitySettingsBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.darkThemeOption;
+      RadioButton darkThemeOption = ViewBindings.findChildViewById(rootView, id);
+      if (darkThemeOption == null) {
+        break missingId;
+      }
+
+      id = R.id.lightThemeOption;
+      RadioButton lightThemeOption = ViewBindings.findChildViewById(rootView, id);
+      if (lightThemeOption == null) {
+        break missingId;
+      }
+
+      id = R.id.systemThemeOption;
+      RadioButton systemThemeOption = ViewBindings.findChildViewById(rootView, id);
+      if (systemThemeOption == null) {
+        break missingId;
+      }
+
       id = R.id.toolbar;
       Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
         break missingId;
       }
 
-      return new ActivitySettingsBinding((CoordinatorLayout) rootView, toolbar);
+      return new ActivitySettingsBinding((CoordinatorLayout) rootView, darkThemeOption,
+          lightThemeOption, systemThemeOption, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
