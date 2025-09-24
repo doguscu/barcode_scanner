@@ -3081,6 +3081,7 @@ drawable googleg_disabled_color_18
 drawable googleg_standard_color_18
 drawable ic_arrow_back_24
 drawable ic_arrow_back_black_24
+drawable ic_auto_mode
 drawable ic_calendar_24
 drawable ic_call_answer
 drawable ic_call_answer_low
@@ -3090,6 +3091,7 @@ drawable ic_call_decline
 drawable ic_call_decline_low
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
+drawable ic_dark_mode
 drawable ic_delete_24
 drawable ic_edit_24
 drawable ic_filter
@@ -3097,6 +3099,7 @@ drawable ic_filter_list
 drawable ic_home_24
 drawable ic_inventory_24
 drawable ic_keyboard_black_24dp
+drawable ic_light_mode
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
@@ -3108,6 +3111,8 @@ drawable ic_qr_code_scanner_24
 drawable ic_search_black_24
 drawable ic_sell_24
 drawable ic_settings_24
+drawable ic_sort_asc
+drawable ic_sort_desc
 drawable m3_avd_hide_password
 drawable m3_avd_show_password
 drawable m3_bottom_sheet_drag_handle
@@ -3245,6 +3250,7 @@ id action_bar_title
 id action_container
 id action_context_bar
 id action_divider
+id action_filter
 id action_image
 id action_menu_divider
 id action_menu_presenter
@@ -3287,7 +3293,10 @@ id bounceEnd
 id bounceStart
 id btnApply
 id btnCancel
+id btnClearFilter
 id buttonBack
+id buttonFilterSales
+id buttonFilterStocks
 id buttonPanel
 id cache_measures
 id callMeasure
@@ -3329,6 +3338,7 @@ id custom
 id customPanel
 id cut
 id dark
+id darkThemeOption
 id date_picker_actions
 id decelerate
 id decelerateAndComplete
@@ -3376,7 +3386,11 @@ id end
 id endToStart
 id enterAlways
 id enterAlwaysCollapsed
+id etBrand
 id etEndDate
+id etMaxAmount
+id etMinAmount
+id etProductType
 id etStartDate
 id exitUntilCollapsed
 id expand_activities_button
@@ -3411,6 +3425,15 @@ id graph_wrap
 id group_divider
 id grouping
 id groups
+id headerAmount
+id headerBrand
+id headerDate
+id headerProductType
+id headerStockAmount
+id headerStockBrand
+id headerStockDate
+id headerStockProductType
+id headerStockQuantity
 id header_title
 id hide_ime_id
 id hideable
@@ -3419,6 +3442,15 @@ id homeAsUp
 id honorRequest
 id horizontal_only
 id icon
+id iconSortAmount
+id iconSortBrand
+id iconSortDate
+id iconSortProductType
+id iconSortStockAmount
+id iconSortStockBrand
+id iconSortStockDate
+id iconSortStockProductType
+id iconSortStockQuantity
 id icon_group
 id icon_only
 id ifRoom
@@ -3446,6 +3478,7 @@ id left
 id leftToRight
 id legacy
 id light
+id lightThemeOption
 id line1
 id line3
 id linear
@@ -3660,6 +3693,7 @@ id stretch
 id submenuarrow
 id submit_area
 id supportScrollUp
+id systemThemeOption
 id tabMode
 id tag_accessibility_actions
 id tag_accessibility_clickable_spans
@@ -3717,7 +3751,11 @@ id textinput_helper_text
 id textinput_placeholder
 id textinput_prefix_text
 id textinput_suffix_text
+id tilBrand
 id tilEndDate
+id tilMaxAmount
+id tilMinAmount
+id tilProductType
 id tilStartDate
 id time
 id title
@@ -3901,6 +3939,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dialog_add_scan_result
 layout dialog_add_stock_item
+layout dialog_advanced_filter
 layout dialog_filter
 layout drawer_header
 layout ime_base_split_test_activity
@@ -3974,6 +4013,8 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 menu drawer_menu
+menu menu_sales
+menu menu_stocks
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
@@ -4006,6 +4047,8 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string advanced_filter
+string amount_range
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
@@ -4021,6 +4064,7 @@ string bottomsheet_action_expand
 string bottomsheet_action_expand_halfway
 string bottomsheet_drag_handle_clicked
 string bottomsheet_drag_handle_content_description
+string brand_filter
 string call_notification_answer_action
 string call_notification_answer_video_action
 string call_notification_decline_action
@@ -4033,6 +4077,7 @@ string cancel
 string character_counter_content_description
 string character_counter_overflowed_content_description
 string character_counter_pattern
+string clear_filter
 string clear_text_end_icon_content_description
 string common_google_play_services_enable_button
 string common_google_play_services_enable_text
@@ -4052,6 +4097,7 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string date_range
 string dest_title
 string end_date
 string error_a11y_label
@@ -4059,6 +4105,8 @@ string error_icon_content_description
 string exposed_dropdown_menu_content_description
 string fab_transformation_scrim_behavior
 string fab_transformation_sheet_behavior
+string filter_sales
+string filter_stocks
 string filter_transactions
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
@@ -4101,6 +4149,8 @@ string material_timepicker_minute
 string material_timepicker_pm
 string material_timepicker_select_time
 string material_timepicker_text_input_mode_description
+string max_amount
+string min_amount
 string mtrl_badge_numberless_content_description
 string mtrl_checkbox_button_icon_path_checked
 string mtrl_checkbox_button_icon_path_group_name
@@ -4180,6 +4230,7 @@ string path_password_eye
 string path_password_eye_mask_strike_through
 string path_password_eye_mask_visible
 string path_password_strike_through
+string product_type_filter
 string scan_barcode
 string scan_instruction
 string scanning_instruction

@@ -15,7 +15,7 @@
     <string name="nav_stocks">Stoklar</string>
     <string name="nav_sales">Satışlarım</string>
     <string name="nav_calendar">Takvim</string>
-    <string name="nav_settings">Ayarlar</string>
+    <string name="nav_settings">Tema</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="nav_header_subtitle">Barkod okuma ve stok yönetimi</string>
     <string name="navigation_drawer_open">Navigation drawer açık</string>
@@ -28,8 +28,18 @@
     
     <!-- Filter Dialog -->
     <string name="filter_transactions">İşlemleri Filtrele</string>
+    <string name="advanced_filter">Gelişmiş Filtre</string>
+    <string name="brand_filter">Marka</string>
+    <string name="product_type_filter">Ürün Tipi</string>
+    <string name="date_range">Tarih Aralığı</string>
+    <string name="amount_range">Tutar Aralığı</string>
+    <string name="min_amount">Min. Tutar</string>
+    <string name="max_amount">Max. Tutar</string>
     <string name="start_date">Başlangıç Tarihi</string>
     <string name="end_date">Bitiş Tarihi</string>
     <string name="cancel">İptal</string>
     <string name="apply_filter">Filtreyi Uygula</string>
+    <string name="clear_filter">Temizle</string>
+    <string name="filter_stocks">Stokları Filtrele</string>
+    <string name="filter_sales">Satışları Filtrele</string>
 </resources>
