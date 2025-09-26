@@ -3,9 +3,11 @@ package com.example.barcodescanner
 import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AlertDialog
@@ -24,6 +26,8 @@ import com.example.barcodescanner.model.Transaction
 import com.example.barcodescanner.repository.ScanResultRepository
 import com.example.barcodescanner.repository.StockItemRepository
 import com.example.barcodescanner.repository.TransactionRepository
+import com.example.barcodescanner.repository.NotificationRepository
+import com.example.barcodescanner.repository.DataImportExportRepository
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 
@@ -36,6 +40,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private lateinit var scanResultRepository: ScanResultRepository
     private lateinit var stockItemRepository: StockItemRepository
     private lateinit var transactionRepository: TransactionRepository
+    private lateinit var notificationRepository: NotificationRepository
+    private lateinit var dataImportExportRepository: DataImportExportRepository
+    
+    // File picker launchers
+    private val exportLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
+        uri?.let { handleExportResult(it) }
+    }
+    
+    private val importLauncher = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+        uri?.let { handleImportResult(it) }
+    }
     
     // Sorting states for recent transactions
     private var currentSortField: String? = null
@@ -79,11 +94,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         scanResultRepository = ScanResultRepository(this)
         stockItemRepository = StockItemRepository(this)
         transactionRepository = TransactionRepository(this)
+        dataImportExportRepository = DataImportExportRepository(this)
+        notificationRepository = NotificationRepository(this)
         
         setupToolbar()
         setupDrawer()
         setupRecyclerView()
         setupScanButton()
+        setupNotificationButton()
         addDummyDataIfNeeded()
         loadDashboardData()
     }
@@ -91,6 +109,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun setupToolbar() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.title = "Ana Sayfa"
+        supportActionBar?.title = getString(R.string.nav_home)
     }
 
     private fun setupDrawer() {
@@ -124,6 +143,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
+    private fun setupNotificationButton() {
+        updateNotificationBadge()
+        binding.buttonNotifications.setOnClickListener {
+            val intent = Intent(this, NotificationsActivity::class.java)
+            startActivity(intent)
+        }
+    }
+
+    private fun updateNotificationBadge() {
+        val unreadCount = notificationRepository.getUnreadNotificationCount()
+        if (unreadCount > 0) {
+            binding.textViewNotificationBadge.visibility = android.view.View.VISIBLE
+            binding.textViewNotificationBadge.text = if (unreadCount > 99) "99+" else unreadCount.toString()
+        } else {
+            binding.textViewNotificationBadge.visibility = android.view.View.GONE
+        }
+    }
+
     private fun checkCameraPermissionAndScan() {
         when {
             ContextCompat.checkSelfPermission(
@@ -149,18 +186,28 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val netIncome = transactionRepository.getTodayNetIncome() // Bugünkü net gelir (satış - alım)
         val salesCount = transactionRepository.getTodaySalesCount() // Bugünkü satış sayısı
 
-        binding.textViewNetIncome.text = "₺${String.format("%.2f", netIncome)}"
+        binding.textViewNetIncome.text = "₺${String.format(java.util.Locale.getDefault(), "%.2f", netIncome)}"
         if (netIncome > 0) {
             binding.textViewNetIncome.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark))
+        } else if (netIncome == 0.0) {
+            // Sıfır değeri için varsayılan tema rengini kullan
+            val typedValue = android.util.TypedValue()
+            theme.resolveAttribute(com.google.android.material.R.attr.colorOnPrimaryContainer, typedValue, true)
+            binding.textViewNetIncome.setTextColor(typedValue.data)
         } else {
-            binding.textViewNetIncome.setTextColor(ContextCompat.getColor(this, android.R.color.primary_text_light))
+            binding.textViewNetIncome.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark))
         }
         
-        binding.textViewIncome.text = "₺${String.format("%.2f", totalSalesRevenue)}"
+        binding.textViewIncome.text = "₺${String.format(java.util.Locale.getDefault(), "%.2f", totalSalesRevenue)}"
         if (totalSalesRevenue > 0) {
             binding.textViewIncome.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark))
+        } else if (totalSalesRevenue == 0.0) {
+            // Sıfır değeri için varsayılan tema rengini kullan
+            val typedValue = android.util.TypedValue()
+            theme.resolveAttribute(com.google.android.material.R.attr.colorOnSecondaryContainer, typedValue, true)
+            binding.textViewIncome.setTextColor(typedValue.data)
         } else {
-            binding.textViewIncome.setTextColor(ContextCompat.getColor(this, android.R.color.primary_text_light))
+            binding.textViewIncome.setTextColor(ContextCompat.getColor(this, android.R.color.holo_red_dark))
         }
         
         binding.textViewSalesCount.text = salesCount.toString()
@@ -186,34 +233,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         if (stockItem == null) {
             // Ürün stokta yok, uyarı ver
             AlertDialog.Builder(this)
-                .setTitle("Ürün Bulunamadı")
-                .setMessage("Bu barkod numarasına ($barcode) sahip ürün stokta bulunmuyor. Önce ürünü stok sayfasından ekleyiniz.")
-                .setPositiveButton("Tamam", null)
+                .setTitle(R.string.product_not_found_title)
+                .setMessage(getString(R.string.product_not_in_stock_message))
+                .setPositiveButton(R.string.ok, null)
                 .show()
             return
         }
 
         val dialogBinding = DialogAddScanResultBinding.inflate(LayoutInflater.from(this))
-        dialogBinding.textViewScannedBarcode.text = "Barkod: $barcode"
+        dialogBinding.textViewScannedBarcode.text = "${getString(R.string.barcode_label)}: $barcode"
 
         // Stok bilgilerini göster
         val productType = transactionRepository.getProductTypeByBarcode(barcode) ?: "Genel"
         dialogBinding.textViewStockInfo.text = "Marka: ${stockItem.brand} | Tip: $productType"
 
         AlertDialog.Builder(this)
-            .setTitle("Satış Bilgileri")
+            .setTitle(R.string.sales_info_title)
             .setView(dialogBinding.root)
-            .setPositiveButton("Kaydet") { _, _ ->
+            .setPositiveButton(R.string.save) { _, _ ->
                 val salePriceText = dialogBinding.editTextSalePrice.text.toString().trim()
 
                 if (salePriceText.isEmpty()) {
-                    Snackbar.make(binding.root, "Satış fiyatını girin", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, R.string.enter_sale_price, Snackbar.LENGTH_SHORT).show()
                     return@setPositiveButton
                 }
 
                 try {
                     val salePrice = salePriceText.toDouble()
-                    val productType = transactionRepository.getProductTypeByBarcode(barcode) ?: "Genel"
+                    val productTypeFromDB = transactionRepository.getProductTypeByBarcode(barcode) ?: "Genel"
                     
                     // ScanResult kaydet
                     val scanResult = ScanResult(
@@ -227,7 +274,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     // Transaction kaydet
                     val transaction = Transaction(
                         brand = stockItem.brand,
-                        productType = productType,
+                        productType = productTypeFromDB,
                         transactionType = Transaction.TYPE_SALE,
                         amount = salePrice,
                         barcode = barcode,
@@ -238,14 +285,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     if (id > 0) {
                         loadDashboardData()
                         Snackbar.make(binding.root, "Satış başarıyla kaydedildi", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, R.string.sale_saved_successfully, Snackbar.LENGTH_SHORT).show()
                     } else {
-                        Snackbar.make(binding.root, "Kaydetme hatası", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, R.string.save_error, Snackbar.LENGTH_SHORT).show()
                     }
                 } catch (e: NumberFormatException) {
-                    Snackbar.make(binding.root, "Geçerli bir fiyat girin", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(binding.root, R.string.enter_valid_price, Snackbar.LENGTH_SHORT).show()
                 }
             }
-            .setNegativeButton("İptal", null)
+            .setNegativeButton(R.string.cancel, null)
             .show()
     }
 
@@ -262,7 +310,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private fun showPermissionDeniedMessage() {
         Snackbar.make(
             binding.root,
-            "Kamera izni barkod tarama için gereklidir",
+            R.string.camera_permission_required_for_scanning,
             Snackbar.LENGTH_LONG
         ).show()
     }
@@ -285,14 +333,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_calendar -> {
                 startActivity(Intent(this, CalendarActivity::class.java))
             }
-            R.id.nav_settings -> {
+            R.id.nav_theme_settings -> {
                 startActivity(Intent(this, SettingsActivity::class.java))
+            }
+            R.id.nav_import_data -> {
+                startImportData()
+            }
+            R.id.nav_export_data -> {
+                startExportData()
             }
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         if (binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             binding.drawerLayout.closeDrawer(GravityCompat.START)
@@ -302,16 +357,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun addDummyDataIfNeeded() {
-        // Eğer veri yoksa dummy veriler ekle
-        val existingTransactions = transactionRepository.getRecentTransactions(1)
-        if (existingTransactions.isEmpty()) {
             addDummyTransactions()
             addDummyStockItems()
-        }
     }
 
     private fun addDummyTransactions() {
-        // 13-24 Eylül 2024 tarihleri için Calendar kullan
+        // 13-24 Eylül 2025 tarihleri için Calendar kullan
         val calendar = java.util.Calendar.getInstance()
         
         val dummyTransactions = listOf(
@@ -321,7 +372,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 transactionType = Transaction.TYPE_SALE,
                 amount = 850.0,
                 barcode = "1234567890123",
-                transactionDate = calendar.apply { set(2024, 8, 24, 14, 30) }.timeInMillis // 24 Eylül 2024
+                transactionDate = calendar.apply { set(2025, 8, 24, 14, 30) }.timeInMillis // 24 Eylül 2024
             ),
             Transaction(
                 brand = "Apple",
@@ -329,7 +380,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 transactionType = Transaction.TYPE_SALE,
                 amount = 1200.0,
                 barcode = "1234567890124",
-                transactionDate = calendar.apply { set(2024, 8, 23, 10, 15) }.timeInMillis // 23 Eylül 2024
+                transactionDate = calendar.apply { set(2025, 8, 23, 10, 15) }.timeInMillis // 23 Eylül 2024
             ),
             Transaction(
                 brand = "Huawei",
@@ -337,7 +388,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 transactionType = Transaction.TYPE_STOCK_ENTRY,
                 amount = 450.0,
                 barcode = "1234567890125",
-                transactionDate = calendar.apply { set(2024, 8, 20, 16, 45) }.timeInMillis // 20 Eylül 2024
+                transactionDate = calendar.apply { set(2025, 8, 20, 16, 45) }.timeInMillis // 20 Eylül 2024
             ),
             Transaction(
                 brand = "Xiaomi",
@@ -345,7 +396,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 transactionType = Transaction.TYPE_SALE,
                 amount = 675.0,
                 barcode = "1234567890126",
-                transactionDate = calendar.apply { set(2024, 8, 18, 11, 20) }.timeInMillis // 18 Eylül 2024
+                transactionDate = calendar.apply { set(2025, 8, 18, 11, 20) }.timeInMillis // 18 Eylül 2024
             ),
             Transaction(
                 brand = "LG",
@@ -353,7 +404,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 transactionType = Transaction.TYPE_STOCK_ENTRY,
                 amount = 320.0,
                 barcode = "1234567890127",
-                transactionDate = calendar.apply { set(2024, 8, 15, 9, 10) }.timeInMillis // 15 Eylül 2024
+                transactionDate = calendar.apply { set(2025, 8, 15, 9, 10) }.timeInMillis // 15 Eylül 2024
             )
         )
 
@@ -363,7 +414,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun addDummyStockItems() {
-        // 13-24 Eylül 2024 tarihleri için Calendar kullan
+        // 13-24 Eylül 2025 tarihleri için Calendar kullan
         val calendar = java.util.Calendar.getInstance()
         
         val dummyStockItems = listOf(
@@ -371,35 +422,35 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 barcode = "1234567890125",
                 brand = "Huawei",
                 purchasePrice = 450.0,
-                stockDate = calendar.apply { set(2024, 8, 20, 16, 45) }.timeInMillis, // 20 Eylül 2024
+                stockDate = calendar.apply { set(2025, 8, 20, 16, 45) }.timeInMillis, // 20 Eylül 2024
                 quantity = 3
             ),
             StockItem(
                 barcode = "1234567890127",
                 brand = "LG",
                 purchasePrice = 320.0,
-                stockDate = calendar.apply { set(2024, 8, 15, 9, 10) }.timeInMillis, // 15 Eylül 2024
+                stockDate = calendar.apply { set(2025, 8, 15, 9, 10) }.timeInMillis, // 15 Eylül 2024
                 quantity = 5
             ),
             StockItem(
                 barcode = "1234567890128",
                 brand = "Sony",
                 purchasePrice = 780.0,
-                stockDate = calendar.apply { set(2024, 8, 22, 13, 25) }.timeInMillis, // 22 Eylül 2024
+                stockDate = calendar.apply { set(2025, 8, 22, 13, 25) }.timeInMillis, // 22 Eylül 2024
                 quantity = 2
             ),
             StockItem(
                 barcode = "1234567890129",
                 brand = "Nokia",
                 purchasePrice = 290.0,
-                stockDate = calendar.apply { set(2024, 8, 17, 8, 45) }.timeInMillis, // 17 Eylül 2024
+                stockDate = calendar.apply { set(2025, 8, 17, 8, 45) }.timeInMillis, // 17 Eylül 2024
                 quantity = 4
             ),
             StockItem(
                 barcode = "1234567890130",
                 brand = "Oppo",
                 purchasePrice = 520.0,
-                stockDate = calendar.apply { set(2024, 8, 14, 15, 30) }.timeInMillis, // 14 Eylül 2024
+                stockDate = calendar.apply { set(2025, 8, 14, 15, 30) }.timeInMillis, // 14 Eylül 2024
                 quantity = 1
             )
         )
@@ -434,7 +485,89 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onResume() {
         super.onResume()
         loadDashboardData()
+        updateNotificationBadge()
         // Set home as selected when returning to main activity
         binding.navigationView.setCheckedItem(R.id.nav_home)
+    }
+    
+    // Data Import/Export Methods
+    private fun startExportData() {
+        val fileName = dataImportExportRepository.generateExportFileName()
+        exportLauncher.launch(fileName)
+    }
+    
+    private fun startImportData() {
+        importLauncher.launch(arrayOf("application/json", "application/octet-stream", "*/*"))
+    }
+    
+    private fun handleExportResult(uri: Uri) {
+        try {
+            val result = dataImportExportRepository.exportAllData(uri)
+            if (result.isSuccess) {
+                Snackbar.make(binding.root, result.getOrThrow(), Snackbar.LENGTH_LONG).show()
+            } else {
+                val error = result.exceptionOrNull()?.message ?: "Bilinmeyen hata"
+                Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()
+            }
+        } catch (e: Exception) {
+            Snackbar.make(binding.root, "Dışa aktarma hatası: ${e.message}", Snackbar.LENGTH_LONG).show()
+        }
+    }
+    
+    private fun handleImportResult(uri: Uri) {
+        // Önce dosyayı doğrula
+        val validationResult = dataImportExportRepository.validateImportFile(uri)
+        if (validationResult.isFailure) {
+            val error = validationResult.exceptionOrNull()?.message ?: "Geçersiz dosya"
+            Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()
+            return
+        }
+        
+        val importData = validationResult.getOrNull()!!
+        
+        // Import seçenekleri dialogu göster
+        showImportOptionsDialog(uri, importData)
+    }
+    
+    private fun showImportOptionsDialog(uri: Uri, importData: com.example.barcodescanner.model.ExportData) {
+        val options = arrayOf(
+            "Mevcut verilerle birleştir",
+            "Mevcut verileri değiştir"
+        )
+        
+        val dialogBuilder = androidx.appcompat.app.AlertDialog.Builder(this)
+        dialogBuilder.setTitle("İçe Aktarma Seçenekleri")
+        dialogBuilder.setMessage(
+            "Dosyadaki veriler:\n" +
+            "• Stok: ${importData.stockItems.size} kayıt\n" +
+            "• İşlem: ${importData.transactions.size} kayıt\n" +
+            "• Tarama: ${importData.scanResults.size} kayıt\n\n" +
+            "Nasıl içe aktarmak istiyorsunuz?"
+        )
+        
+        dialogBuilder.setItems(options) { _, which ->
+            val replaceExisting = (which == 1)
+            performImport(uri, replaceExisting)
+        }
+        
+        dialogBuilder.setNegativeButton("İptal", null)
+        dialogBuilder.show()
+    }
+    
+    private fun performImport(uri: Uri, replaceExisting: Boolean) {
+        try {
+            val result = dataImportExportRepository.importData(uri, replaceExisting)
+            if (result.isSuccess) {
+                Snackbar.make(binding.root, result.getOrThrow(), Snackbar.LENGTH_LONG).show()
+                // Verileri yenile
+                loadDashboardData()
+                updateNotificationBadge()
+            } else {
+                val error = result.exceptionOrNull()?.message ?: "Bilinmeyen hata"
+                Snackbar.make(binding.root, error, Snackbar.LENGTH_LONG).show()
+            }
+        } catch (e: Exception) {
+            Snackbar.make(binding.root, "İçe aktarma hatası: ${e.message}", Snackbar.LENGTH_LONG).show()
+        }
     }
 }

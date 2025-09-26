@@ -154,44 +154,8 @@ class StocksActivity : AppCompatActivity() {
             currentSortField = field
             isAscending = true
         }
-        
-        updateSortIcons()
-        applySorting()
-    }
 
-    private fun updateSortIcons() {
-        // Hide all icons first
-        binding.iconSortStockBrand.visibility = android.view.View.GONE
-        binding.iconSortStockProductType.visibility = android.view.View.GONE
-        binding.iconSortStockQuantity.visibility = android.view.View.GONE
-        binding.iconSortStockDate.visibility = android.view.View.GONE
-        binding.iconSortStockAmount.visibility = android.view.View.GONE
-        
-        // Show and set the appropriate icon
-        val iconResource = if (isAscending) R.drawable.ic_sort_asc else R.drawable.ic_sort_desc
-        
-        when (currentSortField) {
-            SORT_BRAND -> {
-                binding.iconSortStockBrand.visibility = android.view.View.VISIBLE
-                binding.iconSortStockBrand.setImageResource(iconResource)
-            }
-            SORT_PRODUCT_TYPE -> {
-                binding.iconSortStockProductType.visibility = android.view.View.VISIBLE
-                binding.iconSortStockProductType.setImageResource(iconResource)
-            }
-            SORT_QUANTITY -> {
-                binding.iconSortStockQuantity.visibility = android.view.View.VISIBLE
-                binding.iconSortStockQuantity.setImageResource(iconResource)
-            }
-            SORT_DATE -> {
-                binding.iconSortStockDate.visibility = android.view.View.VISIBLE
-                binding.iconSortStockDate.setImageResource(iconResource)
-            }
-            SORT_AMOUNT -> {
-                binding.iconSortStockAmount.visibility = android.view.View.VISIBLE
-                binding.iconSortStockAmount.setImageResource(iconResource)
-            }
-        }
+        applySorting()
     }
 
     private fun applySorting() {
@@ -373,7 +337,7 @@ class StocksActivity : AppCompatActivity() {
 
     private fun showStockItemDetails(stockItem: StockItem) {
         val message = "Marka: ${stockItem.brand}\n" +
-                "Alış Fiyatı: ₺${String.format("%.2f", stockItem.purchasePrice)}\n" +
+                "Alış Fiyatı: ₺${String.format(java.util.Locale.getDefault(), "%.2f", stockItem.purchasePrice)}\n" +
                 "Barkod: ${stockItem.barcode}\n" +
                 "Tarih: ${java.text.DateFormat.getDateTimeInstance().format(java.util.Date(stockItem.stockDate))}"
         
@@ -403,7 +367,7 @@ class StocksActivity : AppCompatActivity() {
         val message = "Marka: ${stockItem.brand}\n" +
                 "Ürün Tipi: $productType\n" +
                 "Adet: ${stockItem.quantity}\n" +
-                "Alış Fiyatı: ₺${String.format("%.2f", stockItem.purchasePrice)}\n" +
+                "Alış Fiyatı: ₺${String.format(java.util.Locale.getDefault(), "%.2f", stockItem.purchasePrice)}\n" +
                 "Barkod: ${stockItem.barcode}\n" +
                 "Tarih: ${java.text.DateFormat.getDateTimeInstance().format(java.util.Date(stockItem.stockDate))}"
         

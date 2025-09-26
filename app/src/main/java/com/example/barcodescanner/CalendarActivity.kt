@@ -112,10 +112,7 @@ class CalendarActivity : AppCompatActivity() {
             calendarDays.add(CalendarDay(day.toString(), profit))
         }
 
-        // Kalan boş günleri tamamla (42 gün toplam - 6 satır x 7 gün)
-        while (calendarDays.size < 42) {
-            calendarDays.add(CalendarDay("", 0.0))
-        }
+        // Ayın son gününden sonra hiç kart oluşturma
 
         calendarAdapter.updateDays(calendarDays)
     }
@@ -136,7 +133,7 @@ class CalendarActivity : AppCompatActivity() {
     private fun loadProfitData() {
         // Bugünkü kar
         val dailyProfit = transactionRepository.getTodayNetIncome()
-        binding.textViewDailyProfit.text = String.format("₺%.2f", dailyProfit)
+        binding.textViewDailyProfit.text = formatProfitText(dailyProfit)
         
         // Kar durumuna göre renk ayarla
         if (dailyProfit > 0) {
@@ -151,7 +148,7 @@ class CalendarActivity : AppCompatActivity() {
 
         // Son 7 günün karı
         val weeklyProfit = getWeeklyProfit()
-        binding.textViewWeeklyProfit.text = String.format("₺%.2f", weeklyProfit)
+        binding.textViewWeeklyProfit.text = formatProfitText(weeklyProfit)
         
         if (weeklyProfit > 0) {
             binding.textViewWeeklyProfit.setTextColor(
@@ -165,7 +162,7 @@ class CalendarActivity : AppCompatActivity() {
 
         // Son 30 günün karı
         val monthlyProfit = getMonthlyProfit()
-        binding.textViewMonthlyProfit.text = String.format("₺%.2f", monthlyProfit)
+        binding.textViewMonthlyProfit.text = formatProfitText(monthlyProfit)
         
         if (monthlyProfit > 0) {
             binding.textViewMonthlyProfit.setTextColor(
@@ -175,6 +172,14 @@ class CalendarActivity : AppCompatActivity() {
             binding.textViewMonthlyProfit.setTextColor(
                 ContextCompat.getColor(this, android.R.color.holo_red_dark)
             )
+        }
+    }
+
+    private fun formatProfitText(profit: Double): String {
+        return if (profit < 0) {
+            "-₺%.2f".format(kotlin.math.abs(profit))
+        } else {
+            "₺%.2f".format(profit)
         }
     }
 

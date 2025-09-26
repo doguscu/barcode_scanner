@@ -27,18 +27,14 @@ public final class ActivitySettingsBinding implements ViewBinding {
   public final RadioButton lightThemeOption;
 
   @NonNull
-  public final RadioButton systemThemeOption;
-
-  @NonNull
   public final Toolbar toolbar;
 
   private ActivitySettingsBinding(@NonNull CoordinatorLayout rootView,
       @NonNull RadioButton darkThemeOption, @NonNull RadioButton lightThemeOption,
-      @NonNull RadioButton systemThemeOption, @NonNull Toolbar toolbar) {
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.darkThemeOption = darkThemeOption;
     this.lightThemeOption = lightThemeOption;
-    this.systemThemeOption = systemThemeOption;
     this.toolbar = toolbar;
   }
 
@@ -81,12 +77,6 @@ public final class ActivitySettingsBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.systemThemeOption;
-      RadioButton systemThemeOption = ViewBindings.findChildViewById(rootView, id);
-      if (systemThemeOption == null) {
-        break missingId;
-      }
-
       id = R.id.toolbar;
       Toolbar toolbar = ViewBindings.findChildViewById(rootView, id);
       if (toolbar == null) {
@@ -94,7 +84,7 @@ public final class ActivitySettingsBinding implements ViewBinding {
       }
 
       return new ActivitySettingsBinding((CoordinatorLayout) rootView, darkThemeOption,
-          lightThemeOption, systemThemeOption, toolbar);
+          lightThemeOption, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

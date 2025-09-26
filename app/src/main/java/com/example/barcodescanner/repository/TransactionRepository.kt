@@ -511,4 +511,10 @@ class TransactionRepository(context: Context) {
             0.0
         }
     }
+    
+    fun clearAllTransactions() {
+        val db = dbHelper.writableDatabase
+        db.delete(DatabaseHelper.TABLE_TRANSACTIONS, null, null)
+        db.close()
+    }
 }

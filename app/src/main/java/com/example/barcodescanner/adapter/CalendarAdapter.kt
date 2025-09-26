@@ -15,19 +15,17 @@ class CalendarAdapter(
     private var days: List<CalendarDay>
 ) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
 
-    private val currencyFormat = NumberFormat.getCurrencyInstance(Locale("tr", "TR"))
-
     class CalendarViewHolder(private val binding: ItemCalendarDayBinding) : 
         RecyclerView.ViewHolder(binding.root) {
         
-        fun bind(calendarDay: CalendarDay, currencyFormat: NumberFormat) {
+        fun bind(calendarDay: CalendarDay) {
             if (calendarDay.day.isEmpty()) {
                 binding.textViewDay.text = ""
                 binding.textViewProfit.text = ""
                 binding.root.alpha = 0.3f
             } else {
                 binding.textViewDay.text = calendarDay.day
-                binding.textViewProfit.text = currencyFormat.format(calendarDay.profit)
+                binding.textViewProfit.text = formatProfitText(calendarDay.profit)
                 binding.root.alpha = 1.0f
                 
                 // Kar durumuna göre renk ayarla
@@ -58,6 +56,15 @@ class CalendarAdapter(
                 }
             }
         }
+
+        private fun formatProfitText(profit: Double): String {
+            val roundedProfit = profit.toInt()
+            return if (roundedProfit < 0) {
+                "-₺${kotlin.math.abs(roundedProfit)}"
+            } else {
+                "₺$roundedProfit"
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CalendarViewHolder {
@@ -70,7 +77,7 @@ class CalendarAdapter(
     }
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
-        holder.bind(days[position], currencyFormat)
+        holder.bind(days[position])
     }
 
     override fun getItemCount(): Int = days.size

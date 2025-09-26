@@ -96,39 +96,8 @@ class SalesActivity : AppCompatActivity() {
             currentSortField = field
             isAscending = true
         }
-        
-        updateSortIcons()
-        applySorting()
-    }
 
-    private fun updateSortIcons() {
-        // Hide all icons first
-        binding.iconSortBrand.visibility = android.view.View.GONE
-        binding.iconSortProductType.visibility = android.view.View.GONE
-        binding.iconSortDate.visibility = android.view.View.GONE
-        binding.iconSortAmount.visibility = android.view.View.GONE
-        
-        // Show and set the appropriate icon
-        val iconResource = if (isAscending) R.drawable.ic_sort_asc else R.drawable.ic_sort_desc
-        
-        when (currentSortField) {
-            SORT_BRAND -> {
-                binding.iconSortBrand.visibility = android.view.View.VISIBLE
-                binding.iconSortBrand.setImageResource(iconResource)
-            }
-            SORT_PRODUCT_TYPE -> {
-                binding.iconSortProductType.visibility = android.view.View.VISIBLE
-                binding.iconSortProductType.setImageResource(iconResource)
-            }
-            SORT_DATE -> {
-                binding.iconSortDate.visibility = android.view.View.VISIBLE
-                binding.iconSortDate.setImageResource(iconResource)
-            }
-            SORT_AMOUNT -> {
-                binding.iconSortAmount.visibility = android.view.View.VISIBLE
-                binding.iconSortAmount.setImageResource(iconResource)
-            }
-        }
+        applySorting()
     }
 
     private fun applySorting() {

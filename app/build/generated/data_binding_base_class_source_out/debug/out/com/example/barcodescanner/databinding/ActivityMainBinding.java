@@ -4,6 +4,7 @@ package com.example.barcodescanner.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,9 @@ import java.lang.String;
 public final class ActivityMainBinding implements ViewBinding {
   @NonNull
   private final DrawerLayout rootView;
+
+  @NonNull
+  public final ImageButton buttonNotifications;
 
   @NonNull
   public final DrawerLayout drawerLayout;
@@ -45,18 +49,23 @@ public final class ActivityMainBinding implements ViewBinding {
   public final TextView textViewNetIncome;
 
   @NonNull
+  public final TextView textViewNotificationBadge;
+
+  @NonNull
   public final TextView textViewSalesCount;
 
   @NonNull
   public final Toolbar toolbar;
 
-  private ActivityMainBinding(@NonNull DrawerLayout rootView, @NonNull DrawerLayout drawerLayout,
+  private ActivityMainBinding(@NonNull DrawerLayout rootView,
+      @NonNull ImageButton buttonNotifications, @NonNull DrawerLayout drawerLayout,
       @NonNull FloatingActionButton fabScanBarcode, @NonNull NavigationView navigationView,
       @NonNull RecyclerView recyclerViewRecentTransactions,
       @NonNull TextView textViewEmptyTransactions, @NonNull TextView textViewIncome,
-      @NonNull TextView textViewNetIncome, @NonNull TextView textViewSalesCount,
-      @NonNull Toolbar toolbar) {
+      @NonNull TextView textViewNetIncome, @NonNull TextView textViewNotificationBadge,
+      @NonNull TextView textViewSalesCount, @NonNull Toolbar toolbar) {
     this.rootView = rootView;
+    this.buttonNotifications = buttonNotifications;
     this.drawerLayout = drawerLayout;
     this.fabScanBarcode = fabScanBarcode;
     this.navigationView = navigationView;
@@ -64,6 +73,7 @@ public final class ActivityMainBinding implements ViewBinding {
     this.textViewEmptyTransactions = textViewEmptyTransactions;
     this.textViewIncome = textViewIncome;
     this.textViewNetIncome = textViewNetIncome;
+    this.textViewNotificationBadge = textViewNotificationBadge;
     this.textViewSalesCount = textViewSalesCount;
     this.toolbar = toolbar;
   }
@@ -95,6 +105,12 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.buttonNotifications;
+      ImageButton buttonNotifications = ViewBindings.findChildViewById(rootView, id);
+      if (buttonNotifications == null) {
+        break missingId;
+      }
+
       DrawerLayout drawerLayout = (DrawerLayout) rootView;
 
       id = R.id.fabScanBarcode;
@@ -133,6 +149,12 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.textViewNotificationBadge;
+      TextView textViewNotificationBadge = ViewBindings.findChildViewById(rootView, id);
+      if (textViewNotificationBadge == null) {
+        break missingId;
+      }
+
       id = R.id.textViewSalesCount;
       TextView textViewSalesCount = ViewBindings.findChildViewById(rootView, id);
       if (textViewSalesCount == null) {
@@ -145,9 +167,10 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((DrawerLayout) rootView, drawerLayout, fabScanBarcode,
-          navigationView, recyclerViewRecentTransactions, textViewEmptyTransactions, textViewIncome,
-          textViewNetIncome, textViewSalesCount, toolbar);
+      return new ActivityMainBinding((DrawerLayout) rootView, buttonNotifications, drawerLayout,
+          fabScanBarcode, navigationView, recyclerViewRecentTransactions, textViewEmptyTransactions,
+          textViewIncome, textViewNetIncome, textViewNotificationBadge, textViewSalesCount,
+          toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

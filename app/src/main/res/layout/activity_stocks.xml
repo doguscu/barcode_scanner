@@ -263,14 +263,6 @@
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurfaceVariant" />
 
-                <ImageView
-                    android:id="@+id/iconSortStockBrand"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="4dp"
-                    android:src="@drawable/ic_sort_asc"
-                    android:visibility="gone" />
-
             </LinearLayout>
 
             <!-- Ürün Tipi Header -->
@@ -295,14 +287,6 @@
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurfaceVariant" />
 
-                <ImageView
-                    android:id="@+id/iconSortStockProductType"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="4dp"
-                    android:src="@drawable/ic_sort_asc"
-                    android:visibility="gone" />
-
             </LinearLayout>
 
             <!-- Adet Header -->
@@ -325,14 +309,6 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurfaceVariant" />
-
-                <ImageView
-                    android:id="@+id/iconSortStockQuantity"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="4dp"
-                    android:src="@drawable/ic_sort_asc"
-                    android:visibility="gone" />
 
             </LinearLayout>
 
@@ -357,14 +333,6 @@
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurfaceVariant" />
 
-                <ImageView
-                    android:id="@+id/iconSortStockDate"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="4dp"
-                    android:src="@drawable/ic_sort_asc"
-                    android:visibility="gone" />
-
             </LinearLayout>
 
             <!-- Tutar Header -->
@@ -387,14 +355,6 @@
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="?attr/colorOnSurfaceVariant" />
-
-                <ImageView
-                    android:id="@+id/iconSortStockAmount"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="4dp"
-                    android:src="@drawable/ic_sort_asc"
-                    android:visibility="gone" />
 
             </LinearLayout>
 

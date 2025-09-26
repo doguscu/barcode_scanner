@@ -1,0 +1,19 @@
+<lint-module
+    format="1"
+    dir="C:\Ozan\projects\barcode_scanner\app"
+    name=":app"
+    type="APP"
+    maven="BarcodeScanner:app:unspecified"
+    agpVersion="8.13.0"
+    buildFolder="build"
+    bootClassPath="C:\Users\Ozan\AppData\Local\Android\Sdk\platforms\android-34\android.jar;C:\Users\Ozan\AppData\Local\Android\Sdk\build-tools\35.0.0\core-lambda-stubs.jar"
+    javaSourceLevel="11"
+    compileTarget="android-34"
+    neverShrinking="true">
+  <lintOptions
+      abortOnError="true"
+      absolutePaths="true"
+      checkReleaseBuilds="true"
+      explainIssues="true"/>
+  <variant name="debug"/>
+</lint-module>

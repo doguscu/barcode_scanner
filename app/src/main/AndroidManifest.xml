@@ -21,6 +21,11 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".NotificationsActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.BarcodeScanner.NoActionBar" />
+        <activity
             android:name=".StocksActivity"
             android:exported="false"
             android:parentActivityName=".MainActivity"

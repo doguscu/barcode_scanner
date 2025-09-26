@@ -1,45 +1,82 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Barkod Tarayıcı</string>
+    <string name="app_name">Barkod Tarayici</string>
     <string name="scan_barcode">Barkod Tara</string>
-    <string name="no_barcodes">Henüz barkod taranmadı</string>
-    <string name="scan_instruction">Barkod taramak için butona basın</string>
+    <string name="no_barcodes">Henuz barkod taranmadi</string>
+    <string name="scan_instruction">Barkod taramak icin butona basin</string>
     <string name="camera_permission_required">Kamera izni gerekli</string>
-    <string name="barcode_added">Barkod başarıyla eklendi</string>
+    <string name="barcode_added">Barkod basariyla eklendi</string>
     <string name="back">Geri</string>
-    <string name="scanning_instruction">Barkodu kamera görüş alanının ortasına getirin</string>
+    <string name="scanning_instruction">Barkodu kamera gorus alaninin ortasina getirin</string>
     <string name="auto_scan_info">Barkod otomatik olarak taranacak</string>
-    
-    <!-- Navigation Menu -->
+
     <string name="nav_home">Ana Sayfa</string>
     <string name="nav_stocks">Stoklar</string>
-    <string name="nav_sales">Satışlarım</string>
+    <string name="nav_sales">Satislar</string>
     <string name="nav_calendar">Takvim</string>
-    <string name="nav_settings">Tema</string>
+    <string name="nav_settings">Ayarlar</string>
+    <string name="nav_theme">Tema</string>
+    <string name="nav_data">Veriler</string>
+    <string name="nav_import_data">Verileri Ice Aktar</string>
+    <string name="nav_export_data">Verileri Disa Aktar</string>
     <string name="nav_header_desc">Navigation header</string>
-    <string name="nav_header_subtitle">Barkod okuma ve stok yönetimi</string>
-    <string name="navigation_drawer_open">Navigation drawer açık</string>
-    <string name="navigation_drawer_close">Navigation drawer kapalı</string>
+    <string name="nav_header_subtitle">Barkod okuma ve stok yonetimi</string>
+    <string name="navigation_drawer_open">Navigation drawer acik</string>
+    <string name="navigation_drawer_close">Navigation drawer kapali</string>
 
-    <string name="Barkod_Tara">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
-    <string name="barcode_scanner_initial_prompt">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
-    <string name="barkod_tarayıcı">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
-    <string name="Taranan_barkodlar_aşağıda_listelenecek">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
+    <string name="Barkod_Tara">Henuz barkod taranmadi\n\nBarkod taramak icin asagidaki butona basin</string>
+    <string name="barcode_scanner_initial_prompt">Henuz barkod taranmadi\n\nBarkod taramak icin asagidaki butona basin</string>
+    <string name="barkod_tarayici">Henuz barkod taranmadi\n\nBarkod taramak icin asagidaki butona basin</string>
+    <string name="Taranan_barkodlar_asagida_listelenecek">Henuz barkod taranmadi\n\nBarkod taramak icin asagidaki butona basin</string>
     
-    <!-- Filter Dialog -->
-    <string name="filter_transactions">İşlemleri Filtrele</string>
-    <string name="advanced_filter">Gelişmiş Filtre</string>
+    <string name="filter_transactions">Islemleri Filtrele</string>
+    <string name="advanced_filter">Filtre</string>
     <string name="brand_filter">Marka</string>
-    <string name="product_type_filter">Ürün Tipi</string>
-    <string name="date_range">Tarih Aralığı</string>
-    <string name="amount_range">Tutar Aralığı</string>
+    <string name="product_type_filter">Urun Tipi</string>
+    <string name="date_range">Tarih Araligi</string>
+    <string name="amount_range">Tutar Araligi</string>
     <string name="min_amount">Min. Tutar</string>
     <string name="max_amount">Max. Tutar</string>
-    <string name="start_date">Başlangıç Tarihi</string>
-    <string name="end_date">Bitiş Tarihi</string>
-    <string name="cancel">İptal</string>
+    <string name="start_date">Baslangic Tarihi</string>
+    <string name="end_date">Bitis Tarihi</string>
+    <string name="cancel">Iptal</string>
     <string name="apply_filter">Filtreyi Uygula</string>
     <string name="clear_filter">Temizle</string>
-    <string name="filter_stocks">Stokları Filtrele</string>
-    <string name="filter_sales">Satışları Filtrele</string>
+    <string name="filter_stocks">Filtrele</string>
+    <string name="filter_sales">Filtrele</string>
+    
+    <string name="product_not_found_title">Urun Bulunamadi</string>
+    <string name="product_not_in_stock_message">Bu barkoda sahip urun stokta bulunamadi</string>
+    <string name="ok">Tamam</string>
+    <string name="barcode_label">Barkod</string>
+    <string name="sales_info_title">Satis Bilgileri</string>
+    <string name="save">Kaydet</string>
+    <string name="enter_sale_price">Satis fiyatini girin</string>
+    <string name="sale_saved_successfully">Satis basariyla kaydedildi</string>
+    <string name="save_error">Kaydetme hatasi</string>
+    <string name="enter_valid_price">Gecerli bir fiyat girin</string>
+    <string name="camera_permission_required_for_scanning">Kamera izni barkod tarama icin gereklidir</string>
+    
+    <string name="notifications">Bildirimler</string>
+    <string name="no_notifications">Henuz bildirim yok\n\nBildirimler burada gorunecek</string>
+    <string name="mark_all_as_read">Tumunu okundu isaretle</string>
+    <string name="delete_notification">Bildirimi Sil</string>
+    <string name="delete_notification_message">Bu bildirimi silmek istediginizden emin misiniz?</string>
+    <string name="notification_deleted">Bildirim silindi</string>
+    <string name="notification_delete_error">Bildirim silinemedi</string>
+    <string name="notifications_marked_as_read">%d bildirim okundu olarak isaretlendi</string>
+    <string name="all_notifications_read">Tum bildirimler zaten okundu</string>
+    
+    <!-- Data Import/Export -->
+    <string name="import_data_title">Verileri Ice Aktar</string>
+    <string name="export_data_title">Verileri Disa Aktar</string>
+    <string name="import_options_title">Ice Aktarma Secenekleri</string>
+    <string name="merge_with_existing">Mevcut verilerle birlestir</string>
+    <string name="replace_existing">Mevcut verileri degistir</string>
+    <string name="export_success">Veriler basariyla disa aktarildi</string>
+    <string name="import_success">Veriler basariyla ice aktarildi</string>
+    <string name="export_error">Disa aktarma hatasi</string>
+    <string name="import_error">Ice aktarma hatasi</string>
+    <string name="invalid_file_format">Gecersiz dosya formati</string>
+    <string name="file_validation_error">Dosya dogrulama hatasi</string>
 </resources>

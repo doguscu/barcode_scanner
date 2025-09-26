@@ -4,7 +4,6 @@ package com.example.barcodescanner.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -47,21 +46,6 @@ public final class ActivityStocksBinding implements ViewBinding {
   public final LinearLayout headerStockQuantity;
 
   @NonNull
-  public final ImageView iconSortStockAmount;
-
-  @NonNull
-  public final ImageView iconSortStockBrand;
-
-  @NonNull
-  public final ImageView iconSortStockDate;
-
-  @NonNull
-  public final ImageView iconSortStockProductType;
-
-  @NonNull
-  public final ImageView iconSortStockQuantity;
-
-  @NonNull
   public final LinearLayout layoutTableHeaders;
 
   @NonNull
@@ -86,13 +70,10 @@ public final class ActivityStocksBinding implements ViewBinding {
       @NonNull MaterialButton buttonFilterStocks, @NonNull FloatingActionButton fabAddStock,
       @NonNull LinearLayout headerStockAmount, @NonNull LinearLayout headerStockBrand,
       @NonNull LinearLayout headerStockDate, @NonNull LinearLayout headerStockProductType,
-      @NonNull LinearLayout headerStockQuantity, @NonNull ImageView iconSortStockAmount,
-      @NonNull ImageView iconSortStockBrand, @NonNull ImageView iconSortStockDate,
-      @NonNull ImageView iconSortStockProductType, @NonNull ImageView iconSortStockQuantity,
-      @NonNull LinearLayout layoutTableHeaders, @NonNull RecyclerView recyclerViewStockBarcodes,
-      @NonNull TextView textViewEmptyState, @NonNull TextView textViewFrameCount,
-      @NonNull TextView textViewGlassCount, @NonNull TextView textViewTotalCount,
-      @NonNull Toolbar toolbar) {
+      @NonNull LinearLayout headerStockQuantity, @NonNull LinearLayout layoutTableHeaders,
+      @NonNull RecyclerView recyclerViewStockBarcodes, @NonNull TextView textViewEmptyState,
+      @NonNull TextView textViewFrameCount, @NonNull TextView textViewGlassCount,
+      @NonNull TextView textViewTotalCount, @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.buttonFilterStocks = buttonFilterStocks;
     this.fabAddStock = fabAddStock;
@@ -101,11 +82,6 @@ public final class ActivityStocksBinding implements ViewBinding {
     this.headerStockDate = headerStockDate;
     this.headerStockProductType = headerStockProductType;
     this.headerStockQuantity = headerStockQuantity;
-    this.iconSortStockAmount = iconSortStockAmount;
-    this.iconSortStockBrand = iconSortStockBrand;
-    this.iconSortStockDate = iconSortStockDate;
-    this.iconSortStockProductType = iconSortStockProductType;
-    this.iconSortStockQuantity = iconSortStockQuantity;
     this.layoutTableHeaders = layoutTableHeaders;
     this.recyclerViewStockBarcodes = recyclerViewStockBarcodes;
     this.textViewEmptyState = textViewEmptyState;
@@ -184,36 +160,6 @@ public final class ActivityStocksBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.iconSortStockAmount;
-      ImageView iconSortStockAmount = ViewBindings.findChildViewById(rootView, id);
-      if (iconSortStockAmount == null) {
-        break missingId;
-      }
-
-      id = R.id.iconSortStockBrand;
-      ImageView iconSortStockBrand = ViewBindings.findChildViewById(rootView, id);
-      if (iconSortStockBrand == null) {
-        break missingId;
-      }
-
-      id = R.id.iconSortStockDate;
-      ImageView iconSortStockDate = ViewBindings.findChildViewById(rootView, id);
-      if (iconSortStockDate == null) {
-        break missingId;
-      }
-
-      id = R.id.iconSortStockProductType;
-      ImageView iconSortStockProductType = ViewBindings.findChildViewById(rootView, id);
-      if (iconSortStockProductType == null) {
-        break missingId;
-      }
-
-      id = R.id.iconSortStockQuantity;
-      ImageView iconSortStockQuantity = ViewBindings.findChildViewById(rootView, id);
-      if (iconSortStockQuantity == null) {
-        break missingId;
-      }
-
       id = R.id.layoutTableHeaders;
       LinearLayout layoutTableHeaders = ViewBindings.findChildViewById(rootView, id);
       if (layoutTableHeaders == null) {
@@ -258,10 +204,8 @@ public final class ActivityStocksBinding implements ViewBinding {
 
       return new ActivityStocksBinding((CoordinatorLayout) rootView, buttonFilterStocks,
           fabAddStock, headerStockAmount, headerStockBrand, headerStockDate, headerStockProductType,
-          headerStockQuantity, iconSortStockAmount, iconSortStockBrand, iconSortStockDate,
-          iconSortStockProductType, iconSortStockQuantity, layoutTableHeaders,
-          recyclerViewStockBarcodes, textViewEmptyState, textViewFrameCount, textViewGlassCount,
-          textViewTotalCount, toolbar);
+          headerStockQuantity, layoutTableHeaders, recyclerViewStockBarcodes, textViewEmptyState,
+          textViewFrameCount, textViewGlassCount, textViewTotalCount, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

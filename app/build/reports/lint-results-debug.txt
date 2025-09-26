@@ -1,0 +1,971 @@
+C:\Ozan\projects\barcode_scanner\app\build.gradle:13: Warning: Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the android.os.Build.VERSION_CODES javadoc for details. [OldTargetApi]
+        targetSdk 34
+        ~~~~~~~~~~~~
+
+   Explanation for issues of type "OldTargetApi":
+   When your application or sdk runs on a version of Android that is more
+   recent than your targetSdkVersion specifies that it has been tested with,
+   various compatibility modes kick in. This ensures that your application
+   continues to work, but it may look out of place. For example, if the
+   targetSdkVersion is less than 14, your app may get an option button in the
+   UI.
+
+   To fix this issue, set the targetSdkVersion to the highest available value.
+   Then test your app to make sure everything works correctly. You may want to
+   consult the compatibility notes to see what changes apply to each version
+   you are adding support for:
+   https://developer.android.com/reference/android/os/Build.VERSION_CODES.html
+   as well as follow this guide:
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.
+   html
+
+   https://developer.android.com/distribute/best-practices/develop/target-sdk.html
+
+C:\Ozan\projects\barcode_scanner\app\build.gradle:8: Warning: A newer version of compileSdkVersion than 34 is available: 36 [GradleDependency]
+    compileSdk 34
+    ~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:39: Warning: A newer version of androidx.core:core-ktx than 1.12.0 is available: 1.17.0 [GradleDependency]
+    implementation 'androidx.core:core-ktx:1.12.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:40: Warning: A newer version of androidx.appcompat:appcompat than 1.6.1 is available: 1.7.1 [GradleDependency]
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:41: Warning: A newer version of com.google.android.material:material than 1.11.0 is available: 1.13.0 [GradleDependency]
+    implementation 'com.google.android.material:material:1.11.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:42: Warning: A newer version of androidx.constraintlayout:constraintlayout than 2.1.4 is available: 2.2.1 [GradleDependency]
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:43: Warning: A newer version of androidx.lifecycle:lifecycle-livedata-ktx than 2.7.0 is available: 2.9.4 [GradleDependency]
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.7.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:44: Warning: A newer version of androidx.lifecycle:lifecycle-viewmodel-ktx than 2.7.0 is available: 2.9.4 [GradleDependency]
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:45: Warning: A newer version of androidx.navigation:navigation-fragment-ktx than 2.7.6 is available: 2.9.5 [GradleDependency]
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.7.6'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:46: Warning: A newer version of androidx.navigation:navigation-ui-ktx than 2.7.6 is available: 2.9.5 [GradleDependency]
+    implementation 'androidx.navigation:navigation-ui-ktx:2.7.6'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:49: Warning: A newer version of androidx.camera:camera-core than 1.3.1 is available: 1.5.0 [GradleDependency]
+    implementation "androidx.camera:camera-core:1.3.1"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:50: Warning: A newer version of androidx.camera:camera-camera2 than 1.3.1 is available: 1.5.0 [GradleDependency]
+    implementation "androidx.camera:camera-camera2:1.3.1"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:51: Warning: A newer version of androidx.camera:camera-lifecycle than 1.3.1 is available: 1.5.0 [GradleDependency]
+    implementation "androidx.camera:camera-lifecycle:1.3.1"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:52: Warning: A newer version of androidx.camera:camera-view than 1.3.1 is available: 1.5.0 [GradleDependency]
+    implementation "androidx.camera:camera-view:1.3.1"
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:55: Warning: A newer version of com.google.mlkit:barcode-scanning than 17.2.0 is available: 17.3.0 [GradleDependency]
+    implementation 'com.google.mlkit:barcode-scanning:17.2.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:58: Warning: A newer version of androidx.recyclerview:recyclerview than 1.3.2 is available: 1.4.0 [GradleDependency]
+    implementation 'androidx.recyclerview:recyclerview:1.3.2'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:61: Warning: A newer version of androidx.test.ext:junit than 1.1.5 is available: 1.3.0 [GradleDependency]
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\build.gradle:62: Warning: A newer version of androidx.test.espresso:espresso-core than 3.5.1 is available: 3.7.0 [GradleDependency]
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "GradleDependency":
+   This detector looks for usages of libraries where the version you are using
+   is not the current stable release. Using older versions is fine, and there
+   are cases where you deliberately want to stick with an older version.
+   However, you may simply not be aware that a more recent version is
+   available, and that is what this lint check helps find.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:22: Warning: Expecting android:screenOrientation="unspecified" or "fullSensor" for this activity so the user can use the application in any orientation and provide a great experience on Chrome OS devices [LockedOrientationActivity]
+            android:screenOrientation="portrait" />
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "LockedOrientationActivity":
+   The <activity> element should not be locked to any orientation so that
+   users can take advantage of the multi-window environments and larger
+   screens available on Android. To fix the issue, consider declaring the
+   corresponding activity element with `screenOrientation="unspecified"`or
+   fullSensor attribute.
+
+   https://developer.android.com/topic/arc/window-management
+
+C:\Ozan\projects\barcode_scanner\app\build.gradle:55: Warning: The native library arm64-v8a/libbarhopper_v3.so (from com.google.mlkit:barcode-scanning:17.2.0) is not 16 KB aligned [Aligned16KB]
+    implementation 'com.google.mlkit:barcode-scanning:17.2.0'
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Users\Ozan\.gradle\caches\8.13\transforms\f724e65ca3abe2e88945a02e304f7939\transformed\barcode-scanning-17.2.0\jni\arm64-v8a\libbarhopper_v3.so: Warning: The native library arm64-v8a/libbarhopper_v3.so (from com.google.mlkit:barcode-scanning:17.2.0) is not 16 KB aligned [Aligned16KB]
+C:\Users\Ozan\.gradle\caches\8.13\transforms\f724e65ca3abe2e88945a02e304f7939\transformed\barcode-scanning-17.2.0\jni\arm64-v8a\libbarhopper_v3.so: Warning: The native library arm64-v8a/libbarhopper_v3.so (from com.google.mlkit:barcode-scanning:17.2.0) is not 16 KB aligned [Aligned16KB]
+
+   Explanation for issues of type "Aligned16KB":
+   Android has traditionally used 4 KB memory page sizes. However, to support
+   future devices that only work with 16 KB aligned libraries apps containing
+   native libraries need to be built with 16 KB alignment.
+
+   Apps with 4 KB aligned native libraries may not work correctly on devices
+   requiring 16 KB alignment. To ensure compatibility and future-proof your
+   app, it is strongly recommended that your native libraries are aligned to
+   16 KB boundaries.
+
+   If your app uses any NDK libraries, directly or indirectly through an SDK,
+   you should rebuild your app to meet this recommendation. Make sure all
+   native libraries within your application, including those from
+   dependencies, are built with 16 KB page alignment.
+
+   This lint check looks at all native libraries that your app depends on. If
+   any are found to be aligned to 4 KB instead of 16 KB, you will need to
+   address this.
+
+   When a library is flagged, first try to update to a newer version that
+   supports 16 KB alignment. If an updated version is not available, contact
+   the library vendor to ask about their plans for 16 KB support and request a
+   compatible version. Updating your libraries proactively will help ensure
+   your app works properly on a wider range of devices.
+
+   https://developer.android.com/guide/practices/page-sizes
+
+C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:22: Warning: Fixed screen orientations will be ignored in most cases, starting from Android 16. Android is moving toward a model where apps are expected to adapt to various orientations, display sizes, and aspect ratios. [DiscouragedApi]
+            android:screenOrientation="portrait" />
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "DiscouragedApi":
+   Discouraged APIs are allowed and are not deprecated, but they may be unfit
+   for common use (e.g. due to slow performance or subtle behavior).
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:393: Warning: Use app:drawableTopCompat instead of android:drawableTop [UseCompatTextViewDrawableXml from androidx.appcompat]
+                android:drawableTop="@drawable/ic_inventory_24"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UseCompatTextViewDrawableXml":
+   TextView uses android: compound drawable attributes instead of app: ones
+
+   Vendor: Android Open Source Project
+   Identifier: androidx.appcompat
+   Feedback: https://issuetracker.google.com/issues/new?component=460343
+
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\adapter\CalendarAdapter.kt:87: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\MainActivity.kt:183: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        transactionAdapter.notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\SalesActivity.kt:138: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        salesAdapter.notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\SalesActivity.kt:149: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        salesAdapter.notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\SalesActivity.kt:264: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        salesAdapter.notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\SalesActivity.kt:271: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        salesAdapter.notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\StocksActivity.kt:204: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        stockItemAdapter.notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\StocksActivity.kt:232: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        stockItemAdapter.notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\StocksActivity.kt:591: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        stockItemAdapter.notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\StocksActivity.kt:598: Warning: It will always be more efficient to use more specific change events if you can. Rely on notifyDataSetChanged as a last resort. [NotifyDataSetChanged]
+        stockItemAdapter.notifyDataSetChanged()
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NotifyDataSetChanged":
+   The RecyclerView adapter's onNotifyDataSetChanged method does not specify
+   what about the data set has changed, forcing any observers to assume that
+   all existing items and structure may no longer be valid. `LayoutManager`s
+   will be forced to fully rebind and relayout all visible views.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values-night\themes.xml:14: Warning: Unnecessary; SDK_INT is always >= 21 [ObsoleteSdkInt]
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+                                            ~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\themes.xml:14: Warning: Unnecessary; SDK_INT is always >= 21 [ObsoleteSdkInt]
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+                                            ~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "ObsoleteSdkInt":
+   This check flags version checks that are not necessary, because the
+   minSdkVersion (or surrounding known API level) is already at least as high
+   as the version checked for.
+
+   Similarly, it also looks for resources in -vNN folders, such as values-v14
+   where the version qualifier is less than or equal to the minSdkVersion,
+   where the contents should be merged into the best folder.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_sales.xml:88: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+            <LinearLayout
+             ~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:235: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+        <LinearLayout
+         ~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_advanced_filter.xml:67: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+        <LinearLayout
+         ~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_advanced_filter.xml:127: Warning: Set android:baselineAligned="false" on this element for better performance [DisableBaselineAlignment]
+        <LinearLayout
+         ~~~~~~~~~~~~
+
+   Explanation for issues of type "DisableBaselineAlignment":
+   When a LinearLayout is used to distribute the space proportionally between
+   nested layouts, the baseline alignment property should be turned off to
+   make the layout computation faster.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_sales.xml:134: Warning: Use a layout_width of 0dp instead of wrap_content for better performance [InefficientWeight]
+                        android:layout_width="wrap_content"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "InefficientWeight":
+   When only a single widget in a LinearLayout defines a weight, it is more
+   efficient to assign a width/height of 0dp to it since it will absorb all
+   the remaining space anyway. With a declared width/height of 0dp it does not
+   have to measure its own size first.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:42: Warning: Nested weights are bad for performance [NestedWeights]
+                android:layout_weight="1"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_sales.xml:136: Warning: Nested weights are bad for performance [NestedWeights]
+                        android:layout_weight="2"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:44: Warning: Nested weights are bad for performance [NestedWeights]
+                android:layout_weight="1"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "NestedWeights":
+   Layout weights require a widget to be measured twice. When a LinearLayout
+   with non-zero weights is nested inside another LinearLayout with non-zero
+   weights, then the number of measurements increase exponentially.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_barcode_scanner.xml:7: Warning: Possible overdraw: Root element paints background @android:color/black with a theme that also paints a background (inferred theme is @style/Theme.BarcodeScanner) [Overdraw]
+    android:background="@android:color/black"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\drawer_header.xml:5: Warning: Possible overdraw: Root element paints background ?attr/colorPrimary with a theme that also paints a background (inferred theme is @style/Theme.BarcodeScanner) [Overdraw]
+    android:background="?attr/colorPrimary"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_sale.xml:7: Warning: Possible overdraw: Root element paints background ?attr/colorSurface with a theme that also paints a background (inferred theme is @style/Theme.BarcodeScanner) [Overdraw]
+    android:background="?attr/colorSurface">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_transaction.xml:8: Warning: Possible overdraw: Root element paints background ?attr/colorSurface with a theme that also paints a background (inferred theme is @style/Theme.BarcodeScanner) [Overdraw]
+    android:background="?attr/colorSurface">
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "Overdraw":
+   If you set a background drawable on a root view, then you should use a
+   custom theme where the theme background is null. Otherwise, the theme
+   background will be painted first, only to have your custom background
+   completely cover it; this is called "overdraw".
+
+   NOTE: This detector relies on figuring out which layouts are associated
+   with which activities based on scanning the Java code, and it's currently
+   doing that using an inexact pattern matching algorithm. Therefore, it can
+   incorrectly conclude which activity the layout is associated with and then
+   wrongly complain that a background-theme is hidden.
+
+   If you want your custom background on multiple pages, then you should
+   consider making a custom theme with your custom background and just using
+   that theme instead of a root element background.
+
+   Of course it's possible that your custom drawable is translucent and you
+   want it to be mixed with the background. However, you will get better
+   performance if you pre-mix the background with your drawable and use that
+   resulting image or color as a custom theme background instead.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_filter.xml:2: Warning: The resource R.layout.dialog_filter appears to be unused [UnusedResources]
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\dimens.xml:8: Warning: The resource R.dimen.fab_margin appears to be unused [UnusedResources]
+    <dimen name="fab_margin">16dp</dimen>
+           ~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\drawable\ic_auto_mode.xml:1: Warning: The resource R.drawable.ic_auto_mode appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Ozan\projects\barcode_scanner\app\src\main\res\drawable\ic_delete_24.xml:2: Warning: The resource R.drawable.ic_delete_24 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Ozan\projects\barcode_scanner\app\src\main\res\drawable\ic_edit_24.xml:2: Warning: The resource R.drawable.ic_edit_24 appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Ozan\projects\barcode_scanner\app\src\main\res\drawable\ic_filter_list.xml:1: Warning: The resource R.drawable.ic_filter_list appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Ozan\projects\barcode_scanner\app\src\main\res\drawable\ic_sort_asc.xml:1: Warning: The resource R.drawable.ic_sort_asc appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Ozan\projects\barcode_scanner\app\src\main\res\drawable\ic_sort_desc.xml:1: Warning: The resource R.drawable.ic_sort_desc appears to be unused [UnusedResources]
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_stock_barcode.xml:2: Warning: The resource R.layout.item_stock_barcode appears to be unused [UnusedResources]
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Ozan\projects\barcode_scanner\app\src\main\res\menu\menu_sales.xml:2: Warning: The resource R.menu.menu_sales appears to be unused [UnusedResources]
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Ozan\projects\barcode_scanner\app\src\main\res\menu\menu_stocks.xml:2: Warning: The resource R.menu.menu_stocks appears to be unused [UnusedResources]
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+^
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:4: Warning: The resource R.string.scan_barcode appears to be unused [UnusedResources]
+    <string name="scan_barcode">Barkod Tara</string>
+            ~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:5: Warning: The resource R.string.no_barcodes appears to be unused [UnusedResources]
+    <string name="no_barcodes">Henüz barkod taranmadı</string>
+            ~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:6: Warning: The resource R.string.scan_instruction appears to be unused [UnusedResources]
+    <string name="scan_instruction">Barkod taramak için butona basın</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:7: Warning: The resource R.string.camera_permission_required appears to be unused [UnusedResources]
+    <string name="camera_permission_required">Kamera izni gerekli</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:8: Warning: The resource R.string.barcode_added appears to be unused [UnusedResources]
+    <string name="barcode_added">Barkod başarıyla eklendi</string>
+            ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:9: Warning: The resource R.string.back appears to be unused [UnusedResources]
+    <string name="back">Geri</string>
+            ~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:10: Warning: The resource R.string.scanning_instruction appears to be unused [UnusedResources]
+    <string name="scanning_instruction">Barkodu kamera görüş alanının ortasına getirin</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:11: Warning: The resource R.string.auto_scan_info appears to be unused [UnusedResources]
+    <string name="auto_scan_info">Barkod otomatik olarak taranacak</string>
+            ~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:25: Warning: The resource R.string.barcode_scanner_initial_prompt appears to be unused [UnusedResources]
+    <string name="barcode_scanner_initial_prompt">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:26: Warning: The resource R.string.barkod_tarayıcı appears to be unused [UnusedResources]
+    <string name="barkod_tarayıcı">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
+            ~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:27: Warning: The resource R.string.Taranan_barkodlar_aşağıda_listelenecek appears to be unused [UnusedResources]
+    <string name="Taranan_barkodlar_aşağıda_listelenecek">Henüz barkod taranmadı\n\nBarkod taramak için aşağıdaki butona basın</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:30: Warning: The resource R.string.filter_transactions appears to be unused [UnusedResources]
+    <string name="filter_transactions">İşlemleri Filtrele</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:41: Warning: The resource R.string.apply_filter appears to be unused [UnusedResources]
+    <string name="apply_filter">Filtreyi Uygula</string>
+            ~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\values\strings.xml:44: Warning: The resource R.string.filter_sales appears to be unused [UnusedResources]
+    <string name="filter_sales">Filtrele</string>
+            ~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnusedResources":
+   Unused resources make applications larger and slow down builds.
+
+
+   The unused resource check can ignore tests. If you want to include
+   resources that are only referenced from tests, consider packaging them in a
+   test source set instead.
+
+   You can include test sources in the unused resource check by setting the
+   system property lint.unused-resources.include-tests =true, and to exclude
+   them (usually for performance reasons), use
+   lint.unused-resources.exclude-tests =true.
+   ,
+
+   Available options:
+
+   **skip-libraries** (default is true):
+   Whether the unused resource check should skip reporting unused resources in libraries.
+
+   Many libraries will declare resources that are part of the library surface; other modules depending on the library will also reference the resources. To avoid reporting all these resources as unused (in the context of a library), the unused resource check normally skips reporting unused resources in libraries. Instead, run the unused resource check on the consuming app module (along with `checkDependencies=true`).
+
+   However, there are cases where you want to check that all the resources declared in a library are used; in that case, you can disable the skip option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UnusedResources">
+           <option name="skip-libraries" value="true" />
+       </issue>
+   </lint>
+   ```
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:95: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                            android:textSize="10sp" />
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:145: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                            android:textSize="10sp"
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:197: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+                            android:textSize="10sp"
+                            ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_calendar_day.xml:41: Warning: Avoid using sizes smaller than 11sp: 10sp [SmallSp]
+            android:textSize="10sp"
+            ~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "SmallSp":
+   Avoid using sizes smaller than 11sp.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:7: Warning: Consider whether this feature (android.hardware.camera.autofocus) really is required for the app to function; you can set android:required="false" to indicate that the feature is used but not required [UnnecessaryRequiredFeature]
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UnnecessaryRequiredFeature":
+   Avoid unnecessarily requiring features that may exclude your app from being
+   served onto devices it might otherwise support.
+
+   Consider whether your application can function adequately without
+   restrictive feature requirements by setting these to
+   android:required="false". By doing so, you can increase the availability of
+   your app to a broader set of devices, including tablets, laptops and cars.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\SettingsActivity.kt:54: Warning: Use the KTX extension function SharedPreferences.edit instead? [UseKtx]
+        sharedPreferences.edit().putString(PREF_THEME, theme).apply()
+        ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "UseKtx":
+   The Android KTX libraries decorates the Android platform SDK as well as
+   various libraries with more convenient extension functions available from
+   Kotlin, allowing you to use default parameters, named parameters, and
+   more.
+
+   Available options:
+
+   **remove-defaults** (default is true):
+   Whether to skip arguments that match the defaults provided by the extension.
+
+   Extensions often provide default values for some of the parameters. For example:
+   ```kotlin
+   fun Path.readLines(charset: Charset = Charsets.UTF_8): List<String> { return Files.readAllLines(this, charset) }
+   ```
+   This lint check will by default automatically omit parameters that match the default, so if your code was calling
+
+   ```kotlin
+   Files.readAllLines(file, Charset.UTF_8)
+   ```
+   lint would replace this with
+   ```kotlin
+   file.readLines()
+   ```
+   rather than
+
+   ```kotlin
+   file.readLines(Charset.UTF_8
+   ```
+   You can turn this behavior off using this option.
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UseKtx">
+           <option name="remove-defaults" value="true" />
+       </issue>
+   </lint>
+   ```
+
+   **require-present** (default is true):
+   Whether to only offer extensions already available.
+
+   This option lets you only have lint suggest extension replacements if those extensions are already available on the class path (in other words, you're already depending on the library containing the extension method.)
+
+   To configure this option, use a `lint.xml` file with an <option> like this:
+
+   ```xml
+   <lint>
+       <issue id="UseKtx">
+           <option name="require-present" value="true" />
+       </issue>
+   </lint>
+   ```
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_scan_result.xml:20: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageView
+         ~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_stock_barcode.xml:20: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageView
+         ~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_transaction.xml:26: Warning: Missing contentDescription attribute on image [ContentDescription]
+        <ImageView
+         ~~~~~~~~~
+
+   Explanation for issues of type "ContentDescription":
+   Non-textual widgets like ImageViews and ImageButtons should use the
+   contentDescription attribute to specify a textual description of the widget
+   such that screen readers and other accessibility tools can adequately
+   describe the user interface.
+
+   Note that elements in application screens that are purely decorative and do
+   not provide any content or enable a user action should not have
+   accessibility content descriptions. In this case, set their descriptions to
+   @null. If your app's minSdkVersion is 16 or higher, you can instead set
+   these graphical elements' android:importantForAccessibility attributes to
+   no.
+
+   Note that for text fields, you should not set both the hint and the
+   contentDescription attributes since the hint will never be shown. Just set
+   the hint.
+
+   https://developer.android.com/guide/topics/ui/accessibility/apps#special-cases
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_advanced_filter.xml:89: Warning: 'clickable' attribute found, please also add 'focusable' [KeyboardInaccessibleWidget]
+                    android:clickable="true"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_advanced_filter.xml:110: Warning: 'clickable' attribute found, please also add 'focusable' [KeyboardInaccessibleWidget]
+                    android:clickable="true"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_filter.xml:32: Warning: 'clickable' attribute found, please also add 'focusable' [KeyboardInaccessibleWidget]
+            android:clickable="true"
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_filter.xml:52: Warning: 'clickable' attribute found, please also add 'focusable' [KeyboardInaccessibleWidget]
+            android:clickable="true"
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "KeyboardInaccessibleWidget":
+   A widget that is declared to be clickable but not declared to be focusable
+   is not accessible via the keyboard. Please add the focusable attribute as
+   well.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_advanced_filter.xml:49: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+            <AutoCompleteTextView
+             ~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "LabelFor":
+   Editable text fields should provide an android:hint or, provided your
+   minSdkVersion is at least 17, they may be referenced by a view with a
+   android:labelFor attribute.
+
+   When using android:labelFor, be sure to provide an android:text or an
+   android:contentDescription.
+
+   If your view is labeled but by a label in a different layout which includes
+   this one, just suppress this warning from lint.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\MainActivity.kt:153: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        binding.textViewNetIncome.text = "₺${String.format(java.util.Locale.getDefault(), "%.2f", netIncome)}"
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\MainActivity.kt:165: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        binding.textViewIncome.text = "₺${String.format(java.util.Locale.getDefault(), "%.2f", totalSalesRevenue)}"
+                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\MainActivity.kt:208: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        dialogBinding.textViewScannedBarcode.text = "${getString(R.string.barcode_label)}: $barcode"
+                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\MainActivity.kt:212: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        dialogBinding.textViewStockInfo.text = "Marka: ${stockItem.brand} | Tip: $productType"
+                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\MainActivity.kt:212: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        dialogBinding.textViewStockInfo.text = "Marka: ${stockItem.brand} | Tip: $productType"
+                                                ~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\MainActivity.kt:212: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        dialogBinding.textViewStockInfo.text = "Marka: ${stockItem.brand} | Tip: $productType"
+                                                                         ~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\adapter\SalesAdapter.kt:29: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            binding.textViewAmount.text = "+${currencyFormat.format(sale.amount)}"
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\adapter\StockItemAdapter.kt:330: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+            binding.textViewAmount.text = "-${currencyFormat.format(item.purchasePrice)}"
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\StocksActivity.kt:248: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        dialogBinding.textViewScannedBarcode.text = "Barkod: $barcode"
+                                                    ~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\StocksActivity.kt:248: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        dialogBinding.textViewScannedBarcode.text = "Barkod: $barcode"
+                                                     ~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\StocksActivity.kt:405: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+        dialogBinding.textViewScannedBarcode.text = "Barkod: ${stockItem.barcode}"
+                                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\StocksActivity.kt:405: Warning: String literal in setText can not be translated. Use Android resources instead. [SetTextI18n]
+        dialogBinding.textViewScannedBarcode.text = "Barkod: ${stockItem.barcode}"
+                                                     ~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\java\com\example\barcodescanner\adapter\TransactionAdapter.kt:45: Warning: Do not concatenate text displayed with setText. Use resource string with placeholders. [SetTextI18n]
+                    binding.textViewAmount.text = "-${currencyFormat.format(transaction.amount)}"
+                                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "SetTextI18n":
+   When calling TextView#setText
+   * Never call Number#toString() to format numbers; it will not handle
+   fraction separators and locale-specific digits properly. Consider using
+   String#format with proper format specifications (%d or %f) instead.
+   * Do not pass a string literal (e.g. "Hello") to display text. Hardcoded
+   text can not be properly translated to other languages. Consider using
+   Android resource strings instead.
+   * Do not build messages by concatenating text chunks. Such messages can not
+   be properly translated.
+
+   https://developer.android.com/guide/topics/resources/localization.html
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_barcode_scanner.xml:35: Warning: Hardcoded string "Geri", should use @string resource [HardcodedText]
+                android:contentDescription="Geri"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_barcode_scanner.xml:43: Warning: Hardcoded string "Barkod Tara", should use @string resource [HardcodedText]
+                android:text="Barkod Tara"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_barcode_scanner.xml:67: Warning: Hardcoded string "Barkodu kamera görüş alanının ortasına getirin", should use @string resource [HardcodedText]
+                android:text="Barkodu kamera görüş alanının ortasına getirin"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_barcode_scanner.xml:76: Warning: Hardcoded string "Barkod otomatik olarak taranacak", should use @string resource [HardcodedText]
+                android:text="Barkod otomatik olarak taranacak"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:58: Warning: Hardcoded string "Bugün", should use @string resource [HardcodedText]
+                        android:text="Bugün"
+                        ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:68: Warning: Hardcoded string "₺0.00", should use @string resource [HardcodedText]
+                        android:text="₺0.00"
+                        ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:104: Warning: Hardcoded string "7 Gün", should use @string resource [HardcodedText]
+                            android:text="7 Gün"
+                            ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:114: Warning: Hardcoded string "₺0.00", should use @string resource [HardcodedText]
+                            android:text="₺0.00"
+                            ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:143: Warning: Hardcoded string "30 Gün", should use @string resource [HardcodedText]
+                            android:text="30 Gün"
+                            ~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:153: Warning: Hardcoded string "₺0.00", should use @string resource [HardcodedText]
+                            android:text="₺0.00"
+                            ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:184: Warning: Hardcoded string "Yıl: ", should use @string resource [HardcodedText]
+                android:text="Yıl: "
+                ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:198: Warning: Hardcoded string "Ay: ", should use @string resource [HardcodedText]
+                android:text="Ay: "
+                ~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:221: Warning: Hardcoded string "Pzt", should use @string resource [HardcodedText]
+                android:text="Pzt"
+                ~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:232: Warning: Hardcoded string "Sal", should use @string resource [HardcodedText]
+                android:text="Sal"
+                ~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:243: Warning: Hardcoded string "Çar", should use @string resource [HardcodedText]
+                android:text="Çar"
+                ~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:254: Warning: Hardcoded string "Per", should use @string resource [HardcodedText]
+                android:text="Per"
+                ~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:265: Warning: Hardcoded string "Cum", should use @string resource [HardcodedText]
+                android:text="Cum"
+                ~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:276: Warning: Hardcoded string "Cmt", should use @string resource [HardcodedText]
+                android:text="Cmt"
+                ~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_calendar.xml:287: Warning: Hardcoded string "Paz", should use @string resource [HardcodedText]
+                android:text="Paz"
+                ~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:72: Warning: Hardcoded string "Net Gelir", should use @string resource [HardcodedText]
+                            android:text="Net Gelir"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:83: Warning: Hardcoded string "₺0.00", should use @string resource [HardcodedText]
+                            android:text="₺0.00"
+                            ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:93: Warning: Hardcoded string "Bugün", should use @string resource [HardcodedText]
+                            android:text="Bugün"
+                            ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:123: Warning: Hardcoded string "Gelir", should use @string resource [HardcodedText]
+                            android:text="Gelir"
+                            ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:135: Warning: Hardcoded string "₺0.00", should use @string resource [HardcodedText]
+                            android:text="₺0.00"
+                            ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:144: Warning: Hardcoded string "Bugün", should use @string resource [HardcodedText]
+                            android:text="Bugün"
+                            ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:175: Warning: Hardcoded string "Toplam Satış", should use @string resource [HardcodedText]
+                            android:text="Toplam Satış"
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:186: Warning: Hardcoded string "0", should use @string resource [HardcodedText]
+                            android:text="0"
+                            ~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:196: Warning: Hardcoded string "Adet", should use @string resource [HardcodedText]
+                            android:text="Adet"
+                            ~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:217: Warning: Hardcoded string "En Son İşlemler", should use @string resource [HardcodedText]
+                android:text="En Son İşlemler"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:238: Warning: Hardcoded string "Marka", should use @string resource [HardcodedText]
+                    android:text="Marka"
+                    ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:249: Warning: Hardcoded string "Ürün Tipi", should use @string resource [HardcodedText]
+                    android:text="Ürün Tipi"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:261: Warning: Hardcoded string "İşlem Tipi", should use @string resource [HardcodedText]
+                    android:text="İşlem Tipi"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:273: Warning: Hardcoded string "Tutar", should use @string resource [HardcodedText]
+                    android:text="Tutar"
+                    ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:297: Warning: Hardcoded string "Henüz işlem yapılmadı", should use @string resource [HardcodedText]
+                android:text="Henüz işlem yapılmadı"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_sales.xml:42: Warning: Hardcoded string "Bu alan boş bırakıldı", should use @string resource [HardcodedText]
+                android:text="Bu alan boş bırakıldı"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_sales.xml:69: Warning: Hardcoded string "Satışlarım", should use @string resource [HardcodedText]
+                    android:text="Satışlarım"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_sales.xml:79: Warning: Hardcoded string "Filtrele", should use @string resource [HardcodedText]
+                    android:text="Filtrele"
+                    ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_sales.xml:113: Warning: Hardcoded string "Marka", should use @string resource [HardcodedText]
+                        android:text="Marka"
+                        ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_sales.xml:137: Warning: Hardcoded string "Ürün Tipi", should use @string resource [HardcodedText]
+                        android:text="Ürün Tipi"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_sales.xml:160: Warning: Hardcoded string "Tarih", should use @string resource [HardcodedText]
+                        android:text="Tarih"
+                        ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_sales.xml:183: Warning: Hardcoded string "Tutar", should use @string resource [HardcodedText]
+                        android:text="Tutar"
+                        ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_sales.xml:217: Warning: Hardcoded string "Henüz satış yapılmamış", should use @string resource [HardcodedText]
+                        android:text="Henüz satış yapılmamış"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_settings.xml:38: Warning: Hardcoded string "Tema Seçimi", should use @string resource [HardcodedText]
+                android:text="Tema Seçimi"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_settings.xml:64: Warning: Hardcoded string "Aydınlık", should use @string resource [HardcodedText]
+                        android:text="Aydınlık"
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_settings.xml:88: Warning: Hardcoded string "Karanlık", should use @string resource [HardcodedText]
+                        android:text="Karanlık"
+                        ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:62: Warning: Hardcoded string "Toplam Ürün", should use @string resource [HardcodedText]
+                        android:text="Toplam Ürün"
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:73: Warning: Hardcoded string "0", should use @string resource [HardcodedText]
+                        android:text="0"
+                        ~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:83: Warning: Hardcoded string "adet", should use @string resource [HardcodedText]
+                        android:text="adet"
+                        ~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:114: Warning: Hardcoded string "Cam", should use @string resource [HardcodedText]
+                        android:text="Cam"
+                        ~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:125: Warning: Hardcoded string "0", should use @string resource [HardcodedText]
+                        android:text="0"
+                        ~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:135: Warning: Hardcoded string "adet", should use @string resource [HardcodedText]
+                        android:text="adet"
+                        ~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:166: Warning: Hardcoded string "Çerçeve", should use @string resource [HardcodedText]
+                        android:text="Çerçeve"
+                        ~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:177: Warning: Hardcoded string "0", should use @string resource [HardcodedText]
+                        android:text="0"
+                        ~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:187: Warning: Hardcoded string "adet", should use @string resource [HardcodedText]
+                        android:text="adet"
+                        ~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:216: Warning: Hardcoded string "Stok Listesi", should use @string resource [HardcodedText]
+                    android:text="Stok Listesi"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:261: Warning: Hardcoded string "Marka", should use @string resource [HardcodedText]
+                    android:text="Marka"
+                    ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:285: Warning: Hardcoded string "Ürün Tipi", should use @string resource [HardcodedText]
+                    android:text="Ürün Tipi"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:308: Warning: Hardcoded string "Adet", should use @string resource [HardcodedText]
+                    android:text="Adet"
+                    ~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:331: Warning: Hardcoded string "Tarih", should use @string resource [HardcodedText]
+                    android:text="Tarih"
+                    ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:354: Warning: Hardcoded string "Tutar", should use @string resource [HardcodedText]
+                    android:text="Tutar"
+                    ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:388: Warning: Hardcoded string "Henüz stok ürünü eklenmedinnSağ alttaki + butonuna basarak stok ekleyin", should use @string resource [HardcodedText]
+                android:text="Henüz stok ürünü eklenmedi\n\nSağ alttaki + butonuna basarak stok ekleyin"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:407: Warning: Hardcoded string "Stok Ekle", should use @string resource [HardcodedText]
+        android:contentDescription="Stok Ekle"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_add_scan_result.xml:11: Warning: Hardcoded string "Satış Bilgileri", should use @string resource [HardcodedText]
+        android:text="Satış Bilgileri"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_add_scan_result.xml:21: Warning: Hardcoded string "Barkod: 1234567890123", should use @string resource [HardcodedText]
+        android:text="Barkod: 1234567890123"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_add_scan_result.xml:30: Warning: Hardcoded string "Marka: Samsung | Tip: Çerçeve", should use @string resource [HardcodedText]
+        android:text="Marka: Samsung | Tip: Çerçeve"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_add_scan_result.xml:46: Warning: Hardcoded string "Satış Fiyatı (₺)", should use @string resource [HardcodedText]
+            android:hint="Satış Fiyatı (₺)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_add_stock_item.xml:11: Warning: Hardcoded string "Stok Bilgileri", should use @string resource [HardcodedText]
+        android:text="Stok Bilgileri"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_add_stock_item.xml:21: Warning: Hardcoded string "Barkod: 1234567890123", should use @string resource [HardcodedText]
+        android:text="Barkod: 1234567890123"
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_add_stock_item.xml:36: Warning: Hardcoded string "Marka", should use @string resource [HardcodedText]
+            android:hint="Marka"
+            ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_add_stock_item.xml:51: Warning: Hardcoded string "Ürün Tipi", should use @string resource [HardcodedText]
+            android:hint="Ürün Tipi"
+            ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_add_stock_item.xml:66: Warning: Hardcoded string "Adet", should use @string resource [HardcodedText]
+            android:hint="Adet"
+            ~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_add_stock_item.xml:67: Warning: Hardcoded string "1", should use @string resource [HardcodedText]
+            android:text="1"
+            ~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\dialog_add_stock_item.xml:82: Warning: Hardcoded string "Alış Fiyatı (₺)", should use @string resource [HardcodedText]
+            android:hint="Alış Fiyatı (₺)"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_barcode.xml:20: Warning: Hardcoded string "1234567890123", should use @string resource [HardcodedText]
+            android:text="1234567890123"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_barcode.xml:30: Warning: Hardcoded string "10.09.2025 14:30", should use @string resource [HardcodedText]
+            android:text="10.09.2025 14:30"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_calendar_day.xml:27: Warning: Hardcoded string "1", should use @string resource [HardcodedText]
+            android:text="1"
+            ~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_calendar_day.xml:40: Warning: Hardcoded string "₺0", should use @string resource [HardcodedText]
+            android:text="₺0"
+            ~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_sale.xml:28: Warning: Hardcoded string "Samsung", should use @string resource [HardcodedText]
+            android:text="Samsung"
+            ~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_sale.xml:42: Warning: Hardcoded string "Çerçeve", should use @string resource [HardcodedText]
+            android:text="Çerçeve"
+            ~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_sale.xml:56: Warning: Hardcoded string "22.09.2025", should use @string resource [HardcodedText]
+            android:text="22.09.2025"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_sale.xml:70: Warning: Hardcoded string "+₺850.00", should use @string resource [HardcodedText]
+            android:text="+₺850.00"
+            ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_scan_result.xml:47: Warning: Hardcoded string "Marka Adı", should use @string resource [HardcodedText]
+                    android:text="Marka Adı"
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_scan_result.xml:57: Warning: Hardcoded string "₺125.99", should use @string resource [HardcodedText]
+                    android:text="₺125.99"
+                    ~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_scan_result.xml:70: Warning: Hardcoded string "1234567890123", should use @string resource [HardcodedText]
+                android:text="1234567890123"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_scan_result.xml:81: Warning: Hardcoded string "16.09.2025 14:30", should use @string resource [HardcodedText]
+                android:text="16.09.2025 14:30"
+                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_stock_barcode.xml:31: Warning: Hardcoded string "1234567890123", should use @string resource [HardcodedText]
+            android:text="1234567890123"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_stock_barcode.xml:45: Warning: Hardcoded string "12:34", should use @string resource [HardcodedText]
+            android:text="12:34"
+            ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_stock_item.xml:29: Warning: Hardcoded string "Samsung", should use @string resource [HardcodedText]
+            android:text="Samsung"
+            ~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_stock_item.xml:44: Warning: Hardcoded string "Çerçeve", should use @string resource [HardcodedText]
+            android:text="Çerçeve"
+            ~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_stock_item.xml:58: Warning: Hardcoded string "1", should use @string resource [HardcodedText]
+            android:text="1"
+            ~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_stock_item.xml:72: Warning: Hardcoded string "17.09.2025", should use @string resource [HardcodedText]
+            android:text="17.09.2025"
+            ~~~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_stock_item.xml:86: Warning: Hardcoded string "-₺125.50", should use @string resource [HardcodedText]
+            android:text="-₺125.50"
+            ~~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_transaction.xml:42: Warning: Hardcoded string "Samsung", should use @string resource [HardcodedText]
+        android:text="Samsung"
+        ~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_transaction.xml:57: Warning: Hardcoded string "Çerçeve", should use @string resource [HardcodedText]
+        android:text="Çerçeve"
+        ~~~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_transaction.xml:71: Warning: Hardcoded string "Satış", should use @string resource [HardcodedText]
+        android:text="Satış"
+        ~~~~~~~~~~~~~~~~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\item_transaction.xml:86: Warning: Hardcoded string "₺125.50", should use @string resource [HardcodedText]
+        android:text="₺125.50"
+        ~~~~~~~~~~~~~~~~~~~~~~
+
+   Explanation for issues of type "HardcodedText":
+   Hardcoding text attributes directly in layout files is bad for several
+   reasons:
+
+   * When creating configuration variations (for example for landscape or
+   portrait) you have to repeat the actual text (and keep it up to date when
+   making changes)
+
+   * The application cannot be translated to other languages by just adding
+   new translations for existing string resources.
+
+   There are quickfixes to automatically extract this hardcoded string into a
+   resource lookup.
+
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:71: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                            android:gravity="left"
+                                             ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:82: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                            android:gravity="left"
+                                             ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:92: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                            android:gravity="left"
+                                             ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:126: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                            android:gravity="left"
+                                             ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:134: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                            android:gravity="left"
+                                             ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:147: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                            android:gravity="left" />
+                                             ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:178: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                            android:gravity="left"
+                                             ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:189: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                            android:gravity="left"
+                                             ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:199: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                            android:gravity="left" />
+                                             ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_main.xml:248: Warning: Use "end" instead of "right" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                    android:gravity="right"
+                                     ~~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:61: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                        android:gravity="left"
+                                         ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:72: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                        android:gravity="left"
+                                         ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:82: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                        android:gravity="left"
+                                         ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:113: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                        android:gravity="left"
+                                         ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:124: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                        android:gravity="left"
+                                         ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:134: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                        android:gravity="left"
+                                         ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:165: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                        android:gravity="left"
+                                         ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:176: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                        android:gravity="left"
+                                         ~~~~
+C:\Ozan\projects\barcode_scanner\app\src\main\res\layout\activity_stocks.xml:186: Warning: Use "start" instead of "left" to ensure correct behavior in right-to-left locales [RtlHardcoded]
+                        android:gravity="left"
+                                         ~~~~
+
+   Explanation for issues of type "RtlHardcoded":
+   Using Gravity#LEFT and Gravity#RIGHT can lead to problems when a layout is
+   rendered in locales where text flows from right to left. Use Gravity#START
+   and Gravity#END instead. Similarly, in XML gravity and layout_gravity
+   attributes, use start rather than left.
+
+   For XML attributes such as paddingLeft and layout_marginLeft, use
+   paddingStart and layout_marginStart. NOTE: If your minSdkVersion is less
+   than 17, you should add both the older left/right attributes as well as the
+   new start/end attributes. On older platforms, where RTL is not supported
+   and the start/end attributes are unknown and therefore ignored, you need
+   the older left/right attributes. There is a separate lint check which
+   catches that type of error.
+
+   (Note: For Gravity#LEFT and Gravity#START, you can use these constants even
+   when targeting older platforms, because the start bitmask is a superset of
+   the left bitmask. Therefore, you can use gravity="start" rather than
+   gravity="left|start".)
+
+0 errors, 215 warnings

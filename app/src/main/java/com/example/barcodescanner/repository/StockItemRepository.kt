@@ -8,6 +8,7 @@ import com.example.barcodescanner.model.StockItem
 
 class StockItemRepository(context: Context) {
     private val dbHelper = DatabaseHelper(context)
+    private val notificationRepository = NotificationRepository(context)
 
     fun insertStockItem(stockItem: StockItem): Long {
         val db = dbHelper.writableDatabase
@@ -21,6 +22,12 @@ class StockItemRepository(context: Context) {
         
         val id = db.insert(DatabaseHelper.TABLE_STOCK_ITEMS, null, values)
         db.close()
+        
+        // Yeni eklenen stok adeti 3'e düşükse bildirim oluştur
+        if (id != -1L && stockItem.quantity <= 3) {
+            notificationRepository.createLowStockNotification(stockItem.brand, stockItem.barcode, stockItem.quantity)
+        }
+        
         return id
     }
 
@@ -112,6 +119,18 @@ class StockItemRepository(context: Context) {
             arrayOf(stockItem.id.toString())
         )
         db.close()
+        
+        // Stok adeti 3'e düştüyse bildirim oluştur
+        if (rowsAffected > 0 && stockItem.quantity <= 3) {
+            notificationRepository.createLowStockNotification(stockItem.brand, stockItem.barcode, stockItem.quantity)
+        }
+        
         return rowsAffected > 0
+    }
+    
+    fun clearAllStockItems() {
+        val db = dbHelper.writableDatabase
+        db.delete(DatabaseHelper.TABLE_STOCK_ITEMS, null, null)
+        db.close()
     }
 }

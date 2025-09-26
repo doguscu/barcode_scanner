@@ -23,12 +23,6 @@ public final class DialogAdvancedFilterBinding implements ViewBinding {
   private final ScrollView rootView;
 
   @NonNull
-  public final MaterialButton btnApply;
-
-  @NonNull
-  public final MaterialButton btnCancel;
-
-  @NonNull
   public final MaterialButton btnClearFilter;
 
   @NonNull
@@ -68,7 +62,6 @@ public final class DialogAdvancedFilterBinding implements ViewBinding {
   public final TextInputLayout tilStartDate;
 
   private DialogAdvancedFilterBinding(@NonNull ScrollView rootView,
-      @NonNull MaterialButton btnApply, @NonNull MaterialButton btnCancel,
       @NonNull MaterialButton btnClearFilter, @NonNull TextInputEditText etBrand,
       @NonNull TextInputEditText etEndDate, @NonNull TextInputEditText etMaxAmount,
       @NonNull TextInputEditText etMinAmount, @NonNull AutoCompleteTextView etProductType,
@@ -77,8 +70,6 @@ public final class DialogAdvancedFilterBinding implements ViewBinding {
       @NonNull TextInputLayout tilMinAmount, @NonNull TextInputLayout tilProductType,
       @NonNull TextInputLayout tilStartDate) {
     this.rootView = rootView;
-    this.btnApply = btnApply;
-    this.btnCancel = btnCancel;
     this.btnClearFilter = btnClearFilter;
     this.etBrand = etBrand;
     this.etEndDate = etEndDate;
@@ -121,18 +112,6 @@ public final class DialogAdvancedFilterBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
-      id = R.id.btnApply;
-      MaterialButton btnApply = ViewBindings.findChildViewById(rootView, id);
-      if (btnApply == null) {
-        break missingId;
-      }
-
-      id = R.id.btnCancel;
-      MaterialButton btnCancel = ViewBindings.findChildViewById(rootView, id);
-      if (btnCancel == null) {
-        break missingId;
-      }
-
       id = R.id.btnClearFilter;
       MaterialButton btnClearFilter = ViewBindings.findChildViewById(rootView, id);
       if (btnClearFilter == null) {
@@ -211,9 +190,9 @@ public final class DialogAdvancedFilterBinding implements ViewBinding {
         break missingId;
       }
 
-      return new DialogAdvancedFilterBinding((ScrollView) rootView, btnApply, btnCancel,
-          btnClearFilter, etBrand, etEndDate, etMaxAmount, etMinAmount, etProductType, etStartDate,
-          tilBrand, tilEndDate, tilMaxAmount, tilMinAmount, tilProductType, tilStartDate);
+      return new DialogAdvancedFilterBinding((ScrollView) rootView, btnClearFilter, etBrand,
+          etEndDate, etMaxAmount, etMinAmount, etProductType, etStartDate, tilBrand, tilEndDate,
+          tilMaxAmount, tilMinAmount, tilProductType, tilStartDate);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

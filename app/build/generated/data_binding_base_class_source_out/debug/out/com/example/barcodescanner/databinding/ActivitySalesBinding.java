@@ -4,7 +4,6 @@ package com.example.barcodescanner.databinding;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -40,18 +39,6 @@ public final class ActivitySalesBinding implements ViewBinding {
   public final LinearLayout headerProductType;
 
   @NonNull
-  public final ImageView iconSortAmount;
-
-  @NonNull
-  public final ImageView iconSortBrand;
-
-  @NonNull
-  public final ImageView iconSortDate;
-
-  @NonNull
-  public final ImageView iconSortProductType;
-
-  @NonNull
   public final LinearLayout layoutSalesHeaders;
 
   @NonNull
@@ -66,9 +53,7 @@ public final class ActivitySalesBinding implements ViewBinding {
   private ActivitySalesBinding(@NonNull CoordinatorLayout rootView,
       @NonNull MaterialButton buttonFilterSales, @NonNull LinearLayout headerAmount,
       @NonNull LinearLayout headerBrand, @NonNull LinearLayout headerDate,
-      @NonNull LinearLayout headerProductType, @NonNull ImageView iconSortAmount,
-      @NonNull ImageView iconSortBrand, @NonNull ImageView iconSortDate,
-      @NonNull ImageView iconSortProductType, @NonNull LinearLayout layoutSalesHeaders,
+      @NonNull LinearLayout headerProductType, @NonNull LinearLayout layoutSalesHeaders,
       @NonNull RecyclerView recyclerViewSales, @NonNull TextView textViewEmptySales,
       @NonNull Toolbar toolbar) {
     this.rootView = rootView;
@@ -77,10 +62,6 @@ public final class ActivitySalesBinding implements ViewBinding {
     this.headerBrand = headerBrand;
     this.headerDate = headerDate;
     this.headerProductType = headerProductType;
-    this.iconSortAmount = iconSortAmount;
-    this.iconSortBrand = iconSortBrand;
-    this.iconSortDate = iconSortDate;
-    this.iconSortProductType = iconSortProductType;
     this.layoutSalesHeaders = layoutSalesHeaders;
     this.recyclerViewSales = recyclerViewSales;
     this.textViewEmptySales = textViewEmptySales;
@@ -144,30 +125,6 @@ public final class ActivitySalesBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.iconSortAmount;
-      ImageView iconSortAmount = ViewBindings.findChildViewById(rootView, id);
-      if (iconSortAmount == null) {
-        break missingId;
-      }
-
-      id = R.id.iconSortBrand;
-      ImageView iconSortBrand = ViewBindings.findChildViewById(rootView, id);
-      if (iconSortBrand == null) {
-        break missingId;
-      }
-
-      id = R.id.iconSortDate;
-      ImageView iconSortDate = ViewBindings.findChildViewById(rootView, id);
-      if (iconSortDate == null) {
-        break missingId;
-      }
-
-      id = R.id.iconSortProductType;
-      ImageView iconSortProductType = ViewBindings.findChildViewById(rootView, id);
-      if (iconSortProductType == null) {
-        break missingId;
-      }
-
       id = R.id.layoutSalesHeaders;
       LinearLayout layoutSalesHeaders = ViewBindings.findChildViewById(rootView, id);
       if (layoutSalesHeaders == null) {
@@ -193,8 +150,8 @@ public final class ActivitySalesBinding implements ViewBinding {
       }
 
       return new ActivitySalesBinding((CoordinatorLayout) rootView, buttonFilterSales, headerAmount,
-          headerBrand, headerDate, headerProductType, iconSortAmount, iconSortBrand, iconSortDate,
-          iconSortProductType, layoutSalesHeaders, recyclerViewSales, textViewEmptySales, toolbar);
+          headerBrand, headerDate, headerProductType, layoutSalesHeaders, recyclerViewSales,
+          textViewEmptySales, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

@@ -186,20 +186,6 @@
                 android:layout_marginEnd="8dp"
                 style="@style/Widget.Material3.Button.TextButton" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cancel"
-                android:layout_marginEnd="8dp"
-                style="@style/Widget.Material3.Button.TextButton" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnApply"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/apply_filter" />
-
         </LinearLayout>
 
     </LinearLayout>

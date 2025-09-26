@@ -93,4 +93,10 @@ class ScanResultRepository(context: Context) {
         db.close()
         return scanResult
     }
+    
+    fun clearAllScanResults() {
+        val db = dbHelper.writableDatabase
+        db.delete(DatabaseHelper.TABLE_SCAN_RESULTS, null, null)
+        db.close()
+    }
 }

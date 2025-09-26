@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:2:1-54:12
-INJECTED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:2:1-54:12
-INJECTED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:2:1-54:12
-INJECTED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:2:1-54:12
+ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:2:1-59:12
+INJECTED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:2:1-59:12
+INJECTED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:2:1-59:12
+INJECTED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:2:1-59:12
 MERGED from [androidx.databinding:viewbinding:8.13.0] C:\Users\Ozan\.gradle\caches\8.13\transforms\ea89c6feaa66f6d89ddf50f9df26a1fa\transformed\viewbinding-8.13.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.navigation:navigation-common:2.7.6] C:\Users\Ozan\.gradle\caches\8.13\transforms\4dca66a79ca11b73da2ab58a76d360bb\transformed\navigation-common-2.7.6\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-ktx:2.7.6] C:\Users\Ozan\.gradle\caches\8.13\transforms\b56aa2ce815b3f3bdf35d4f6f7fcdf98\transformed\navigation-common-ktx-2.7.6\AndroidManifest.xml:2:1-7:12
@@ -110,8 +110,8 @@ ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:7:5
 	android:name
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:7:19-67
 application
-ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:9:5-52:19
-INJECTED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:9:5-52:19
+ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:9:5-57:19
+INJECTED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:9:5-57:19
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Ozan\.gradle\caches\8.13\transforms\72c30dfb48d09c212e82622e32a22d93\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.11.0] C:\Users\Ozan\.gradle\caches\8.13\transforms\72c30dfb48d09c212e82622e32a22d93\transformed\material-1.11.0\AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Ozan\.gradle\caches\8.13\transforms\5bc2c27d7b1ac0fa25edf41c2d3ed6ac\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -182,7 +182,7 @@ ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:19:
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:21:13-37
 	android:name
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:20:13-51
-activity#com.example.barcodescanner.StocksActivity
+activity#com.example.barcodescanner.NotificationsActivity
 ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:23:9-27:71
 	android:parentActivityName
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:26:13-55
@@ -191,8 +191,8 @@ ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:23:
 	android:theme
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:27:13-68
 	android:name
-		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:24:13-43
-activity#com.example.barcodescanner.CalendarActivity
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:24:13-50
+activity#com.example.barcodescanner.StocksActivity
 ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:28:9-32:71
 	android:parentActivityName
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:31:13-55
@@ -201,8 +201,8 @@ ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:28:
 	android:theme
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:32:13-68
 	android:name
-		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:29:13-45
-activity#com.example.barcodescanner.SettingsActivity
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:29:13-43
+activity#com.example.barcodescanner.CalendarActivity
 ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:33:9-37:71
 	android:parentActivityName
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:36:13-55
@@ -212,7 +212,7 @@ ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:33:
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:37:13-68
 	android:name
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:34:13-45
-activity#com.example.barcodescanner.SalesActivity
+activity#com.example.barcodescanner.SettingsActivity
 ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:38:9-42:71
 	android:parentActivityName
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:41:13-55
@@ -221,25 +221,35 @@ ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:38:
 	android:theme
 		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:42:13-68
 	android:name
-		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:39:13-42
-activity#com.example.barcodescanner.MainActivity
-ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:43:9-51:20
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:39:13-45
+activity#com.example.barcodescanner.SalesActivity
+ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:43:9-47:71
+	android:parentActivityName
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:46:13-55
 	android:exported
-		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:45:13-36
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:45:13-37
 	android:theme
-		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:46:13-68
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:47:13-68
 	android:name
-		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:44:13-41
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:44:13-42
+activity#com.example.barcodescanner.MainActivity
+ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:48:9-56:20
+	android:exported
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:50:13-36
+	android:theme
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:51:13-68
+	android:name
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:49:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:47:13-50:29
+ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:52:13-55:29
 action#android.intent.action.MAIN
-ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:48:17-69
+ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:53:17-69
 	android:name
-		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:48:25-66
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:53:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:49:17-77
+ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:54:17-77
 	android:name
-		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:49:27-74
+		ADDED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml:54:27-74
 uses-sdk
 INJECTED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Ozan\projects\barcode_scanner\app\src\main\AndroidManifest.xml

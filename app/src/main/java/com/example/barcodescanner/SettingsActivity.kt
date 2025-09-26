@@ -36,7 +36,7 @@ class SettingsActivity : AppCompatActivity() {
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             setDisplayShowHomeEnabled(true)
-            title = "Tema"
+            title = getString(R.string.nav_theme)
         }
     }
 
@@ -47,10 +47,6 @@ class SettingsActivity : AppCompatActivity() {
         
         binding.darkThemeOption.setOnClickListener {
             setTheme(THEME_DARK)
-        }
-        
-        binding.systemThemeOption.setOnClickListener {
-            setTheme(THEME_SYSTEM)
         }
     }
 
@@ -67,18 +63,16 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun updateThemeSelection() {
-        val currentTheme = sharedPreferences.getString(PREF_THEME, THEME_LIGHT) ?: THEME_LIGHT
+        val currentTheme = sharedPreferences.getString(PREF_THEME, THEME_SYSTEM) ?: THEME_SYSTEM
         
         // Reset all selections
         binding.lightThemeOption.isChecked = false
         binding.darkThemeOption.isChecked = false
-        binding.systemThemeOption.isChecked = false
         
         // Set current selection
         when (currentTheme) {
             THEME_LIGHT -> binding.lightThemeOption.isChecked = true
             THEME_DARK -> binding.darkThemeOption.isChecked = true
-            THEME_SYSTEM -> binding.systemThemeOption.isChecked = true
         }
     }
 
