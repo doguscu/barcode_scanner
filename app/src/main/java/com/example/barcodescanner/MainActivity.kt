@@ -30,6 +30,7 @@ import com.example.barcodescanner.repository.NotificationRepository
 import com.example.barcodescanner.repository.DataImportExportRepository
 import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -102,8 +103,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setupRecyclerView()
         setupScanButton()
         setupNotificationButton()
-        addDummyDataIfNeeded()
         loadDashboardData()
+        
+        // Geçici: Dummy data yükle (sadece ilk çalıştırmada)
+        val sharedPreferences = getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
+        val dummyDataLoaded = sharedPreferences.getBoolean("dummy_data_loaded", false)
+        if (!dummyDataLoaded) {
+            loadDummyData()
+            sharedPreferences.edit().putBoolean("dummy_data_loaded", true).apply()
+        }
     }
 
     private fun setupToolbar() {
@@ -186,7 +194,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val netIncome = transactionRepository.getTodayNetIncome() // Bugünkü net gelir (satış - alım)
         val salesCount = transactionRepository.getTodaySalesCount() // Bugünkü satış sayısı
 
-        binding.textViewNetIncome.text = "₺${String.format(java.util.Locale.getDefault(), "%.2f", netIncome)}"
+        // Negatif değerler için - sembolünü ₺ den önce getir
+        val formattedNetIncome = if (netIncome < 0) {
+            "-₺${String.format(java.util.Locale.getDefault(), "%.2f", -netIncome)}"
+        } else {
+            "₺${String.format(java.util.Locale.getDefault(), "%.2f", netIncome)}"
+        }
+        binding.textViewNetIncome.text = formattedNetIncome
         if (netIncome > 0) {
             binding.textViewNetIncome.setTextColor(ContextCompat.getColor(this, android.R.color.holo_green_dark))
         } else if (netIncome == 0.0) {
@@ -342,6 +356,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_export_data -> {
                 startExportData()
             }
+            R.id.nav_clear_data -> {
+                showClearDataConfirmationDialog()
+            }
         }
         binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
@@ -356,120 +373,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    private fun addDummyDataIfNeeded() {
-            addDummyTransactions()
-            addDummyStockItems()
-    }
 
-    private fun addDummyTransactions() {
-        // 13-24 Eylül 2025 tarihleri için Calendar kullan
-        val calendar = java.util.Calendar.getInstance()
-        
-        val dummyTransactions = listOf(
-            Transaction(
-                brand = "Samsung",
-                productType = "Çerçeve",
-                transactionType = Transaction.TYPE_SALE,
-                amount = 850.0,
-                barcode = "1234567890123",
-                transactionDate = calendar.apply { set(2025, 8, 24, 14, 30) }.timeInMillis // 24 Eylül 2024
-            ),
-            Transaction(
-                brand = "Apple",
-                productType = "Cam",
-                transactionType = Transaction.TYPE_SALE,
-                amount = 1200.0,
-                barcode = "1234567890124",
-                transactionDate = calendar.apply { set(2025, 8, 23, 10, 15) }.timeInMillis // 23 Eylül 2024
-            ),
-            Transaction(
-                brand = "Huawei",
-                productType = "Çerçeve",
-                transactionType = Transaction.TYPE_STOCK_ENTRY,
-                amount = 450.0,
-                barcode = "1234567890125",
-                transactionDate = calendar.apply { set(2025, 8, 20, 16, 45) }.timeInMillis // 20 Eylül 2024
-            ),
-            Transaction(
-                brand = "Xiaomi",
-                productType = "Cam",
-                transactionType = Transaction.TYPE_SALE,
-                amount = 675.0,
-                barcode = "1234567890126",
-                transactionDate = calendar.apply { set(2025, 8, 18, 11, 20) }.timeInMillis // 18 Eylül 2024
-            ),
-            Transaction(
-                brand = "LG",
-                productType = "Lens",
-                transactionType = Transaction.TYPE_STOCK_ENTRY,
-                amount = 320.0,
-                barcode = "1234567890127",
-                transactionDate = calendar.apply { set(2025, 8, 15, 9, 10) }.timeInMillis // 15 Eylül 2024
-            )
-        )
-
-        for (transaction in dummyTransactions) {
-            transactionRepository.insertTransaction(transaction)
-        }
-    }
-
-    private fun addDummyStockItems() {
-        // 13-24 Eylül 2025 tarihleri için Calendar kullan
-        val calendar = java.util.Calendar.getInstance()
-        
-        val dummyStockItems = listOf(
-            StockItem(
-                barcode = "1234567890125",
-                brand = "Huawei",
-                purchasePrice = 450.0,
-                stockDate = calendar.apply { set(2025, 8, 20, 16, 45) }.timeInMillis, // 20 Eylül 2024
-                quantity = 3
-            ),
-            StockItem(
-                barcode = "1234567890127",
-                brand = "LG",
-                purchasePrice = 320.0,
-                stockDate = calendar.apply { set(2025, 8, 15, 9, 10) }.timeInMillis, // 15 Eylül 2024
-                quantity = 5
-            ),
-            StockItem(
-                barcode = "1234567890128",
-                brand = "Sony",
-                purchasePrice = 780.0,
-                stockDate = calendar.apply { set(2025, 8, 22, 13, 25) }.timeInMillis, // 22 Eylül 2024
-                quantity = 2
-            ),
-            StockItem(
-                barcode = "1234567890129",
-                brand = "Nokia",
-                purchasePrice = 290.0,
-                stockDate = calendar.apply { set(2025, 8, 17, 8, 45) }.timeInMillis, // 17 Eylül 2024
-                quantity = 4
-            ),
-            StockItem(
-                barcode = "1234567890130",
-                brand = "Oppo",
-                purchasePrice = 520.0,
-                stockDate = calendar.apply { set(2025, 8, 14, 15, 30) }.timeInMillis, // 14 Eylül 2024
-                quantity = 1
-            )
-        )
-
-        for (stockItem in dummyStockItems) {
-            stockItemRepository.insertStockItem(stockItem)
-            
-            // Stok items için transaction da ekle
-            val transaction = Transaction(
-                brand = stockItem.brand,
-                productType = "Çerçeve", // Default olarak çerçeve
-                transactionType = Transaction.TYPE_STOCK_ENTRY,
-                amount = stockItem.purchasePrice,
-                barcode = stockItem.barcode,
-                transactionDate = stockItem.stockDate
-            )
-            transactionRepository.insertTransaction(transaction)
-        }
-    }
 
     private fun applySelectedTheme() {
         val sharedPreferences = getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
@@ -570,4 +474,182 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             Snackbar.make(binding.root, "İçe aktarma hatası: ${e.message}", Snackbar.LENGTH_LONG).show()
         }
     }
+
+    private fun showClearDataConfirmationDialog() {
+        AlertDialog.Builder(this)
+            .setTitle("Verileri Temizle")
+            .setMessage("Bu işlem tüm verilerinizi kalıcı olarak silecektir:\n\n• Tüm stok kayıtları\n• Tüm satış işlemleri\n• Tüm tarama geçmişi\n• Tüm bildirimler\n\nBu işlem geri alınamaz. Devam etmek istediğinizden emin misiniz?")
+            .setPositiveButton("Sil") { _, _ ->
+                showFinalClearDataConfirmation()
+            }
+            .setNegativeButton("İptal", null)
+            .setIcon(R.drawable.ic_delete_24)
+            .show()
+    }
+
+    private fun showFinalClearDataConfirmation() {
+        AlertDialog.Builder(this)
+            .setTitle("Son Uyarı")
+            .setMessage("TÜM VERİLERİNİZ SİLİNECEK!\n\nBu işlem geri alınamaz. Emin misiniz?")
+            .setPositiveButton("EVET, SİL") { _, _ ->
+                clearAllData()
+            }
+            .setNegativeButton("İptal", null)
+            .setCancelable(false)
+            .show()
+    }
+
+    private fun clearAllData() {
+        try {
+            // Tüm repository'leri temizle
+            scanResultRepository.clearAllScanResults()
+            stockItemRepository.clearAllStockItems()
+            transactionRepository.clearAllTransactions()
+            notificationRepository.clearAllNotifications()
+
+            // Dashboard'ı yenile
+            loadDashboardData()
+            updateNotificationBadge()
+
+            // Başarı mesajı
+            Snackbar.make(binding.root, "Tüm veriler başarıyla temizlendi", Snackbar.LENGTH_LONG).show()
+
+        } catch (e: Exception) {
+            Snackbar.make(binding.root, "Veri temizleme hatası: ${e.message}", Snackbar.LENGTH_LONG).show()
+        }
+    }
+
+    private fun loadDummyData() {
+        loadDummyStockData()
+        loadDummySalesData()
+        
+        // Dashboard'ı yenile
+        loadDashboardData()
+        updateNotificationBadge()
+        
+        Snackbar.make(binding.root, "Dummy veriler yüklendi", Snackbar.LENGTH_LONG).show()
+    }
+
+    private fun loadDummyStockData() {
+        val brands = arrayOf("Ray-Ban", "Oakley", "Prada", "Gucci", "Versace", "Dior", "Tom Ford", "Persol", "Maui Jim", "Police")
+        val productTypes = arrayOf(
+            Transaction.PRODUCT_TYPE_GLASS,
+            Transaction.PRODUCT_TYPE_FRAME, 
+            Transaction.PRODUCT_TYPE_LENS
+        )
+        
+        // 13 Eylül 2025 - 27 Eylül 2025 arası rastgele tarihler
+        val startDate = java.util.Calendar.getInstance().apply {
+            set(2025, 8, 13, 0, 0, 0) // Ay 0-indexed (8 = Eylül)
+            set(java.util.Calendar.MILLISECOND, 0)
+        }.timeInMillis
+        
+        val endDate = java.util.Calendar.getInstance().apply {
+            set(2025, 8, 27, 23, 59, 59)
+            set(java.util.Calendar.MILLISECOND, 999)
+        }.timeInMillis
+
+        // 20 adet dummy stok verisi
+        for (i in 1..20) {
+            val brand = brands.random()
+            val productType = productTypes.random()
+            val randomDate = (startDate..endDate).random()
+            val quantity = (1..15).random()
+            val price = when (productType) {
+                Transaction.PRODUCT_TYPE_GLASS -> (50.0..300.0).random()
+                Transaction.PRODUCT_TYPE_FRAME -> (100.0..800.0).random()
+                Transaction.PRODUCT_TYPE_LENS -> (75.0..400.0).random()
+                else -> (50.0..300.0).random()
+            }
+            
+            val barcode = "DUMMY${System.nanoTime()}${i}"
+            
+            // StockItem ekle
+            val stockItem = StockItem(
+                barcode = barcode,
+                brand = brand,
+                purchasePrice = price,
+                stockDate = randomDate,
+                quantity = quantity,
+                productType = productType
+            )
+            stockItemRepository.insertStockItem(stockItem)
+            
+            // Transaction ekle
+            val transaction = Transaction(
+                brand = brand,
+                productType = productType,
+                transactionType = Transaction.TYPE_STOCK_ENTRY,
+                amount = price,
+                barcode = barcode,
+                transactionDate = randomDate,
+                quantity = quantity,
+                purchasePrice = price
+            )
+            transactionRepository.insertTransaction(transaction)
+        }
+    }
+
+    private fun loadDummySalesData() {
+        val brands = arrayOf("Ray-Ban", "Oakley", "Prada", "Gucci", "Versace", "Dior", "Tom Ford", "Persol", "Maui Jim", "Police")
+        val productTypes = arrayOf(
+            Transaction.PRODUCT_TYPE_GLASS,
+            Transaction.PRODUCT_TYPE_FRAME,
+            Transaction.PRODUCT_TYPE_LENS
+        )
+        
+        // 13 Eylül 2025 - 27 Eylül 2025 arası rastgele tarihler
+        val startDate = java.util.Calendar.getInstance().apply {
+            set(2025, 8, 13, 0, 0, 0)
+            set(java.util.Calendar.MILLISECOND, 0)
+        }.timeInMillis
+        
+        val endDate = java.util.Calendar.getInstance().apply {
+            set(2025, 8, 27, 23, 59, 59)
+            set(java.util.Calendar.MILLISECOND, 999)
+        }.timeInMillis
+
+        // 15 adet dummy satış verisi
+        for (i in 1..15) {
+            val brand = brands.random()
+            val productType = productTypes.random()
+            val randomDate = (startDate..endDate).random()
+            val quantity = (1..3).random()
+            val salePrice = when (productType) {
+                Transaction.PRODUCT_TYPE_GLASS -> (100.0..500.0).random()
+                Transaction.PRODUCT_TYPE_FRAME -> (200.0..1200.0).random()
+                Transaction.PRODUCT_TYPE_LENS -> (150.0..600.0).random()
+                else -> (100.0..500.0).random()
+            }
+            
+            val barcode = "SALE${System.nanoTime()}${i}"
+            
+            // Satış transaction'ı ekle
+            val transaction = Transaction(
+                brand = brand,
+                productType = productType,
+                transactionType = Transaction.TYPE_SALE,
+                amount = salePrice,
+                barcode = barcode,
+                transactionDate = randomDate,
+                quantity = quantity,
+                purchasePrice = salePrice * 0.6 // %40 kar marjı
+            )
+            transactionRepository.insertTransaction(transaction)
+            
+            // Ana sayfa tarama sonucu ekle
+            val scanResult = ScanResult(
+                barcode = barcode,
+                brand = brand,
+                salePrice = salePrice,
+                scanDate = randomDate
+            )
+            scanResultRepository.insertScanResult(scanResult)
+        }
+    }
+}
+
+// Extension function for ClosedRange<Double>.random()
+fun ClosedRange<Double>.random(): Double {
+    return Random.nextDouble(start, endInclusive)
 }

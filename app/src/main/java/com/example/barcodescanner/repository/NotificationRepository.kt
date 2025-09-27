@@ -165,4 +165,10 @@ class NotificationRepository(context: Context) {
         db.close()
         return exists
     }
+
+    fun clearAllNotifications() {
+        val db = dbHelper.writableDatabase
+        db.delete(DatabaseHelper.TABLE_NOTIFICATIONS, null, null)
+        db.close()
+    }
 }

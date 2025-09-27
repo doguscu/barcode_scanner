@@ -8,7 +8,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     companion object {
         private const val DATABASE_NAME = "barcode_scanner.db"
-        private const val DATABASE_VERSION = 5
+        private const val DATABASE_VERSION = 6
 
         // Ana sayfa taramaları tablosu
         const val TABLE_SCAN_RESULTS = "scan_results"
@@ -26,6 +26,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         const val COLUMN_STOCK_PURCHASE_PRICE = "purchase_price"
         const val COLUMN_STOCK_DATE = "stock_date"
         const val COLUMN_STOCK_QUANTITY = "quantity"
+        const val COLUMN_STOCK_PRODUCT_TYPE = "product_type"
 
         // İşlemler tablosu
         const val TABLE_TRANSACTIONS = "transactions"
@@ -68,7 +69,8 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 $COLUMN_STOCK_BRAND TEXT NOT NULL,
                 $COLUMN_STOCK_PURCHASE_PRICE REAL NOT NULL,
                 $COLUMN_STOCK_DATE INTEGER NOT NULL,
-                $COLUMN_STOCK_QUANTITY INTEGER NOT NULL DEFAULT 1
+                $COLUMN_STOCK_QUANTITY INTEGER NOT NULL DEFAULT 1,
+                $COLUMN_STOCK_PRODUCT_TYPE TEXT NOT NULL DEFAULT ''
             )
         """
 
@@ -122,6 +124,14 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                     db?.execSQL("ALTER TABLE $TABLE_TRANSACTIONS ADD COLUMN $COLUMN_TRANSACTION_QUANTITY INTEGER NOT NULL DEFAULT 1")
                     db?.execSQL("ALTER TABLE $TABLE_TRANSACTIONS ADD COLUMN $COLUMN_TRANSACTION_PURCHASE_PRICE REAL NOT NULL DEFAULT 0.0")
                 }
+                // Eğer version 5'e de geçiyorsa, notifications tablosunu ekle
+                if (newVersion >= 5) {
+                    db?.execSQL(CREATE_NOTIFICATIONS_TABLE)
+                }
+                // Eğer version 6'ya da geçiyorsa, stock_items tablosuna product_type sütunu ekle
+                if (newVersion >= 6) {
+                    db?.execSQL("ALTER TABLE $TABLE_STOCK_ITEMS ADD COLUMN $COLUMN_STOCK_PRODUCT_TYPE TEXT NOT NULL DEFAULT ''")
+                }
             }
             2 -> {
                 // Version 2'den 3'e geçiş: stock_items tablosuna quantity sütunu ekle
@@ -135,6 +145,10 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 if (newVersion >= 5) {
                     db?.execSQL(CREATE_NOTIFICATIONS_TABLE)
                 }
+                // Eğer version 6'ya da geçiyorsa, stock_items tablosuna product_type sütunu ekle
+                if (newVersion >= 6) {
+                    db?.execSQL("ALTER TABLE $TABLE_STOCK_ITEMS ADD COLUMN $COLUMN_STOCK_PRODUCT_TYPE TEXT NOT NULL DEFAULT ''")
+                }
             }
             3 -> {
                 // Version 3'den 4'e geçiş: transactions tablosuna yeni sütunları ekle
@@ -144,10 +158,22 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 if (newVersion >= 5) {
                     db?.execSQL(CREATE_NOTIFICATIONS_TABLE)
                 }
+                // Eğer version 6'ya da geçiyorsa, stock_items tablosuna product_type sütunu ekle
+                if (newVersion >= 6) {
+                    db?.execSQL("ALTER TABLE $TABLE_STOCK_ITEMS ADD COLUMN $COLUMN_STOCK_PRODUCT_TYPE TEXT NOT NULL DEFAULT ''")
+                }
             }
             4 -> {
                 // Version 4'den 5'e geçiş: notifications tablosunu ekle
                 db?.execSQL(CREATE_NOTIFICATIONS_TABLE)
+                // Eğer version 6'ya da geçiyorsa, stock_items tablosuna product_type sütunu ekle
+                if (newVersion >= 6) {
+                    db?.execSQL("ALTER TABLE $TABLE_STOCK_ITEMS ADD COLUMN $COLUMN_STOCK_PRODUCT_TYPE TEXT NOT NULL DEFAULT ''")
+                }
+            }
+            5 -> {
+                // Version 5'den 6'ya geçiş: stock_items tablosuna product_type sütunu ekle
+                db?.execSQL("ALTER TABLE $TABLE_STOCK_ITEMS ADD COLUMN $COLUMN_STOCK_PRODUCT_TYPE TEXT NOT NULL DEFAULT ''")
             }
             else -> {
                 // Diğer durumlar için tüm tabloları yeniden oluştur

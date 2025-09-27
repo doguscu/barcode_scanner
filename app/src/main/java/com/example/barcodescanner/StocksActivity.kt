@@ -168,11 +168,10 @@ class StocksActivity : AppCompatActivity() {
                 }
             }
             SORT_PRODUCT_TYPE -> {
-                // StockItem'da productType yok, bu yüzden brand'e göre sıralayacağız
                 if (isAscending) {
-                    stockItemList.sortedBy { it.brand.lowercase() }
+                    stockItemList.sortedBy { it.productType.lowercase() }
                 } else {
-                    stockItemList.sortedByDescending { it.brand.lowercase() }
+                    stockItemList.sortedByDescending { it.productType.lowercase() }
                 }
             }
             SORT_QUANTITY -> {
@@ -234,12 +233,30 @@ class StocksActivity : AppCompatActivity() {
     }
 
     private fun loadProductTypeCounts() {
-        val glassCount = transactionRepository.getStockCountByProductType(Transaction.PRODUCT_TYPE_GLASS)
-        val frameCount = transactionRepository.getStockCountByProductType(Transaction.PRODUCT_TYPE_FRAME)
-        val totalCount = transactionRepository.getTotalStockCount()
+        // Tüm stok öğelerini al
+        val allStocks = stockItemRepository.getAllStockItems()
+        
+        // Ürün tiplerine göre toplam miktarları hesapla
+        var glassCount = 0
+        var frameCount = 0
+        var lensCount = 0
+        var totalCount = 0
+        
+        for (stockItem in allStocks) {
+            val quantity = stockItem.quantity
+            totalCount += quantity
+            
+            when (stockItem.productType) {
+                Transaction.PRODUCT_TYPE_GLASS -> glassCount += quantity
+                Transaction.PRODUCT_TYPE_FRAME -> frameCount += quantity
+                Transaction.PRODUCT_TYPE_LENS -> lensCount += quantity
+            }
+        }
 
+        // UI'ı güncelle
         binding.textViewGlassCount.text = glassCount.toString()
         binding.textViewFrameCount.text = frameCount.toString()
+        binding.textViewLensCount.text = lensCount.toString()
         binding.textViewTotalCount.text = totalCount.toString()
     }
 
@@ -285,7 +302,8 @@ class StocksActivity : AppCompatActivity() {
                         brand = brand,
                         purchasePrice = purchasePrice,
                         stockDate = System.currentTimeMillis(),
-                        quantity = quantity
+                        quantity = quantity,
+                        productType = productType
                     )
                     stockItemRepository.insertStockItem(stockItem)
 
@@ -449,7 +467,8 @@ class StocksActivity : AppCompatActivity() {
                     val updatedStockItem = stockItem.copy(
                         brand = brand,
                         purchasePrice = purchasePrice,
-                        quantity = quantity
+                        quantity = quantity,
+                        productType = productType
                     )
                     val success = stockItemRepository.updateStockItem(updatedStockItem)
                     

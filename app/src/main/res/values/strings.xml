@@ -19,6 +19,7 @@
     <string name="nav_data">Veriler</string>
     <string name="nav_import_data">Verileri Ice Aktar</string>
     <string name="nav_export_data">Verileri Disa Aktar</string>
+    <string name="nav_clear_data">Verileri Temizle</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="nav_header_subtitle">Barkod okuma ve stok yonetimi</string>
     <string name="navigation_drawer_open">Navigation drawer acik</string>

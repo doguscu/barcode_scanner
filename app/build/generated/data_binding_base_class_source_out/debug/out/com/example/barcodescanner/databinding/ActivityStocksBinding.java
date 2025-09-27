@@ -61,6 +61,9 @@ public final class ActivityStocksBinding implements ViewBinding {
   public final TextView textViewGlassCount;
 
   @NonNull
+  public final TextView textViewLensCount;
+
+  @NonNull
   public final TextView textViewTotalCount;
 
   @NonNull
@@ -73,7 +76,8 @@ public final class ActivityStocksBinding implements ViewBinding {
       @NonNull LinearLayout headerStockQuantity, @NonNull LinearLayout layoutTableHeaders,
       @NonNull RecyclerView recyclerViewStockBarcodes, @NonNull TextView textViewEmptyState,
       @NonNull TextView textViewFrameCount, @NonNull TextView textViewGlassCount,
-      @NonNull TextView textViewTotalCount, @NonNull Toolbar toolbar) {
+      @NonNull TextView textViewLensCount, @NonNull TextView textViewTotalCount,
+      @NonNull Toolbar toolbar) {
     this.rootView = rootView;
     this.buttonFilterStocks = buttonFilterStocks;
     this.fabAddStock = fabAddStock;
@@ -87,6 +91,7 @@ public final class ActivityStocksBinding implements ViewBinding {
     this.textViewEmptyState = textViewEmptyState;
     this.textViewFrameCount = textViewFrameCount;
     this.textViewGlassCount = textViewGlassCount;
+    this.textViewLensCount = textViewLensCount;
     this.textViewTotalCount = textViewTotalCount;
     this.toolbar = toolbar;
   }
@@ -190,6 +195,12 @@ public final class ActivityStocksBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.textViewLensCount;
+      TextView textViewLensCount = ViewBindings.findChildViewById(rootView, id);
+      if (textViewLensCount == null) {
+        break missingId;
+      }
+
       id = R.id.textViewTotalCount;
       TextView textViewTotalCount = ViewBindings.findChildViewById(rootView, id);
       if (textViewTotalCount == null) {
@@ -205,7 +216,7 @@ public final class ActivityStocksBinding implements ViewBinding {
       return new ActivityStocksBinding((CoordinatorLayout) rootView, buttonFilterStocks,
           fabAddStock, headerStockAmount, headerStockBrand, headerStockDate, headerStockProductType,
           headerStockQuantity, layoutTableHeaders, recyclerViewStockBarcodes, textViewEmptyState,
-          textViewFrameCount, textViewGlassCount, textViewTotalCount, toolbar);
+          textViewFrameCount, textViewGlassCount, textViewLensCount, textViewTotalCount, toolbar);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

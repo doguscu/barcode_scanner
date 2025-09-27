@@ -43,6 +43,11 @@
                 android:id="@+id/nav_export_data"
                 android:icon="@drawable/ic_export_24"
                 android:title="@string/nav_export_data" />
+                
+            <item
+                android:id="@+id/nav_clear_data"
+                android:icon="@drawable/ic_delete_24"
+                android:title="@string/nav_clear_data" />
         </menu>
     </item>
 

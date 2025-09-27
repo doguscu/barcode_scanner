@@ -53,6 +53,7 @@
     <string name="merge_with_existing">Mevcut verilerle birlestir</string>
     <string name="min_amount">Min. Tutar</string>
     <string name="nav_calendar">Takvim</string>
+    <string name="nav_clear_data">Verileri Temizle</string>
     <string name="nav_data">Veriler</string>
     <string name="nav_export_data">Verileri Disa Aktar</string>
     <string name="nav_header_desc">Navigation header</string>

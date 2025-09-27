@@ -75,6 +75,7 @@ id layoutSalesHeaders
 id layoutTableHeaders
 id lightThemeOption
 id nav_calendar
+id nav_clear_data
 id nav_export_data
 id nav_home
 id nav_import_data
@@ -105,6 +106,7 @@ id textViewEmptyTransactions
 id textViewFrameCount
 id textViewGlassCount
 id textViewIncome
+id textViewLensCount
 id textViewMessage
 id textViewMonthlyProfit
 id textViewNetIncome
@@ -195,6 +197,7 @@ string max_amount
 string merge_with_existing
 string min_amount
 string nav_calendar
+string nav_clear_data
 string nav_data
 string nav_export_data
 string nav_header_desc

@@ -4,6 +4,10 @@
         "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\drawable\\ic_export_24.xml"
     },
     {
+        "merged": "com.example.barcodescanner.app-debug-4:/layout_activity_stocks.xml.flat",
+        "source": "com.example.barcodescanner.app-main-6:/layout/activity_stocks.xml"
+    },
+    {
         "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-debug-4:\\mipmap-mdpi_ic_launcher_round.xml.flat",
         "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\mipmap-mdpi\\ic_launcher_round.xml"
     },
@@ -146,10 +150,6 @@
     {
         "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-debug-4:\\layout_activity_stocks.xml.flat",
         "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\activity_stocks.xml"
-    },
-    {
-        "merged": "com.example.barcodescanner.app-debug-4:/menu_drawer_menu.xml.flat",
-        "source": "com.example.barcodescanner.app-main-6:/menu/drawer_menu.xml"
     },
     {
         "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-debug-4:\\layout_dialog_advanced_filter.xml.flat",

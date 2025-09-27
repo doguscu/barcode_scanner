@@ -18,6 +18,7 @@ class StockItemRepository(context: Context) {
             put(DatabaseHelper.COLUMN_STOCK_PURCHASE_PRICE, stockItem.purchasePrice)
             put(DatabaseHelper.COLUMN_STOCK_DATE, stockItem.stockDate)
             put(DatabaseHelper.COLUMN_STOCK_QUANTITY, stockItem.quantity)
+            put(DatabaseHelper.COLUMN_STOCK_PRODUCT_TYPE, stockItem.productType)
         }
         
         val id = db.insert(DatabaseHelper.TABLE_STOCK_ITEMS, null, values)
@@ -52,7 +53,8 @@ class StockItemRepository(context: Context) {
                     brand = getString(getColumnIndexOrThrow(DatabaseHelper.COLUMN_STOCK_BRAND)),
                     purchasePrice = getDouble(getColumnIndexOrThrow(DatabaseHelper.COLUMN_STOCK_PURCHASE_PRICE)),
                     stockDate = getLong(getColumnIndexOrThrow(DatabaseHelper.COLUMN_STOCK_DATE)),
-                    quantity = getInt(getColumnIndexOrThrow(DatabaseHelper.COLUMN_STOCK_QUANTITY))
+                    quantity = getInt(getColumnIndexOrThrow(DatabaseHelper.COLUMN_STOCK_QUANTITY)),
+                    productType = getString(getColumnIndexOrThrow(DatabaseHelper.COLUMN_STOCK_PRODUCT_TYPE)) ?: ""
                 )
                 stockItems.add(stockItem)
             }
@@ -110,6 +112,7 @@ class StockItemRepository(context: Context) {
             put(DatabaseHelper.COLUMN_STOCK_BRAND, stockItem.brand)
             put(DatabaseHelper.COLUMN_STOCK_PURCHASE_PRICE, stockItem.purchasePrice)
             put(DatabaseHelper.COLUMN_STOCK_QUANTITY, stockItem.quantity)
+            put(DatabaseHelper.COLUMN_STOCK_PRODUCT_TYPE, stockItem.productType)
         }
         
         val rowsAffected = db.update(

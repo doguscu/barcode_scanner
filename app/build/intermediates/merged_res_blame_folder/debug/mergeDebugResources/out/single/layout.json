@@ -1,82 +1,86 @@
 [
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/item_barcode.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/item_barcode.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\dialog_filter.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\dialog_filter.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/dialog_add_stock_item.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/dialog_add_stock_item.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\activity_main.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/item_stock_barcode.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/item_stock_barcode.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\item_scan_result.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\item_scan_result.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/activity_calendar.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/activity_calendar.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\item_sale.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\item_sale.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\activity_calendar.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\activity_calendar.xml"
+    },
+    {
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\activity_barcode_scanner.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\activity_barcode_scanner.xml"
     },
     {
         "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/activity_stocks.xml",
         "source": "com.example.barcodescanner.app-main-6:/layout/activity_stocks.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/drawer_header.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/drawer_header.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\item_barcode.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\item_barcode.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/activity_notifications.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/activity_notifications.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\dialog_add_scan_result.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\dialog_add_scan_result.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/dialog_advanced_filter.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/dialog_advanced_filter.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\activity_stocks.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\activity_stocks.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/item_stock_item.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/item_stock_item.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\item_stock_item.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\item_stock_item.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/activity_sales.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/activity_sales.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\item_transaction.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\item_transaction.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/activity_main.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/activity_main.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\item_notification.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\item_notification.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/activity_barcode_scanner.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/activity_barcode_scanner.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\dialog_add_stock_item.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\dialog_add_stock_item.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/item_notification.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/item_notification.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\dialog_advanced_filter.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\dialog_advanced_filter.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/dialog_add_scan_result.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/dialog_add_scan_result.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\item_calendar_day.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\item_calendar_day.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/dialog_filter.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/dialog_filter.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\activity_settings.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\activity_settings.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/item_scan_result.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/item_scan_result.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\activity_notifications.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\activity_notifications.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/item_sale.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/item_sale.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\drawer_header.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\drawer_header.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/item_calendar_day.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/item_calendar_day.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\item_stock_barcode.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\item_stock_barcode.xml"
     },
     {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/activity_settings.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/activity_settings.xml"
-    },
-    {
-        "merged": "com.example.barcodescanner.app-mergeDebugResources-3:/layout/item_transaction.xml",
-        "source": "com.example.barcodescanner.app-main-6:/layout/item_transaction.xml"
+        "merged": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-mergeDebugResources-3:\\layout\\activity_sales.xml",
+        "source": "C:\\Users\\Ozan\\.gradle\\daemon\\8.13\\com.example.barcodescanner.app-main-6:\\layout\\activity_sales.xml"
     }
 ]
